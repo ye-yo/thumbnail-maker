@@ -1,0 +1,56 @@
+@import "../../assets/css/components.scss";
+
+$변수사용가능 : 100px; 
+
+main{
+    @include flexBox();
+    width: 90%;
+    background-color: #eeeeee;
+    height: 100%;
+    max-width: 1080px;
+    margin: 4rem auto;
+    height: 90vh;
+    > section{
+        border: 1px solid gray;
+        margin-bottom: 1rem;
+        width: 50%;
+    }
+}
+
+.section-canvas{
+    height: 100%;
+    @include flexBox(flex,column,space-between);
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    background-color: white;
+    .canvas-box{
+        @include flexBox();
+        width: 80%;
+        height: 90%;
+        // overflow: hidden;
+    }
+
+    canvas{
+        background-color: green;
+    }
+
+    .btn-download{
+        font-size: 18px;
+        *{
+            margin-right: 10px;
+        }
+    }
+
+
+}
+
+
+.section-form{
+     min-height: 200px;
+     height: 100%;
+     padding: 1rem;
+     background-color: rgb(59, 58, 67);
+     > section{
+         margin-bottom: .4rem;
+     }
+}

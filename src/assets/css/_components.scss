@@ -1,0 +1,10 @@
+@import "./crossBrowsing";
+$lightgray : #dcdcdc;
+$borderGray :1px solid $lightgray;
+$fontColor:#222222;
+
+%btnMiniSize{
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+}
