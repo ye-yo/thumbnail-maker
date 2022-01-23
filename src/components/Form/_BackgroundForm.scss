@@ -1,0 +1,157 @@
+@import "../../assets/css/_components.scss";
+
+.tab-color{
+    @include flexBox;
+    %colorItem{
+        border-radius: 50%;
+        border: $borderGray;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+    };
+
+    .color-picker-box{
+        width: 40%;
+        height: auto;
+        min-width: 4rem;
+        min-height: 4rem;
+        background-color: red;
+    }
+
+    .tab-color-right{
+        @include flex(1);
+        width: 100%;
+        height: 100%;
+        padding-left:22px;
+        position: relative;
+        &::before{
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 1px;
+            height:88%;
+            transform: translate(0, -50%);
+            background-color: #e1e2e3;
+            margin: auto 10px;
+            // background-color: $lightgray;
+        }
+    }
+
+    .color-list{
+        @include flexBox(flex, row, start,center,wrap);
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: .4rem;
+        li{
+            @extend %colorItem;
+            margin: 0 4px 4px;
+        }
+    }
+
+    .gradient-wrap{
+        width: 100%;
+        @include flexBox(flex, row, space-between, center, wrap);
+    }
+
+    .gradient-preview{
+        background-color: red;
+        width: 4.8rem;
+        height: 4rem;
+        min-width: 4rem;
+        margin: 4px auto;
+        max-width: 34%;
+    }
+
+    .gradient-right{
+        min-width: 60%;
+        margin: 0 auto;
+        .gradient-selector{
+            margin: 4px 0;
+            @include flexBox;
+            p{
+                @extend %colorItem;
+                display: inline-block;
+            }
+            span{
+                margin: 0 4px;
+                @include flex(1);
+                width: auto;
+                height: 1px;
+                background-color:$lightgray;
+            }
+        }
+        .option-wrap{
+            .gradient-type{
+                width: 100%;
+                button{
+                    display: inline-block;
+                    width: 50%;
+                    font-size: 12px;
+                    border-radius: 20px 0 0 20px;
+                    background-color: white;
+                    border: $borderGray;
+                    color: $fontColor;
+                    &:hover{
+                        @extend %btnDark;
+                        border-color: $colorDark;
+                    }
+                    &.clicked{
+                        @extend %btnDark;
+                        border-color: $colorDark;
+                    }
+                 &:last-child{
+                     border-radius: 0 20px 20px 0;
+                 }
+                }
+                svg{
+                    width: 12px;
+                    height: 12px;
+                    margin-right: 4px;
+                    vertical-align: top;
+                }
+                button.clicked{
+                    background-color: gray;
+                    color: white;
+                    border-color: gray;
+
+                    svg{
+                        color: white;
+                    }
+                }
+            }
+
+            .btn-gradient-direction{
+                @extend %btnMiniSize;
+                border: $borderGray;
+                background-color: white;
+            }
+
+        }
+    }
+}
+
+.tab-image{
+    ul{
+        width: 100%;
+        overflow-x: auto;
+        text-align: left;
+
+        li{
+            display: inline-block;
+            border: $borderGray;
+            width: 5rem;
+            height: 5rem;
+            margin-right: 10px;
+            cursor: pointer;
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+    }
+    .btn-upload-image{
+        width: 100%;
+        margin-top: 1rem;
+    }
+}

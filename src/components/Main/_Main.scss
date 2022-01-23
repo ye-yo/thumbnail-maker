@@ -3,16 +3,24 @@
 $변수사용가능 : 100px; 
 
 main{
-    @include flexBox();
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+.center-box{
+    @include flexBox(flex, row, stretch);
+    // margin: 10%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 90%;
+    height: 80vh;
     background-color: #eeeeee;
-    height: 100%;
     max-width: 1080px;
-    margin: 4rem auto;
-    height: 90vh;
+    // height: 90vh;
     > section{
         border: 1px solid gray;
-        margin-bottom: 1rem;
         width: 50%;
     }
 }
@@ -21,22 +29,35 @@ main{
     height: 100%;
     @include flexBox(flex,column,space-between);
     margin: 0 auto;
-    margin-bottom: 1rem;
     background-color: white;
+    .input-canvas-size-wrap{
+        margin-top: 1rem;
+
+        input{
+            width: 100px;
+            margin: 0 6px;
+        }
+
+    }
     .canvas-box{
         @include flexBox();
         width: 80%;
         height: 90%;
         // overflow: hidden;
+
+        .canvas{
+            background-color: green;
+        }
     }
 
-    canvas{
-        background-color: green;
-    }
 
     .btn-download{
+        width: 90%;
+        margin-bottom: 1rem;
+        padding: 10px;
         font-size: 18px;
-        *{
+        svg{
+            vertical-align: text-top;
             margin-right: 10px;
         }
     }
