@@ -2,9 +2,25 @@
 $lightgray : #dcdcdc;
 $borderGray :1px solid $lightgray;
 $fontColor:#222222;
+$colorDark : gray;
 
 %btnMiniSize{
     width: 24px;
     height: 24px;
     border-radius: 4px;
+};
+
+%btnDark{
+    opacity: 1;
+    background-color: $colorDark;
+    color: white;
+}
+
+.btn-main{
+    &:hover{
+        opacity: .8;
+    }
+    &.clicked{
+
+    }
 }

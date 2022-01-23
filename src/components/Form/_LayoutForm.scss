@@ -1,0 +1,32 @@
+@import "../../assets/css/components.scss";
+.section-form-layout{
+    .form{
+        background-color: transparent
+    }
+}
+.template-list{
+    @include flexBox(flex,row,start);
+    overflow-x: scroll;
+    & ::after{
+        content: "";
+        flex: auto;
+        margin: 10px;
+    }
+
+    > li{
+        border: $borderGray;
+        cursor: pointer;
+        flex: none;
+        width: 100px;
+        height: 100px;
+        margin: 0 4px;
+        background-color: rgba(255,255,255,.7);
+        cursor: pointer;
+        &:hover{
+            opacity: .6;
+        }
+        &.clicked{
+            opacity: .6;
+        }
+    }
+}

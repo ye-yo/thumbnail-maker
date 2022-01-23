@@ -1,0 +1,31 @@
+@import "../assets/css/components";
+
+.select-wrap{
+    border: $borderGray;
+    position: relative;
+    padding: 4px 10px;
+
+    select{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        padding-right : 14px;
+        line-height: 1.6;
+
+        option{
+            font-size: inherit;
+        }
+    }
+
+    svg{
+        width: 14px;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translate(0, -50%);
+        pointer-events: none;
+    }
+}

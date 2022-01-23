@@ -1,0 +1,90 @@
+@import "../../assets/css/components.scss";
+
+.form{
+    background-color: white;
+}
+
+.layout-template-list{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 10px;
+    padding : 10px;
+    background-color: antiquewhite;
+}
+
+.layout-template-list::after{
+    content: "";
+    flex: auto;
+    margin: 10px;
+}
+
+.layout-template-list li{
+    width: calc(33% - 10px);
+    height: 100px;
+    background-color: white;
+}
+
+.btn-accordion{
+    @include flexBox;
+    margin-right: 100%;
+    background-color: transparent;
+    margin-bottom: .4rem;
+    &:hover{
+        opacity: .8;
+    }
+
+    &:after{
+        // content: "-";
+        margin-left: 4px;
+    }
+    &.clicked:after{
+        content:"+"
+    }
+
+    svg {
+        width: 1.4rem;
+        height: 1.4rem;
+        margin-right: 4px;
+    }
+}
+
+.tab-button-wrap{
+    width: 100%;
+    label{
+        width: 50%;
+        display: inline-block;
+        padding:10px;
+        cursor: pointer;
+        line-height: initial;
+        &:hover{
+        }
+        background-color: #dddddd;
+        &:hover{
+            background-color: rgb(179, 174, 174);
+        }
+        &.clicked{
+            background-color: white;
+            border-color: white;
+        }
+    }
+    // label.
+}
+
+.tab-content{
+    padding: 1rem;
+    background-color: white;
+    width: 100%;
+    min-height: 100px;
+}
+
+input{
+    border: $borderGray;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+
+.select-wrap{
+    border-radius: 4px;
+}
