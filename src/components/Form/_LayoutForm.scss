@@ -1,4 +1,4 @@
-@import "../../assets/css/components.scss";
+@import "../../assets/css/_crossBrowsing.scss";
 .section-form-layout{
     .form{
         background-color: transparent
@@ -14,7 +14,7 @@
     }
 
     > li{
-        border: $borderGray;
+        border: var(--borderGray);
         cursor: pointer;
         flex: none;
         width: 100px;

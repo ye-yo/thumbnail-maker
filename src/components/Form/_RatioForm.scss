@@ -1,4 +1,4 @@
-@import "../../assets/css/components.scss";
+@import "../../assets/css/_crossBrowsing.scss";
 .section-form-ratio{
     .form{
         background-color: transparent
@@ -9,7 +9,7 @@
     overflow-x: scroll;
     > li{
         @include flexBox;
-        border: $borderGray;
+        border: var(--borderGray);
         cursor: pointer;
         flex: none;
         width: 100px;

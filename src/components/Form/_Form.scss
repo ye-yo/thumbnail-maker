@@ -1,4 +1,4 @@
-@import "../../assets/css/components.scss";
+@import "../../assets/css/_crossBrowsing.scss";
 
 .form{
     background-color: white;
@@ -50,13 +50,20 @@
 }
 
 .tab-button-wrap{
+    @include flexBox;
     width: 100%;
     label{
-        width: 50%;
+        @include flex(1);
         display: inline-block;
         padding:10px;
         cursor: pointer;
         line-height: initial;
+        border: 1px solid rgb(209, 209, 209);
+        border-top:0;
+        border-bottom: 0;
+        &:last-child, &:first-child{
+            border: none;
+        }
         &:hover{
         }
         background-color: #dddddd;
@@ -79,7 +86,7 @@
 }
 
 input{
-    border: $borderGray;
+    border: var(--borderGray);
     padding: 4px 10px;
     border-radius: 4px;
 }

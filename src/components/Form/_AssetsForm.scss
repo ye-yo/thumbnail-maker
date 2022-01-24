@@ -1,4 +1,4 @@
-@import "../../assets/css/_components.scss";
+@import "../../assets/css/_crossBrowsing.scss";
 
 .section-text, .section-image{
     @include flexBox(flex, row, space-between);
@@ -21,7 +21,7 @@
         button{
             margin: 0 4px 4px;
             background-color: #eeeeee;
-            border: $borderGray;
+            border: var(--borderGray);
             color: black;
             width: 32px;
             height: 32px;
@@ -55,13 +55,6 @@
             margin :10px 0;
             button{
                 position: relative;
-                &:hover{
-                   @extend %btnDark;
-                }
-
-                &.clicked{
-                   @extend %btnDark;
-                }
             }
             .color-preview{
                 position: absolute;
@@ -70,7 +63,7 @@
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                border: $borderGray;
+                border: var(--borderGray);
             }
 
             .btn-back-color{
@@ -103,16 +96,10 @@
             width: 100%;
             height: 30%;
             margin-bottom: 4px;
-            border:$borderGray;
+            border:var(--borderGray);
             background-color: transparent;
-            color: $fontColor;
+            color: var(--fontColor);
             position: relative;
-            &:hover{
-                @extend %btnDark;
-            }
-            &.clicked{
-                @extend %btnDark;
-            }
             svg{
                 width: 14px;
                 height: 14px;
@@ -149,26 +136,23 @@
     .image-list{
         @include flexBox(flex, row, start);
         width: 60%;
-        border-left: $borderGray;
+        border-left: var(--borderGray);
         margin-left: 10px;
         padding-left: 12px;
     
         button, li{
             width: 5rem;
             height: 5rem;
-            border: $borderGray;
+            border: var(--borderGray);
         }
 
         button{
             background-color: transparent;
-            border: 1px dashed $lightgray;
-            &:hover{
-                @extend %btnDark;
-            }
+            border: 1px dashed var(--colorLightgray);
             svg{
                 width: 100%;
                 height: 100%;
-                color: $lightgray;
+                color: var(--colorLightgray);
             }
         }
 

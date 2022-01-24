@@ -30,7 +30,8 @@ button {
 :root {
   --color_main: #3366FF; }
 
-button {
+button, .btn {
+  display: block;
   width: fit-content;
   box-shadow: none;
   border: none;
@@ -38,7 +39,8 @@ button {
   color: white;
   padding: 8px 10px;
   border-radius: 2px;
-  font-weight: bold; }
+  font-weight: bold; 
+}
 
 textarea {
   resize: none;
@@ -54,7 +56,34 @@ input {
   -webkit-border-radius: 0; }
 
 :root {
-  --color_beach_blue: linear-gradient(to right, rgb(76, 161, 175), rgb(196, 224, 229)); }
+  --color_beach_blue: linear-gradient(to right, rgb(76, 161, 175), rgb(196, 224, 229)); 
+  --colorMain : #222222;
+  --colorLightgray : #dcdcdc;
+  --colorDark : gray;
+  --borderGray :1px solid var(--colorLightgray);
+  --fontColor:#222222;
+
+}
+
+.btn-dark:hover, button:hover{
+    opacity: 1;
+    background-color: var(--colorDark);
+    color: white;
+}
+
+.btn-dark.clicked, button.clicked{
+  opacity: 1;
+  background-color: var(--colorDark);
+  color: white;
+}
+
+.btn-main{
+    background-color: var(--colorMain);
+}
+.btn-main:hover{
+  opacity: .8;
+}
+
 
 body {
   font-family: Arial, Helvetica, sans-serif;

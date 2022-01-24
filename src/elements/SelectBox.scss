@@ -1,7 +1,6 @@
-@import "../assets/css/components";
-
+@use 'variables' as v;
 .select-wrap{
-    border: $borderGray;
+    border: var(--borderGray);
     position: relative;
     padding: 4px 10px;
 
