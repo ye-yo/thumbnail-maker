@@ -26,10 +26,11 @@
 }
 
 .btn-accordion{
-    @include flexBox;
+    @include flexBox(flex, row, start);
     margin-right: 100%;
     background-color: transparent;
     margin-bottom: .4rem;
+    width: 100%;
     &:hover{
         opacity: .8;
     }
@@ -38,8 +39,16 @@
         // content: "-";
         margin-left: 4px;
     }
-    &.clicked:after{
-        content:"+"
+    &.hide{
+        border-bottom: var(--borderGray);
+        border-bottom-style:dashed;
+        border-color: rgba(255,255,255,0.4);
+        &:after{
+            content:"+";
+        }
+        + .form{
+            display: none;
+        }
     }
 
     svg {
