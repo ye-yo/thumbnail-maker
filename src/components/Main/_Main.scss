@@ -19,8 +19,9 @@ main{
     background-color: #eeeeee;
     max-width: 1080px;
     // height: 90vh;
+    border: 1px solid gray;
+
     > section{
-        border: 1px solid gray;
         width: 50%;
     }
 }

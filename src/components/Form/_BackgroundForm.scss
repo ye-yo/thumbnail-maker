@@ -1,85 +1,99 @@
-@import "../../assets/css/_components.scss";
+@import "../../assets/css/_crossBrowsing.scss";
+
+%colorItem{
+    border-radius: 50%;
+    border: var(--borderGray);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+};
 
 .tab-color{
-    @include flexBox;
-    %colorItem{
-        border-radius: 50%;
-        border: $borderGray;
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-        display: inline-block;
-    };
-
-    .color-picker-box{
-        width: 40%;
+    @include flexBox(flex, row, space-between, stretch);
+    .color-picker-wrap{
+        width: 50%;
         height: auto;
         min-width: 4rem;
         min-height: 4rem;
-        background-color: red;
+        overflow: hidden;
+        border-right: var(--borderGray);
+        padding-right: 20px;
+        margin-right: 20px;
+        > div{
+            width: 100% !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .flexbox-fix:last-child{
+            display: none!important;
+        }
     }
 
     .tab-color-right{
         @include flex(1);
         width: 100%;
         height: 100%;
-        padding-left:22px;
-        position: relative;
-        &::before{
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 1px;
-            height:88%;
-            transform: translate(0, -50%);
-            background-color: #e1e2e3;
-            margin: auto 10px;
-            // background-color: $lightgray;
-        }
     }
 
     .color-list{
         @include flexBox(flex, row, start,center,wrap);
         width: 100%;
+        padding: 4px;
         overflow-x: auto;
-        margin-bottom: .4rem;
         li{
             @extend %colorItem;
+            width: 28px;
+            height: 28px;
             margin: 0 4px 4px;
+            transition: transform .2s ;
+            transition-timing-function:cubic-bezier(0.645, 0.045, 0.355, 1);
+
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+
+        .circle-picker{
+            
         }
     }
+}
 
-    .gradient-wrap{
-        width: 100%;
-        @include flexBox(flex, row, space-between, center, wrap);
-    }
-
+.tab-gradient{
+    @include flexBox(flex, row, space-between, center, wrap);
+    @include flex(1);
     .gradient-preview{
         background-color: red;
-        width: 4.8rem;
+        width: 100%;
         height: 4rem;
         min-width: 4rem;
         margin: 4px auto;
-        max-width: 34%;
     }
 
     .gradient-right{
-        min-width: 60%;
+        min-width: 100%;
+        max-width: 100px;
         margin: 0 auto;
         .gradient-selector{
-            margin: 4px 0;
+            margin-bottom: 10px;
             @include flexBox;
             p{
                 @extend %colorItem;
                 display: inline-block;
+                position: relative;
+                &.clicked{
+                    border: 1px solid white;
+                    outline: 1px dotted gray;
+                }
             }
             span{
                 margin: 0 4px;
                 @include flex(1);
                 width: auto;
                 height: 1px;
-                background-color:$lightgray;
+                background-color:var(--colorLightgray);
             }
         }
         .option-wrap{
@@ -91,15 +105,13 @@
                     font-size: 12px;
                     border-radius: 20px 0 0 20px;
                     background-color: white;
-                    border: $borderGray;
-                    color: $fontColor;
+                    border: var(--borderGray);
+                    color: var(--fontColor);
                     &:hover{
-                        @extend %btnDark;
-                        border-color: $colorDark;
+                        border-color: var(--colorDark);
                     }
                     &.clicked{
-                        @extend %btnDark;
-                        border-color: $colorDark;
+                        border-color: var(--colorDark);
                     }
                  &:last-child{
                      border-radius: 0 20px 20px 0;
@@ -121,13 +133,6 @@
                     }
                 }
             }
-
-            .btn-gradient-direction{
-                @extend %btnMiniSize;
-                border: $borderGray;
-                background-color: white;
-            }
-
         }
     }
 }
@@ -140,7 +145,7 @@
 
         li{
             display: inline-block;
-            border: $borderGray;
+            border: var(--borderGray);
             width: 5rem;
             height: 5rem;
             margin-right: 10px;

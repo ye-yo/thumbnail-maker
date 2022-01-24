@@ -33,6 +33,7 @@
     width: 100%;
     &:hover{
         opacity: .8;
+        background-color: initial;
     }
 
     &:after{
@@ -70,7 +71,7 @@
         border: 1px solid rgb(209, 209, 209);
         border-top:0;
         border-bottom: 0;
-        &:last-child, &:first-child{
+        &:last-child, &:from-child{
             border: none;
         }
         &:hover{

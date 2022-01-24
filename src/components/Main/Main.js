@@ -39,7 +39,7 @@ function Main() {
     const [canvasMaxWidth, setCanvasMaxWidth] = useState(400);
     const [ratio, setRatio] = useState(ratioList[2]);
     const [layout, setLayout] = useState(null);
-    const [background, setBackground] = useState({ type: null, background: null });
+    const [background, setBackground] = useState({ type: null, background: null, index: null });
     const [assets, setAssets] = useState(null);
     const canvasBox = useRef(null);
 
@@ -57,13 +57,13 @@ function Main() {
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
                         {/* {background.background} */}
-                        <div className="canvas" style={{
+                        <div className="canvas" style={Object.assign({
                             width: canvasMaxWidth,
-                            height: canvasMaxWidth * ratio.heightRatio,
-                            backgroundColor: background.background,
-                            backgroundImage: background.type === "image" ? `url(${background.background})` : 'none'
-                        }}>
-                            {background.background, background.type}
+                            height: canvasMaxWidth * ratio.heightRatio
+                        }, background.type === "image" ?
+                            { backgroundImage: `url(${background.background})` } :
+                            { background: background.background })}>
+                            {background.background}{background.type}{background.index}
                         </div>
                     </div>
                     <button className="btn-download btn-main"><BsDownload />Download</button>

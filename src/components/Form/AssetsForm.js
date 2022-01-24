@@ -28,8 +28,8 @@ function AssetsForm() {
     return (
         <Form icon={RiDragMove2Fill({ color: "white" })} label="Assets" className="section-form-assets">
             <div className="tab-button-wrap">
-                <label className={!currentTab && 'clicked'} onClick={() => setCurrentTab(0)}>Text</label>
-                <label className={currentTab && 'clicked'} onClick={() => setCurrentTab(1)}>Image</label>
+                <label className={!currentTab ? 'clicked' : ''} onClick={() => setCurrentTab(0)}>Text</label>
+                <label className={currentTab ? 'clicked' : ''} onClick={() => setCurrentTab(1)}>Image</label>
             </div>
             <div className="tab-content">
                 {!currentTab ?
