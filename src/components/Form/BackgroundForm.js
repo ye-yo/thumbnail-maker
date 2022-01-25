@@ -6,6 +6,7 @@ import './_BackgroundForm.scss';
 import { RiPaintFill, RiRecordCircleLine } from "react-icons/ri";
 import { MdBlurLinear, } from "react-icons/md";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
+import handleFileOnChange from '../commonFunction.js';
 
 const gradientDirectionList = [
     { direction: 'top', icon: <HiOutlineArrowSmUp /> },
@@ -124,22 +125,17 @@ function LayoutForm(props) {
         setCurrentTab(index);
     }
 
-    function handleFileOnChange(e) {
-        e.preventDefault();
-        const file = e.target.files[0];
-        let reader = new FileReader();
-        reader.onloadend = () => {
-            setUploadedImages([...uploadedImages, { url: reader.result, name: file.name }]);
-        }
-        reader.readAsDataURL(file);
-    }
-
     function handleBackground(index, url) {
         setCurrentColorItem(null);
         props.setBackground({ ...props.background, type: "image", background: url, index: `image${index}` });
     }
 
     const currentIsColorItem = () => { return currentColorItem.index < gradientItemStartIndex };
+
+    function setFileInput(url, name) {
+        setUploadedImages([...uploadedImages, { url, name }])
+    }
+
     return (
         <Form icon={RiPaintFill({ color: "white" })} label="Background" className="section-form-background">
             <div className="tab-button-wrap">
@@ -194,7 +190,10 @@ function LayoutForm(props) {
                                 <li key={index} onClick={() => handleBackground(index, url)}><img src={url} alt={name}></img></li>
                             )}
                         </ul>
-                        <input id="input_file" type="file" accept='image/jpg,impge/png,image/jpeg,image/gif' onChange={handleFileOnChange}></input>
+                        <input id="input_file" type="file" accept='image/jpg,impge/png,image/jpeg,image/gif'
+                            onChange={(e) => {
+                                handleFileOnChange(e, setFileInput);
+                            }}></input>
                         <label className="btn-upload-image btn btn-main" htmlFor="input_file">Upload</label>
                     </div>
                 }

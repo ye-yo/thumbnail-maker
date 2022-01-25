@@ -1,0 +1,37 @@
+.asset{
+    // position: absolute;
+    // cursor: default;
+    // width: fit-content;
+    // width: 50px;
+
+    position: absolute;
+    cursor: move;
+    color: black;
+    width: fit-content;
+    height: fit-content;
+    // border-radius: 5px;
+    margin: auto;
+    user-select: none;
+
+    textarea{
+        display: block;
+        width: 100px;
+        height: 28px;
+        background-color: transparent;
+        border-radius: 0;
+        color: white;
+        border: 0;
+        outline:0;
+        pointer-events: none;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: .1s;
+        text-align: center;
+        &:focus{
+        }
+    }
+
+    &.current{
+        border: 1px solid rgba(255,255,255,0.5);
+    }
+}

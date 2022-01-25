@@ -4,6 +4,7 @@ import LayoutForm from '../Form/LayoutForm.js';
 import BackgroundForm from '../Form/BackgroundForm.js';
 import AssetsForm from '../Form/AssetsForm.js';
 import RatioForm from '../Form/RatioForm.js';
+import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
 
 function useWindowSize() {
@@ -40,30 +41,41 @@ function Main() {
     const [ratio, setRatio] = useState(ratioList[2]);
     const [layout, setLayout] = useState(null);
     const [background, setBackground] = useState({ type: null, background: null, index: null });
-    const [assets, setAssets] = useState(null);
+    const [textStype, setTextStype] = useState(null);
     const canvasBox = useRef(null);
-
+    const [canvasAssets, setCanvasAssets] = useState([]);
+    const [currentAsset, setCurrentAsset] = useState();
     useEffect(() => {
         setCanvasMaxWidth(canvasBox.current.clientWidth);
     }, [windowWidth])
 
+    function handleAssetDrag() {
+
+    }
+
+    function handleAssetDrop() {
+        console.log("드랍")
+    }
     return (
         <main>
             <div className="center-box">
                 <section className="section-canvas">
                     <div className="input-canvas-size-wrap">
-                        <input type="number" value={canvasMaxWidth} />X
-                        <input type="number" value={canvasMaxWidth * ratio.heightRatio} />
+                        <input type="number" defaultValue={canvasMaxWidth} />X
+                        <input type="number" defaultValue={canvasMaxWidth * ratio.heightRatio} />
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
                         {/* {background.background} */}
-                        <div className="canvas" style={Object.assign({
+                        <div className="canvas" onDrop={handleAssetDrop} style={Object.assign({
                             width: canvasMaxWidth,
                             height: canvasMaxWidth * ratio.heightRatio
                         }, background.type === "image" ?
                             { backgroundImage: `url(${background.background})` } :
                             { background: background.background })}>
                             {background.background}{background.type}{background.index}
+                            {canvasAssets.map((element, index) =>
+                                <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={index} index={index} asset={element}></Asset>
+                            )}
                         </div>
                     </div>
                     <button className="btn-download btn-main"><BsDownload />Download</button>
@@ -72,7 +84,7 @@ function Main() {
                     <RatioForm setRatio={setRatio} ratioList={ratioList} />
                     <LayoutForm setLayout={setLayout} />
                     <BackgroundForm setBackground={setBackground} />
-                    <AssetsForm />
+                    <AssetsForm assets={canvasAssets} setCanvasAssets={setCanvasAssets} textStype={textStype} setTextStype={setTextStype} />
                 </section>
             </div>
         </main >

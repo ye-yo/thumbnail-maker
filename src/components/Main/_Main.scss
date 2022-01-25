@@ -1,7 +1,5 @@
 @import "../../assets/css/_crossBrowsing.scss";
 
-$변수사용가능 : 100px; 
-
 main{
     position: relative;
     width: 100vw;
@@ -51,6 +49,8 @@ main{
             background-position: center;
             background-repeat: no-repeat;
             background-color: green;
+            overflow: hidden;
+            position: relative;
         }
     }
 
