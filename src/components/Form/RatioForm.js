@@ -16,7 +16,7 @@ function RatioForm(props) {
                     <li onClick={() => handleRatio(index)} key={index}>
                         <div style={{ width: width, height: height }}>
                             {icon && <p className="icon">{icon}</p>}
-                            <span>{text}{subText && <template><br></br><span>{subText}</span></template>}</span>
+                            <span>{text}{subText && <span>{subText}</span>}</span>
                         </div>
                     </li>
                 ))

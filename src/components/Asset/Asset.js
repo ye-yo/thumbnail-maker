@@ -8,7 +8,7 @@ function checkOutside(ref) {
 }
 const sectionForm = document.querySelector(".section-form");
 function Asset(props) {
-    const { asset, index, currentAsset, setCurrentAsset, canvasMaxWidth, onClick, assetStyle, setAssetStyle } = props;
+    const { asset, index, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle } = props;
     const assetBox = useRef(null);
     const [pointer, setPointer] = useState('none');
     const [position, setPosition] = useState({ x: 0, y: 0 });

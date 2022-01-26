@@ -37,7 +37,7 @@ const ratioList = [
 
 function Main() {
     const [windowWidth, windowHeight] = useWindowSize();
-    const [canvasMaxWidth, setCanvasMaxWidth] = useState(400);
+    const [canvasSize, setCanvasSize] = useState({ width: 400, height: 300 });
     const [ratio, setRatio] = useState(ratioList[2]);
     const [layout, setLayout] = useState(null);
     const [background, setBackground] = useState({ type: null, background: null, index: null });
@@ -45,9 +45,9 @@ function Main() {
     const canvasBox = useRef(null);
     const [canvasAssets, setCanvasAssets] = useState([]);
     const [currentAsset, setCurrentAsset] = useState({ index: null, type: null, style: {} });
-
+    // | canvasMaxWidth * ratio.heightRatio
     useEffect(() => {
-        setCanvasMaxWidth(canvasBox.current.clientWidth);
+        setCanvasSize({ ...canvasSize, width: canvasBox.current.clientWidth });
     }, [windowWidth])
 
     useEffect(() => {
@@ -56,24 +56,32 @@ function Main() {
         }
     }, [currentAsset])
 
+    function handleResizeCanvas(e) {
+        const { name, value } = e.target;
+        setCanvasSize({ ...canvasSize, [name]: Number(value) });
+    }
+
+    useEffect(() => {
+        setCanvasSize({ width: canvasBox.current.clientWidth, height: canvasBox.current.clientWidth * ratio.heightRatio })
+    }, [ratio])
     return (
         < main >
             <div className="center-box">
                 <section className="section-canvas">
                     <div className="input-canvas-size-wrap">
-                        <input type="number" defaultValue={canvasMaxWidth} />X
-                        <input type="number" defaultValue={canvasMaxWidth * ratio.heightRatio} />
+                        <input type="number" min={0} defaultValue={canvasSize.width} name="width" value={canvasSize.width} onChange={handleResizeCanvas} />X
+                        <input type="number" min={0} defaultValue={canvasSize.height} name="height" value={canvasSize.height} onChange={handleResizeCanvas} />
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
                         <div className="canvas" style={Object.assign({
-                            width: canvasMaxWidth,
-                            height: canvasMaxWidth * ratio.heightRatio
+                            width: canvasSize.width,
+                            height: canvasSize.height
                         }, background.type === "image" ?
                             { backgroundImage: `url(${background.background})` } :
                             { background: background.background })}>
                             {background.background}{background.type}{background.index}
                             {canvasAssets.map((element, index) =>
-                                <Asset canvasMaxWidth={canvasMaxWidth} setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={index} index={index} asset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
+                                <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={index} index={index} asset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
                             )}
                         </div>
                     </div>
