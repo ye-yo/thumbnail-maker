@@ -1,12 +1,13 @@
+@import "../../assets/css/_crossBrowsing.scss";
+
 .asset{
     // position: absolute;
     // cursor: default;
     // width: fit-content;
     // width: 50px;
-
     position: absolute;
     cursor: move;
-    color: black;
+    color: white;
     width: fit-content;
     height: fit-content;
     // border-radius: 5px;
@@ -16,22 +17,31 @@
     textarea{
         display: block;
         width: 100px;
-        height: 28px;
-        background-color: transparent;
+        height: 22px;
+        padding: 0;
+        // line-height: 22px;
+        line-height: 1;
         border-radius: 0;
-        color: white;
+        color: inherit;
+        background-color: transparent;
         border: 0;
         outline:0;
         pointer-events: none;
-        overflow: hidden;
         white-space: nowrap;
-        transition: .1s;
         text-align: center;
+        font-family: inherit;
+        overflow: auto;
         &:focus{
         }
     }
 
-    &.current{
-        border: 1px solid rgba(255,255,255,0.5);
+    img{
+        pointer-events: none;
+        width: auto;
+        height: 6vmin
+    }
+
+    &.current > *{
+        outline: 1px solid rgba(255,255,255,0.5);
     }
 }

@@ -41,23 +41,23 @@ function Main() {
     const [ratio, setRatio] = useState(ratioList[2]);
     const [layout, setLayout] = useState(null);
     const [background, setBackground] = useState({ type: null, background: null, index: null });
-    const [textStype, setTextStype] = useState(null);
+    const [assetStyle, setAssetStyle] = useState({ fontSize: '14px', height: 0, width: 0 });
     const canvasBox = useRef(null);
     const [canvasAssets, setCanvasAssets] = useState([]);
-    const [currentAsset, setCurrentAsset] = useState();
+    const [currentAsset, setCurrentAsset] = useState({ index: null, type: null, style: {} });
+
     useEffect(() => {
         setCanvasMaxWidth(canvasBox.current.clientWidth);
     }, [windowWidth])
 
-    function handleAssetDrag() {
+    useEffect(() => {
+        if (currentAsset.index != null) {
+            setAssetStyle({ ...currentAsset.style })
+        }
+    }, [currentAsset])
 
-    }
-
-    function handleAssetDrop() {
-        console.log("드랍")
-    }
     return (
-        <main>
+        < main >
             <div className="center-box">
                 <section className="section-canvas">
                     <div className="input-canvas-size-wrap">
@@ -65,8 +65,7 @@ function Main() {
                         <input type="number" defaultValue={canvasMaxWidth * ratio.heightRatio} />
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
-                        {/* {background.background} */}
-                        <div className="canvas" onDrop={handleAssetDrop} style={Object.assign({
+                        <div className="canvas" style={Object.assign({
                             width: canvasMaxWidth,
                             height: canvasMaxWidth * ratio.heightRatio
                         }, background.type === "image" ?
@@ -74,7 +73,7 @@ function Main() {
                             { background: background.background })}>
                             {background.background}{background.type}{background.index}
                             {canvasAssets.map((element, index) =>
-                                <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={index} index={index} asset={element}></Asset>
+                                <Asset canvasMaxWidth={canvasMaxWidth} setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={index} index={index} asset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
                             )}
                         </div>
                     </div>
@@ -84,7 +83,7 @@ function Main() {
                     <RatioForm setRatio={setRatio} ratioList={ratioList} />
                     <LayoutForm setLayout={setLayout} />
                     <BackgroundForm setBackground={setBackground} />
-                    <AssetsForm assets={canvasAssets} setCanvasAssets={setCanvasAssets} textStype={textStype} setTextStype={setTextStype} />
+                    <AssetsForm assets={canvasAssets} setCanvasAssets={setCanvasAssets} currentAsset={currentAsset} assetStyle={assetStyle} setAssetStyle={setAssetStyle} />
                 </section>
             </div>
         </main >

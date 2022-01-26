@@ -1,4 +1,5 @@
 @import url(./reset.css);
+@import url(./fonts.css);
 @import url(./input.css);
 
 html, body {
@@ -94,4 +95,8 @@ body {
 
 button *{
   cursor: pointer;
+}
+
+svg{
+  pointer-events: none;
 }

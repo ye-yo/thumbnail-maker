@@ -6,7 +6,7 @@ import './_BackgroundForm.scss';
 import { RiPaintFill, RiRecordCircleLine } from "react-icons/ri";
 import { MdBlurLinear, } from "react-icons/md";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
-import handleFileOnChange from '../commonFunction.js';
+import handleFileOnChange, { getRgba } from '../commonFunction.js';
 
 const gradientDirectionList = [
     { direction: 'top', icon: <HiOutlineArrowSmUp /> },
@@ -27,10 +27,6 @@ function hexToRgba(hex) {
         // return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',1)';
     }
     throw new Error('Bad Hex');
-}
-
-function getRgba({ r, g, b, a }) {
-    return `rgba(${r},${g},${b},${a})`;
 }
 
 function LayoutForm(props) {
