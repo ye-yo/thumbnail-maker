@@ -2,21 +2,20 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import Draggable from 'react-draggable';
 import './_Asset.scss';
 
-
-function checkOutside(ref) {
-
-}
-const sectionForm = document.querySelector(".section-form");
 function Asset(props) {
+    const sectionForm = document.querySelector(".section-form");
     const { asset, index, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle } = props;
     const assetBox = useRef(null);
     const [pointer, setPointer] = useState('none');
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [currentStyle, setCurrentStyle] = useState({});
     const assetComponent = useRef(null);
+
     useEffect(() => {
         function handleClickOutside(e) {
             if (assetComponent.current && (!assetComponent.current.contains(e.target) && !sectionForm.contains(e.target))) {
+                isDragging.current = false;
+                setPointer('none');
                 setCurrentAsset({ ...currentAsset, index: null })
             }
         }
@@ -71,11 +70,6 @@ function Asset(props) {
         });
     }
 
-    function handleAssetState() {
-        isDragging.current = false;
-        setPointer('none');
-        setCurrentAsset({ ...currentAsset, index: null });
-    }
     function handleDrag(e, data) {
         if (!isDragging.current) {
             isDragging.current = true;
@@ -95,12 +89,12 @@ function Asset(props) {
             onStart={handleAssetClick}
             onDrag={(e, data) => handleDrag(e, data)}
             tabIndex={index}
-            onBlur={handleAssetState}
+            nodeRef={assetComponent}
         // onStop={handleAssetState}
         >
             <div index={index} ref={assetComponent}
                 className={`asset${isCurrentAsset() ? ' current' : ''}`}
-                style={{ ...asset.style, ...currentStyle, transform: 'none' }}
+                style={{ top: asset.style.top, left: asset.style.left, transform: 'none' }}
             >
                 {
                     asset.type == 'text' ?
