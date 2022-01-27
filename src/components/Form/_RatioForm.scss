@@ -7,44 +7,46 @@
 .ratio-list{
     @include flexBox(flex,row,start);
     overflow-x: scroll;
-    > li{
-        @include flexBox;
+    .check-style{
+        @include flexBox(flex,column);
         border: var(--borderGray);
         cursor: pointer;
         flex: none;
         width: 100px;
         height: 100px;
         margin: 0 4px;
+        background-color: transparent;
+        color: white;
         // background-color: rgba(255,255,255,.7);
         cursor: pointer;
         &:hover{
             opacity: .8;
         }
-        div{
-            @include flexBox(flex,column);
-            color: white;
-            .icon{
-                background: no-repeat center / contain;
-                width: 22px;
-                height: 22px;
-                display: block;
-                margin-bottom: 2px;
-                svg{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            span{
-                font-size: 18px;
+       .icon{
+            background: no-repeat center / contain;
+            width: 22px;
+            height: 22px;
+            display: block;
+            margin-bottom: 2px;
+            svg{
                 width: 100%;
-                display: block;
-                word-wrap: break-word;
-                text-align: center;
-                span{
-                    color: #aaaaaa;
-                    font-size: 12px;
-                }
+                height: 100%;
             }
         }
+        span{
+            font-size: 18px;
+            width: 100%;
+            display: block;
+            word-wrap: break-word;
+            text-align: center;
+            span{
+                color: #aaaaaa;
+                font-size: 12px;
+            }
+        }
+    }
+    input[type=checkbox]:checked + .check-style{
+        border-color: aquamarine;
+        background-color: transparent;
     }
 }

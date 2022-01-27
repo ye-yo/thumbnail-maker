@@ -4,23 +4,29 @@ main{
     position: relative;
     width: 100vw;
     height: 100vh;
+    overflow: auto;
 }
 .center-box{
-    @include flexBox(flex, row, stretch);
+    margin-top: 10vh;
+    // @include flexBox(flex, row, stretch);
+    @include flexBox(flex, column, stretch);
     // margin: 10%;
     position: absolute;
-    top: 50%;
+    // top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     width: 90%;
-    height: 80vh;
+    // height: 80vh;
     background-color: #eeeeee;
     max-width: 1080px;
     // height: 90vh;
     border: 1px solid gray;
+    min-width: fit-content;
+    min-height: fit-content;
 
     > section{
-        width: 50%;
+        // width: 100%;
     }
 }
 
@@ -28,7 +34,7 @@ main{
     height: 100%;
     @include flexBox(flex,column,space-between);
     margin: 0 auto;
-    background-color: white;
+    // background-color: white;
     .input-canvas-size-wrap{
         margin-top: 1rem;
 
@@ -42,6 +48,9 @@ main{
         @include flexBox();
         width: 90%;
         height: 90%;
+        min-width: 768px;
+        min-height: 402.094px;
+        margin: 1rem 0;
         // overflow: hidden;
 
         .canvas{
@@ -52,6 +61,9 @@ main{
             background-color: green;
             overflow: hidden;
             position: relative;
+            height: 100%;
+            // width: 768px;
+            // height: 402.094px;
         }
     }
 
@@ -71,12 +83,18 @@ main{
 }
 
 .section-form{
+    @include flexBox(flex, row, space-between, start, wrap);
      min-height: 200px;
      height: 100%;
-     padding: 1rem;
+    //  padding: 1rem;
+    padding: 1rem 2rem;
+    width: 900px;
      background-color: rgb(59, 58, 67);
      overflow-y: auto;
      > section{
          margin-bottom: .4rem;
+         width: calc(50% - 1rem);
+         min-width: 400px;
+         display: inline-block;
      }
 }
