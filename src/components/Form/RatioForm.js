@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Form from './Form.js';
 import './_RatioForm.scss';
 
-import { RiLayoutBottom2Line, RiYoutubeFill } from "react-icons/ri";
+import { RiAspectRatioLine } from "react-icons/ri";
 
 function RatioForm(props) {
 
@@ -10,7 +10,7 @@ function RatioForm(props) {
         props.setRatio(props.ratioList[index]);
     }
     return (
-        <Form icon={RiLayoutBottom2Line()} label="Ratio" className="section-form-ratio">
+        <Form icon={RiAspectRatioLine()} label="Ratio" className="section-form-ratio">
             <ul className="ratio-list">{
                 props.ratioList.map(({ width, height, text, subText, icon }, index) => (
                     <li onClick={() => handleRatio(index)} key={index}>

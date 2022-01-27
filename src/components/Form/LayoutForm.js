@@ -71,7 +71,7 @@ function LayoutForm(props) {
                         <div className="asset-group">
                             {
                                 layout.layout.map((element, elementIndex) =>
-                                    <p style={{ ...element.style, top: `calc(${element.style.top} + ${defaultHalfSize.height}px)`, left: `calc(${element.style.left} + ${defaultHalfSize.width}px)`, transform: 'translate(-50%, -50%) scale(0.5)' }}>{element.name}</p>
+                                    <p key={elementIndex} style={{ ...element.style, top: `calc(${element.style.top} + ${defaultHalfSize.height}px)`, left: `calc(${element.style.left} + ${defaultHalfSize.width}px)`, transform: 'translate(-50%, -50%) scale(0.5)' }}>{element.name}</p>
                                 )
                             }
                         </div>

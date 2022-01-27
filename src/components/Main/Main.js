@@ -6,6 +6,8 @@ import AssetsForm from '../Form/AssetsForm.js';
 import RatioForm from '../Form/RatioForm.js';
 import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
+import html2canvas from 'html2canvas';
+
 
 let count = 0;
 
@@ -66,6 +68,24 @@ function Main() {
     useEffect(() => {
         setCanvasSize({ width: canvasBox.current.clientWidth, height: canvasBox.current.clientWidth * ratio.heightRatio })
     }, [ratio])
+
+
+    function handleDownload() {
+        let canvasElement = document.querySelector("#canvas");
+        html2canvas(canvasElement).then(canvas =>
+            handleCaptureCanvas(canvas.toDataURL('image/png'), 'thumbnail.png')
+        );
+    }
+
+    function handleCaptureCanvas(uri, fileName) {
+        let link = document.createElement('a');
+        document.body.appendChild(link);
+        link.href = uri;
+        link.download = fileName;
+        link.click();
+        console.log(link);
+        document.body.removeChild(link);
+    }
     return (
         < main >
             <div className="center-box">
@@ -75,7 +95,7 @@ function Main() {
                         <input type="number" min={0} defaultValue={canvasSize.height} name="height" value={canvasSize.height} onChange={handleResizeCanvas} />
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
-                        <div className="canvas" style={Object.assign({
+                        <div id="canvas" className="canvas" style={Object.assign({
                             width: canvasSize.width,
                             height: canvasSize.height
                         }, background.type === "image" ?
@@ -88,7 +108,7 @@ function Main() {
                             )}
                         </div>
                     </div>
-                    <button className="btn-download btn-main"><BsDownload />Download</button>
+                    <button onClick={handleDownload} className="btn-download btn-main"><BsDownload />Download</button>
                 </section>
                 <section className="section-form">
                     <RatioForm setRatio={setRatio} ratioList={ratioList} />
