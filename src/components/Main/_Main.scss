@@ -40,11 +40,12 @@ main{
     }
     .canvas-box{
         @include flexBox();
-        width: 80%;
+        width: 90%;
         height: 90%;
         // overflow: hidden;
 
         .canvas{
+            font-size: 1vmin;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

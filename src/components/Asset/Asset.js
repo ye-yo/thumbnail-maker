@@ -29,18 +29,23 @@ function Asset(props) {
 
 
     useEffect(() => {
+        if (!asset.style.fontSize) {
 
-        let newAsset = {
-            width: assetBox.current.clientWidth,
-            height: assetBox.current.clientHeight,
-        }
-        if (asset.type === "text") {
-            newAsset.fontSize = assetBox.current.style.fontSize;
+            let newAsset = {
+                width: assetBox.current.clientWidth,
+                height: assetBox.current.clientHeight,
+            }
+            if (asset.type === "text") {
+                newAsset.fontSize = assetBox.current.style.fontSize;
+            }
+            else {
+                newAsset.fontSize = '14px';
+            }
+            setCurrentStyle({ ...newAsset });
         }
         else {
-            newAsset.fontSize = '14px';
+            setCurrentStyle(asset.style)
         }
-        setCurrentStyle({ ...newAsset });
     }, [])
     let isDragging = useRef(false);
     function handleTextInput(e) {
@@ -84,30 +89,29 @@ function Asset(props) {
             setCurrentStyle({ ...assetStyle });
     }, [assetStyle])
 
-    function start() {
-
-    }
-
     const isCurrentAsset = () => { return currentAsset.index === index; }
     return (
         <Draggable
             onStart={handleAssetClick}
             onDrag={(e, data) => handleDrag(e, data)}
             tabIndex={index}
-            onFocus={() => { console.log("---") }}
             onBlur={handleAssetState}
         // onStop={handleAssetState}
         >
-            <div ref={assetComponent} className={`asset${isCurrentAsset() ? ' current' : ''} `}>
-                {asset.type == 'text' ?
-                    <textarea ref={assetBox} row="1"
-                        onKeyUp={handleTextInput}
-                        onKeyDown={handleTextInput}
-                        defaultValue={asset.name}
-                        style={{ ...asset.style, ...currentStyle, pointerEvents: pointer }}
-                    ></textarea>
-                    :
-                    <img style={{ ...asset.style, ...currentStyle }} ref={assetBox} src={asset.url} alt={asset.name}></img>
+            <div index={index} ref={assetComponent}
+                className={`asset${isCurrentAsset() ? ' current' : ''}`}
+                style={{ ...asset.style, ...currentStyle, transform: 'none' }}
+            >
+                {
+                    asset.type == 'text' ?
+                        <textarea ref={assetBox} row="1"
+                            onKeyUp={handleTextInput}
+                            onKeyDown={handleTextInput}
+                            defaultValue={asset.name}
+                            style={{ ...asset.style, ...currentStyle, pointerEvents: pointer, transform: 'none' }}
+                        ></textarea>
+                        :
+                        <img style={{ ...asset.style, ...currentStyle, transform: 'none' }} ref={assetBox} src={asset.url} alt={asset.name}></img>
                 }
             </div>
         </Draggable >

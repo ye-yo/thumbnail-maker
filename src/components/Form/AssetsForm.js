@@ -12,11 +12,11 @@ import handleFileOnChange from '../commonFunction.js';
 import getFontList from './FontList.js';
 import axios from 'axios';
 import { SketchPicker } from 'react-color'
-
+let count = 0;
 const textLayoutList = [
-    { name: 'Title', style: { fontSize: '24px', fontWeight: '500' } },
-    { name: 'Sub title', style: { fontSize: '18px' } },
-    { name: 'Text', style: { fontSize: '14px' } },
+    { name: 'Title', style: { fontSize: '24px', fontWeight: '500', left: '50%', top: '20%' } },
+    { name: 'Sub title', style: { fontSize: '18px', left: '50%', top: '40%' } },
+    { name: 'Text', style: { fontSize: '14px', left: '50%', top: '60%' } },
 ];
 
 function AssetsForm(props) {
@@ -42,6 +42,7 @@ function AssetsForm(props) {
 
     function handleTextCreate(item) {
         item.type = 'text';
+        item.id = 'asset' + count++;
         props.setCanvasAssets([...props.assets, item])
     }
 
@@ -51,6 +52,7 @@ function AssetsForm(props) {
 
     function handleImageAssetClick(item) {
         item.type = 'image';
+        item.id = 'asset' + count++;
         props.setCanvasAssets([...props.assets, item])
     }
 

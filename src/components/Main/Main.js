@@ -7,6 +7,8 @@ import RatioForm from '../Form/RatioForm.js';
 import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
 
+let count = 0;
+
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
     useLayoutEffect(() => {
@@ -79,9 +81,10 @@ function Main() {
                         }, background.type === "image" ?
                             { backgroundImage: `url(${background.background})` } :
                             { background: background.background })}>
-                            {background.background}{background.type}{background.index}
-                            {canvasAssets.map((element, index) =>
-                                <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={index} index={index} asset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
+                            {canvasAssets.map((element, index) => {
+                                return <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={element.id}
+                                    index={index} id={index.id} asset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
+                            }
                             )}
                         </div>
                     </div>
@@ -89,7 +92,7 @@ function Main() {
                 </section>
                 <section className="section-form">
                     <RatioForm setRatio={setRatio} ratioList={ratioList} />
-                    <LayoutForm setLayout={setLayout} />
+                    <LayoutForm setLayout={setLayout} setCanvasAssets={setCanvasAssets} canvasAssets={canvasAssets} />
                     <BackgroundForm setBackground={setBackground} />
                     <AssetsForm assets={canvasAssets} setCanvasAssets={setCanvasAssets} currentAsset={currentAsset} assetStyle={assetStyle} setAssetStyle={setAssetStyle} />
                 </section>
