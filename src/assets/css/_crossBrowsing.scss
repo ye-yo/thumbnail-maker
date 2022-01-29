@@ -306,7 +306,7 @@
 
     -webkit-justify-content: if($justify == space-between,  justify, $justify);
     -ms-flex-pack: if($justify == space-between,  justify, $justify);
-    justify-content: if($justify == center or space-between, $justify, 'flex-' + $justify);
+    justify-content: if($justify == center or $justify == space-between, $justify, flex- + $justify);
 
     -webkit-align-items:$align;
     -ms-align-items:$align;

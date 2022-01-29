@@ -74,5 +74,8 @@
     .color-picker-wrap{
         position: absolute;
         left: 100%;
+        .sketch-picker{
+            z-index: 2;
+        }
     }
 }

@@ -7,10 +7,6 @@ import RatioForm from '../Form/RatioForm.js';
 import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
 import html2canvas from 'html2canvas';
-import { AiFillCodeSandboxCircle } from 'react-icons/ai';
-
-
-let count = 0;
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -46,28 +42,32 @@ function Main() {
     const [windowWidth, windowHeight] = useWindowSize();
     const [canvasSize, setCanvasSize] = useState({ width: 400, height: 300 });
     const [ratio, setRatio] = useState(ratioList[2]);
-    const [layout, setLayout] = useState(null);
     const [background, setBackground] = useState({ type: null, background: null, index: null });
     const [assetStyle, setAssetStyle] = useState({ fontSize: '14px', height: 0, width: 0 });
     const canvasBox = useRef(null);
     const [canvasAssets, setCanvasAssets] = useState([]);
     const [currentAsset, setCurrentAsset] = useState({ index: null, type: null, style: {}, position: {} });
+
     useEffect(() => {
-        // setCanvasSize({ ...canvasSize, });
         setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
     }, [windowHeight])
 
     useEffect(() => {
         if (currentAsset.index != null) {
+            alert("current asset")
             setAssetStyle({ ...currentAsset.style })
         }
     }, [currentAsset])
+
+    useEffect(() => {
+        if (ratio)
+            setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
+    }, [ratio])
 
     function handleResizeCanvas(e) {
         const { name, value } = e.target;
         setRatio(null);
         uncheckedRatioBox();
-
         setCanvasSize({ ...canvasSize, [name]: Number(value) });
     }
 
@@ -76,12 +76,6 @@ function Main() {
         checkBoxes.forEach(box => box.checked = false)
         checkBoxes.checked = false;
     }
-
-    useEffect(() => {
-        if (ratio)
-            setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
-    }, [ratio])
-
 
     function handleDownload() {
         let canvasElement = document.querySelector("#canvas");
@@ -98,31 +92,24 @@ function Main() {
         link.click();
         document.body.removeChild(link);
     }
-
-    /*ㅇㄴㄹㄴㅇㄹ
-    max-width 500;
-    */
-    console.log(ratio)
     return (
         < main >
             <div className="center-box">
                 <section className="section-canvas">
                     <div className="input-canvas-size-wrap">
-                        <input type="number" min={0} defaultValue={canvasSize.width} name="width" value={canvasSize.width} onChange={handleResizeCanvas} />X
-                        <input type="number" min={0} defaultValue={canvasSize.height} name="height" value={canvasSize.height} onChange={handleResizeCanvas} />
+                        <input type="number" min={0} name="width" value={canvasSize.width} onChange={handleResizeCanvas} />X
+                        <input type="number" min={0} name="height" value={canvasSize.height} onChange={handleResizeCanvas} />
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
                         <div id="canvas" className="canvas" style={Object.assign({
                             width: canvasSize.width,
                             height: canvasSize.height
-                            // height: ratio.aspectRatio ? canvasSize.height * ratio.aspectRatio.height / ratio.aspectRatio.width : canvasSize.height,
-                            // aspectRatio: ratio.aspectRatio.width + '/' + ratio.aspectRatio.height || 'none',
                         }, background.type === "image" ?
                             { backgroundImage: `url(${background.background})` } :
                             { background: background.background })}>
                             {canvasAssets.map((element, index) => {
                                 return <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={element.id}
-                                    index={index} id={index.id} asset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
+                                    id={element.id} newAsset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
                             }
                             )}
                         </div>
@@ -131,7 +118,7 @@ function Main() {
                 </section>
                 <section className="section-form">
                     <RatioForm setRatio={setRatio} ratioList={ratioList} />
-                    <LayoutForm setLayout={setLayout} setCanvasAssets={setCanvasAssets} canvasAssets={canvasAssets} />
+                    <LayoutForm setCanvasAssets={setCanvasAssets} canvasAssets={canvasAssets} />
                     <BackgroundForm setBackground={setBackground} />
                     <AssetsForm assets={canvasAssets} setCanvasAssets={setCanvasAssets} currentAsset={currentAsset} assetStyle={assetStyle} setAssetStyle={setAssetStyle} />
                 </section>

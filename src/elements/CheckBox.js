@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import './CheckBox.scss';
 
 function CheckBox(props) {
-    const { id, className, name, isRadio, parents, children, checkedEvent } = props;
+    const { id, className, name, isRadio, parents, children, checkedEvent, checked, onBlur } = props;
     function toggleChecked(e) {
         if (e.target.checked && isRadio) {
             let checkBoxes = document.querySelectorAll(parents + ` input[type=checkbox]:not(#${e.target.id}`);
@@ -13,8 +12,8 @@ function CheckBox(props) {
     }
     return (
         <div className={`checkbox-wrap${" " + (className || '')}`}>
-            <input id={id} type="checkbox" onChange={toggleChecked} />
-            <label htmlFor={id} name={name} className="check-style"  >
+            <input id={id} type="checkbox" name={name} checked={checked && true} onChange={toggleChecked} />
+            <label htmlFor={id} className="check-style"  >
                 {children}
             </label>
         </div>

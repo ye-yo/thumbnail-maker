@@ -1,17 +1,11 @@
-import React, { useReducer, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './Form.js';
-import SelectBox from '../../elements/SelectBox.js';
-import CheckBox from '../../elements/CheckBox.js';
 import TextOptions from './TextOptions.js';
 import './_AssetsForm.scss';
-import { RiDragMove2Fill, RiText, RiUnderline, RiPaintFill, RiBold, RiAlignJustify } from "react-icons/ri";
+import { RiDragMove2Fill, RiAlignJustify } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
-import { ImImage } from "react-icons/im";
 import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
 import handleFileOnChange from '../commonFunction.js';
-import getFontList from './FontList.js';
-import axios from 'axios';
-import { SketchPicker } from 'react-color'
 let count = 0;
 const textLayoutList = [
     { name: 'Title', style: { fontSize: '24px', fontWeight: '500', left: '50%', top: '20%' } },
@@ -28,14 +22,12 @@ function AssetsForm(props) {
         'justify': <RiAlignJustify />
     };
     const [currentTab, setCurrentTab] = useState(0);
-    const fontSize = useRef(0);
     const [imageAssets, setImageAssets] = useState([]);
     const [selectValue, setSelectValue] = useState(0);
-    const width = useRef(null);
-    const height = useRef(null);
 
     useEffect(() => {
         if (selectValue) {
+            alert("select")
             props.setAssetStyle({ ...props.assetStyle, fontFamily: selectValue })
         }
     }, [selectValue])
@@ -57,6 +49,7 @@ function AssetsForm(props) {
     }
 
     function handleAssetSize(e) {
+        alert("handleassetsieze")
         const { name, value } = e.target;
         setAssetStyle({ ...assetStyle, [name]: Number(value) });
     }

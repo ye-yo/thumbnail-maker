@@ -14,13 +14,12 @@
     margin: auto;
     user-select: none;
 
-    textarea{
+    > *{
         display: block;
-        width: 100px;
+        width: 110px;
         // height: 22px;
         padding: 0;
         // line-height: 22px;
-        line-height: 1;
         border-radius: 0;
         color: inherit;
         background-color: transparent;
@@ -32,6 +31,11 @@
         font-family: inherit;
         overflow: auto;
         &:focus{
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar{
+            display: none;
         }
     }
 

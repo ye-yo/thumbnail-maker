@@ -1,9 +1,7 @@
 import React from 'react';
 import Form from './Form.js';
 import './_LayoutForm.scss';
-import Asset from '../Asset/Asset.js';
 import { RiLayoutBottom2Line } from "react-icons/ri";
-import { BiLeftArrow } from 'react-icons/bi';
 
 const defaultAssetSize = {
     width: 100, height: 22
@@ -19,7 +17,7 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Title',
-                style: { fontSize: '24px', fontWeight: 'bold', top: `calc(50% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
+                style: { fontSize: '54px', fontWeight: 'bold', top: `calc(50% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
             },
         ],
     },
@@ -29,12 +27,12 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Title',
-                style: { fontSize: '24px', fontWeight: 'bold', top: `calc(38% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
+                style: { fontSize: '54px', fontWeight: 'bold', top: `calc(38% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
             },
             {
                 type: 'text',
                 name: 'Sub Title',
-                style: { fontSize: '16px', fontWeight: '500', top: `calc(68% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
+                style: { fontSize: '38px', fontWeight: '500', top: `calc(68% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
             },
         ],
     },
@@ -44,7 +42,7 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Title',
-                style: { fontSize: '24px', fontWeight: 'bold', top: `calc(42% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
+                style: { fontSize: '54px', fontWeight: 'bold', top: `calc(42% - ${defaultHalfSize.height}px)`, left: `calc(50% - ${defaultHalfSize.width}px)` }
             },
             {
                 type: 'text',
@@ -60,7 +58,6 @@ function LayoutForm(props) {
 
     function handleTemplateChange(index) {
         const layout = (layoutList[index].layout).map(layout => { layout.id = 'layout' + count++; return layout; });
-        // console.log(layout[0].id)
         setCanvasAssets(layout);
     }
     return (

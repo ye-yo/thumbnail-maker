@@ -1,14 +1,11 @@
-import React, { useReducer, useState, useRef, useEffect } from 'react';
-import Form from './Form.js';
+import React, { useState, useEffect } from 'react';
 import SelectBox from '../../elements/SelectBox.js';
 import CheckBox from '../../elements/CheckBox.js';
 import './_TextOptions.scss';
 import { BiFont } from "react-icons/bi";
-import { IoMdColorPalette, IoIosAdd } from "react-icons/io";
-import { RiDragMove2Fill, RiText, RiUnderline, RiPaintFill, RiBold, RiAlignJustify } from "react-icons/ri";
+import { IoMdColorPalette, } from "react-icons/io";
+import { RiUnderline, RiBold, RiAlignJustify } from "react-icons/ri";
 import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
-import getFontList from './FontList.js';
-import axios from 'axios';
 import { SketchPicker } from 'react-color';
 import { getRgba } from '../commonFunction.js';
 
@@ -35,11 +32,9 @@ function TextOptions(props) {
         'right': <AiOutlineAlignRight />,
         'justify': <RiAlignJustify />
     };
-    const [currentAlign, setCurrentAlign] = useState(0)
-    const fontSize = useRef(0);
-    const [currentAssetSize, setCurrentAssetSize] = useState({ width: 0, height: 0 });
-    const [imageAssets, setImageAssets] = useState([]);
     const [selectValue, setSelectValue] = useState(0);
+    const [color, setColor] = useState();
+    const [colorTarget, setColorTarget] = useState(null);
 
     useEffect(() => {
         if (selectValue) {
@@ -47,22 +42,15 @@ function TextOptions(props) {
         }
     }, [selectValue])
 
-    function handleCurrentAlign() {
-        setCurrentAlign(currentAlign => currentAlign === 3 ? 0 : currentAlign + 1)
-    }
-
     function openColorPicker(colorTarget) {
         setColorTarget(colorTarget);
     }
-    function handleUnderline(checked) {
-        setAssetStyle({ ...assetStyle, textDecoration: checked && 'underline' });
+    function handleUnderline(e) {
+        setAssetStyle({ ...assetStyle, textDecoration: e.target.checked && 'underline' });
     }
-    function handleTextBold(checked) {
-        setAssetStyle({ ...assetStyle, fontWeight: checked && 'bold' });
+    function handleTextBold(e) {
+        setAssetStyle({ ...assetStyle, fontWeight: e.target.checked && 'bold' });
     }
-
-    const [color, setColor] = useState();
-    const [colorTarget, setColorTarget] = useState(null);
 
     function handleChange(color) {
         setColor(color);
@@ -73,7 +61,7 @@ function TextOptions(props) {
 
     function handleAssetStyle(e, checked) {
         const { name, value } = e.target;
-        let objectValue = '';
+        let objectValue = null;
         let moreObject = {};
         if (name) {
             switch (name) {
@@ -86,7 +74,7 @@ function TextOptions(props) {
                 } break;
                 case 'bold': objectValue = checked && 'bold'; break;
                 case 'fontDecolation': objectValue = checked && 'underline'; break;
-                case 'color': checked ? openColorPicker(name) : setColorTarget(null); break;
+                case 'color': checked ? openColorPicker(name) : focusout(e); break;
                 case 'backgroundColor': checked ? openColorPicker(name) : setColorTarget(null); break;
                 case 'textAlign': {
                     objectValue = (checked === 'center' || !checked) ? 'left' : checked === 'left' ? 'right' : checked === 'right' ? 'justify' : 'center';
@@ -100,22 +88,27 @@ function TextOptions(props) {
             }
         }
     }
+
+    function focusout(e) {
+        e.target.checked = false;
+        setColorTarget(null);
+    }
     return (
-        <div className={`text-option-wrap disabled-content${props.currentAsset.index === null || props.currentAsset.type !== 'text' ? ' disabled' : ''}`} >
+        <div className={`text-option-wrap disabled-content${props.currentAsset.id === null || props.currentAsset.type !== 'text' ? ' disabled' : ''}`} >
             <div className="text-input-wrap">
                 <SelectBox setSelectValue={setSelectValue} assetStyle={props.assetStyle} options={fontList} defaultValue='0' value={assetStyle.fontFamily} className="select-font"></SelectBox>
-                <input type="number" min="0" name="fontSize" onChange={(e) => handleAssetStyle(e, null)} defaultValue={14} value={Number(assetStyle.fontSize.replace('px', ''))}></input>
+                <input type="number" min="0" name="fontSize" onChange={(e) => handleAssetStyle(e, null)} value={Number(assetStyle.fontSize.replace('px', ''))}></input>
             </div>
             <div className="text-style-wrap">
-                <CheckBox id={'check_bold'} name="fontWeight" checkedEvent={handleTextBold}><RiBold /></CheckBox>
-                <CheckBox id={'check_underline'} name="fontDecolation" checkedEvent={handleUnderline}><RiUnderline /></CheckBox>
-                <CheckBox id={'check_color'} name="color" checkedEvent={handleAssetStyle}><IoMdColorPalette /><span className="color-preview" style={{ backgroundColor: assetStyle.color || 'initial' }}></span></CheckBox>
-                <CheckBox id={'check_backcolor'} name="backgroundColor" checkedEvent={handleAssetStyle} className="btn-back-color"><BiFont className="ic-top" /><span style={{ backgroundColor: assetStyle.backgroundColor || 'initial' }}></span></CheckBox>
-                <button name="textAlign" onClick={(e) => { console.log("--"); handleAssetStyle(e, assetStyle.textAlign) }}>{alignList[assetStyle.textAlign || 'center']}</button>
+                <CheckBox id="check_bold" name="fontWeight" checkedEvent={handleTextBold} checked={assetStyle.fontWeight}><RiBold /></CheckBox>
+                <CheckBox id="check_underline" name="fontDecolation" checkedEvent={handleUnderline} checked={assetStyle.textDecoration}><RiUnderline /></CheckBox>
+                <CheckBox id="check_color" name="color" checkedEvent={handleAssetStyle} checked={colorTarget === 'color'}><IoMdColorPalette /><span className="color-preview" style={{ backgroundColor: assetStyle.color || 'initial' }}></span></CheckBox>
+                <CheckBox id="check_backcolor" name="backgroundColor" checkedEvent={handleAssetStyle} checked={colorTarget === 'backgroundColor'} className="btn-back-color"><BiFont className="ic-top" /><span style={{ backgroundColor: assetStyle.backgroundColor || 'initial' }}></span></CheckBox>
+                <button name="textAlign" onClick={(e) => { handleAssetStyle(e, assetStyle.textAlign) }}>{alignList[assetStyle.textAlign || 'center']}</button>
             </div>
             {
                 colorTarget != null &&
-                <div className="color-picker-wrap">
+                <div className="color-picker-wrap" tabIndex="0">
                     <SketchPicker color={color} onChangeComplete={handleChange} />
                 </div>
             }
