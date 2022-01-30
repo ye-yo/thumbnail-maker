@@ -11,7 +11,7 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Title',
-                style: { fontSize: '54px', fontWeight: 'bold', top: '50%', left: '50%' }
+                style: { fontSize: '54px', fontWeight: 'bold', top: '50%', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
         ],
     },
@@ -21,12 +21,12 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Title',
-                style: { fontSize: '54px', fontWeight: 'bold', top: '40%', left: '50%' }
+                style: { fontSize: '54px', fontWeight: 'bold', top: '40%', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
             {
                 type: 'text',
                 name: 'Sub Title',
-                style: { fontSize: '38px', fontWeight: '500', top: 'calc(40% + 74px)', left: '50%' }
+                style: { fontSize: '38px', fontWeight: '500', top: 'calc(40% + 74px)', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
         ],
     },
@@ -36,12 +36,12 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Title',
-                style: { fontSize: '54px', fontWeight: 'bold', top: '46%', left: '50%' }
+                style: { fontSize: '54px', fontWeight: 'bold', top: '46%', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
             {
                 type: 'text',
                 name: 'small text',
-                style: { fontSize: '24px', fontWeight: '300', top: 'calc(46% + 54px)', left: '50%' }
+                style: { fontSize: '24px', fontWeight: '300', top: 'calc(46% + 54px)', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
         ],
     },
