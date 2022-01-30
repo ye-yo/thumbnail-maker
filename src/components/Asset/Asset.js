@@ -6,28 +6,24 @@ function Asset(props) {
     const sectionForm = document.querySelector(".section-form");
     const { newAsset, id, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle } = props;
     const assetBox = useRef(null);
-    const [pointer, setPointer] = useState('none');
-    const [currentStyle, setCurrentStyle] = useState(newAsset.style);
+    const [currentStyle, setCurrentStyle] = useState({ ...newAsset.style, visibility: 'hidden' });
     const assetComponent = useRef(null);
-    const [CustomTag, setCustomTag] = useState('div');
     let isDragging = useRef(false);
     let isClicked = useRef(false);
     const isCurrentAsset = currentAsset.id === id;
-    const [textValue, setTextValue] = useState(newAsset.name);
-
     useEffect(() => {
-        let size = getAssetSize();// 렌더링된 사이즈에 따라 초기 width,height 재조정
         const assetElement = assetComponent.current;
-        assetElement.style.top = `calc(${assetElement.style.top} - ${size.height} / 2)`;
-        assetElement.style.left = `calc(${assetElement.style.left} - ${size.width} / 2)`;
+        let size = assetElement.getBoundingClientRect();
+        assetElement.style.top = `calc(${assetElement.style.top} - ${size.height}px / 2)`;
+        assetElement.style.left = `calc(${assetElement.style.left} - ${size.width}px / 2)`;
+        setCurrentStyle({ ...currentStyle, visibility: 'visible' });
     }, [])
 
     useEffect(() => {
         function handleClickOutside(e) {
             if (assetComponent.current && (!assetComponent.current.contains(e.target) && !sectionForm.contains(e.target))) {
                 isDragging.current = false;
-                setCustomTag('div')
-                setPointer('none');
+                setCurrentStyle({ ...currentStyle, pointerEvents: 'none', cursor: 'inherit', visibility: 'visible' })
                 setCurrentAsset({ ...currentAsset, id: null })
             }
         }
@@ -36,7 +32,7 @@ function Asset(props) {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         };
-    }, [assetComponent])
+    }, [])
 
     useEffect(() => {
         if (isCurrentAsset) {
@@ -47,8 +43,7 @@ function Asset(props) {
     useEffect(() => {
         if (isCurrentAsset) {
             assetBox.current.style.fontSize = assetStyle.fontSize;
-            let assetSize = getAssetSize();
-            setCurrentStyle({ ...assetStyle, ...assetSize });
+            setCurrentStyle({ ...currentStyle, ...assetStyle });
         }
     }, [assetStyle])
 
@@ -56,6 +51,7 @@ function Asset(props) {
         if (!isDragging.current) {
             isDragging.current = true;
             if (!isClicked.current) {
+                assetBox.current.focus()
                 handleAssetClick(e);
             }
             else {
@@ -63,59 +59,27 @@ function Asset(props) {
             }
         }
     };
-    // useEffect(() => {
-    //     if (isCurrentAsset) {
-    //         // getAssetSize();
-    //     }
-    // }, [currentStyle])
 
-    function handleTextInput(e) {
-        if (e.type === 'keyup' && e.target.scrollHeight === assetStyle.height) {
-            return;
-        }
-        setTextValue(e.target.value);
-        setAssetStyle({ ...assetStyle, width: e.target.scrollWidth, height: e.target.scrollHeight });
-    }
-
-    function getAssetSize() {
-        const assetElement = assetBox.current;
-        // assetElement.style.width = '100px';
-        assetElement.style.height = '1px';
-        assetElement.style.width = assetElement.scrollWidth + 'px';
-        assetElement.style.height = assetElement.scrollHeight + 'px';
-        // return { width: assetElement.style.width, height: assetElement.style.height };
-        return { width: assetElement.style.width, height: assetElement.style.height };
-    }
     function handleAssetClick(e) {
         e.stopPropagation();
         isClicked.current = true;
-        if (isCurrentAsset) {
-            if (pointer === 'none') {
-                if (CustomTag === 'div') {
-                    let assetSize = getAssetSize();
-                    setCurrentStyle({ ...currentStyle, ...assetSize, pointerEvents: 'inherit' })
-                    setCustomTag('textarea')
-                }
-                setPointer('inherit');
-            }
-            return;
-        }
-        else {
+        if (!isCurrentAsset) {
             setCurrentAsset({
                 ...currentAsset,
                 id: id,
                 type: newAsset.type,
                 style: currentStyle
             });
+            setCurrentStyle({ ...currentStyle, cursor: 'default', pointerEvents: 'inherit' })
         }
     }
-
-    useEffect(() => {
-        if (CustomTag === 'textarea') {
-            assetBox.current.value = textValue;
-        }
-    }, [CustomTag])
-
+    // function handleAssetBlur(e) {
+    //     if (!sectionForm.contains(e.target)) {
+    //         isDragging.current = false;
+    //         setCurrentStyle({ ...currentStyle, pointerEvents: 'none', cursor: 'move' })
+    //         setCurrentAsset({ ...currentAsset, id: null })
+    //     }
+    // }
     return (
         <Draggable
             onStart={handleAssetClick}
@@ -128,11 +92,11 @@ function Asset(props) {
             >
                 {
                     newAsset.type == 'text' ?
-                        <CustomTag ref={assetBox} row="1"
-                            onKeyUp={handleTextInput}
-                            onKeyDown={handleTextInput}
-                            style={currentStyle}
-                        >{CustomTag === 'div' ? textValue : null}</CustomTag>
+                        <div ref={assetBox} row="1"
+                            // onBlur={handleAssetBlur}
+                            style={currentStyle} contentEditable="true"
+                            suppressContentEditableWarning="true"
+                        ><div>{newAsset.name}</div></div>
                         :
                         <img style={currentStyle} ref={assetBox} src={newAsset.url} alt={newAsset.name}></img>
                 }

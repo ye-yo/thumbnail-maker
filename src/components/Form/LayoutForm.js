@@ -3,12 +3,6 @@ import Form from './Form.js';
 import './_LayoutForm.scss';
 import { RiLayoutBottom2Line } from "react-icons/ri";
 
-const defaultAssetSize = {
-    width: 100, height: 22
-};
-
-const defaultHalfSize = { width: defaultAssetSize.width / 2, height: defaultAssetSize.height / 2 }
-
 let count = 0;
 const layoutList = [
     {

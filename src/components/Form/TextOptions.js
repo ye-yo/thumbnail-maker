@@ -63,6 +63,7 @@ function TextOptions(props) {
         const { name, value } = e.target;
         let objectValue = null;
         let moreObject = {};
+        console.log(name, value)
         if (name) {
             switch (name) {
                 case 'fontSize': {

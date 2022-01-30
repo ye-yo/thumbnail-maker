@@ -12,7 +12,7 @@ function CheckBox(props) {
     }
     return (
         <div className={`checkbox-wrap${" " + (className || '')}`}>
-            <input id={id} type="checkbox" name={name} checked={checked && true} onChange={toggleChecked} />
+            <input id={id} type="checkbox" name={name} checked={checked ? true : false} onChange={toggleChecked} />
             <label htmlFor={id} className="check-style"  >
                 {children}
             </label>
