@@ -13,9 +13,13 @@ function Asset(props) {
     let isDragging = useRef(false);
     let isClicked = useRef(false);
     const isCurrentAsset = currentAsset.id === id;
+    const [textValue, setTextValue] = useState(newAsset.name);
 
     useEffect(() => {
-        getAssetSize();// 렌더링된 사이즈에 따라 초기 width,height 재조정
+        let size = getAssetSize();// 렌더링된 사이즈에 따라 초기 width,height 재조정
+        const assetElement = assetComponent.current;
+        assetElement.style.top = `calc(${assetElement.style.top} - ${size.height} / 2)`;
+        assetElement.style.left = `calc(${assetElement.style.left} - ${size.width} / 2)`;
     }, [])
 
     useEffect(() => {
@@ -66,18 +70,20 @@ function Asset(props) {
     // }, [currentStyle])
 
     function handleTextInput(e) {
-        if (e.type === 'keyup' && e.keyCode !== 13) {
+        if (e.type === 'keyup' && e.target.scrollHeight === assetStyle.height) {
             return;
         }
+        setTextValue(e.target.value);
         setAssetStyle({ ...assetStyle, width: e.target.scrollWidth, height: e.target.scrollHeight });
     }
 
     function getAssetSize() {
         const assetElement = assetBox.current;
-        assetElement.style.width = '100px';
+        // assetElement.style.width = '100px';
         assetElement.style.height = '1px';
         assetElement.style.width = assetElement.scrollWidth + 'px';
         assetElement.style.height = assetElement.scrollHeight + 'px';
+        // return { width: assetElement.style.width, height: assetElement.style.height };
         return { width: assetElement.style.width, height: assetElement.style.height };
     }
     function handleAssetClick(e) {
@@ -104,6 +110,12 @@ function Asset(props) {
         }
     }
 
+    useEffect(() => {
+        if (CustomTag === 'textarea') {
+            assetBox.current.value = textValue;
+        }
+    }, [CustomTag])
+
     return (
         <Draggable
             onStart={handleAssetClick}
@@ -119,9 +131,8 @@ function Asset(props) {
                         <CustomTag ref={assetBox} row="1"
                             onKeyUp={handleTextInput}
                             onKeyDown={handleTextInput}
-                            defaultValue={newAsset.name || ''}
                             style={currentStyle}
-                        >{CustomTag === 'div' ? newAsset.name : null}</CustomTag>
+                        >{CustomTag === 'div' ? textValue : null}</CustomTag>
                         :
                         <img style={currentStyle} ref={assetBox} src={newAsset.url} alt={newAsset.name}></img>
                 }
