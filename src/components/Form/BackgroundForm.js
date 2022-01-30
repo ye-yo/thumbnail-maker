@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Form from './Form.js';
-import { CirclePicker, SketchPicker } from 'react-color';
-// import InputColor from 'react-input-color';
+import { SketchPicker } from 'react-color';
 import './_BackgroundForm.scss';
 import { RiPaintFill, RiRecordCircleLine } from "react-icons/ri";
-import { MdBlurLinear, } from "react-icons/md";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import handleFileOnChange, { getRgba } from '../commonFunction.js';
 
@@ -14,36 +12,23 @@ const gradientDirectionList = [
     { direction: 'bottom', icon: <HiOutlineArrowSmDown /> },
     { direction: 'left', icon: <HiOutlineArrowSmLeft /> }
 ];
-
-function hexToRgba(hex) {
-    var c;
-    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-        c = hex.substring(1).split('');
-        if (c.length == 3) {
-            c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-        }
-        c = '0x' + c.join('');
-        return { r: (c >> 16) & 255, g: (c >> 8) & 255, b: c & 255, a: 1 };
-        // return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',1)';
-    }
-    throw new Error('Bad Hex');
-}
+const defaultColorList = [
+    { "r": 205, "g": 106, "b": 131, "a": 1 },
+    { "r": 45, "g": 134, "b": 123, "a": 1 },
+    { "r": 46, "g": 191, "b": 145, "a": 1 },
+    { "r": 255, "g": 221, "b": 108, "a": 1 },
+    { "r": 123, "g": 121, "b": 210, "a": 1 },
+    { "r": 198, "g": 210, "b": 236, "a": 1 },
+    { "r": 154, "g": 189, "b": 210, "a": 1 },
+    { "r": 51, "g": 93, "b": 153, "a": 1 },
+    { from: { "r": 101, "g": 78, "b": 163, "a": 1 }, to: { "r": 234, "g": 175, "b": 200, "a": 1 }, type: 'linear', direction: 'right', directionIndex: 1 },
+    { from: { "r": 218, "g": 68, "b": 83, "a": 1 }, to: { "r": 137, "g": 33, "b": 107, "a": 1 }, type: 'linear', direction: 'left', directionIndex: 0 },
+    { from: { "r": 0, "g": 90, "b": 167, "a": 1 }, to: { "r": 255, "g": 253, "b": 228, "a": 1 }, type: 'linear', direction: 'top', directionIndex: 3 },
+    { from: { "r": 168, "g": 192, "b": 255, "a": 1 }, to: { "r": 63, "g": 43, "b": 150, "a": 1 }, type: 'radial', direction: 'right', directionIndex: 1 },
+];
 
 function LayoutForm(props) {
-    const defaultColorList = [
-        { "r": 44, "g": 92, "b": 95, "a": 1 },
-        { "r": 144, "g": 192, "b": 195, "a": 1 },
-        { "r": 100, "g": 142, "b": 51, "a": 1 },
-        { "r": 44, "g": 92, "b": 95, "a": 1 },
-        { "r": 44, "g": 92, "b": 95, "a": 1 },
-        { "r": 44, "g": 92, "b": 95, "a": 1 },
-        { "r": 44, "g": 92, "b": 95, "a": 1 },
-        { "r": 44, "g": 92, "b": 95, "a": 1 },
-        { from: { "r": 44, "g": 92, "b": 95, "a": 1 }, to: { "r": 144, "g": 192, "b": 195, "a": 1 }, type: 'linear', direction: 'right', directionIndex: 1 },
-        { from: { "r": 100, "g": 142, "b": 51, "a": 1 }, to: { "r": 144, "g": 192, "b": 195, "a": 1 }, type: 'linear', direction: 'left', directionIndex: 3 },
-        { from: { "r": 100, "g": 142, "b": 51, "a": 1 }, to: { "r": 44, "g": 92, "b": 95, "a": 1 }, type: 'linear', direction: 'top', directionIndex: 0 },
-        { from: { "r": 44, "g": 92, "b": 95, "a": 1 }, to: { "r": 255, "g": 255, "b": 255, "a": 1 }, type: 'radial', direction: 'right', directionIndex: 1 },
-    ];
+    const { setBackground, background } = props;
     const gradientItemStartIndex = 8;
     const [currentTab, setCurrentTab] = useState(0);
     const [colorList, setColorList] = useState(defaultColorList);
@@ -58,8 +43,8 @@ function LayoutForm(props) {
 
     useEffect(() => {
         if (currentColorItem.index != null) {
-            let newBackground = { ...props.background, index: currentColorItem.index };
-            if (currentIsColorItem()) {
+            let newBackground = { ...background, index: currentColorItem.index };
+            if (currentIsColorItem) {
                 const currentColor = colorList[currentColorItem.index];
                 setColor(currentColor);
                 newBackground.type = "color";
@@ -67,28 +52,25 @@ function LayoutForm(props) {
             }
             else {
                 const currentGradient = colorList[currentColorItem.index];
-                setColor(currentGradient.from);
+                setColor(currentGradient[currentColorItem.isFrom ? 'from' : 'to']);
                 const newGradientStyle = { ...gradientStyle, ...currentGradient };
                 setGradientStyle(newGradientStyle);
                 newBackground.type = "gradient";
                 newBackground.background = getGradient(newGradientStyle);
             }
-            props.setBackground(newBackground);
+            setBackground(newBackground);
         }
     }, [currentColorItem, colorList])
 
-    function handleGradientOneColor(index) {
-        const key = !index ? 'from' : 'to';
-        setCurrentColorItem({ ...currentColorItem, isFrom: !index });
-        setColor(gradientStyle[key]);
+    function handleGradientOneColor(e) {
+        let name = e.target.getAttribute("name");
+        setCurrentColorItem({ ...currentColorItem, isFrom: name === 'from' });
     }
-
-
 
     const handleChange = color => {
         let currentColorList = [...colorList];
         if (currentColorItem.index != null) {
-            if (currentIsColorItem()) {
+            if (currentIsColorItem) {
                 currentColorList[currentColorItem.index] = color.rgb;
             }
             else {
@@ -99,8 +81,9 @@ function LayoutForm(props) {
         }
     };
 
-    function handleGradient(type) {
-        let newObject = { type: type };
+    function handleGradient(e) {
+        const type = e.target.name;
+        let newObject = { ...gradientStyle, type: type };
         if (type === "linear" && gradientStyle.type === type) {
             const newIndex = gradientStyle.directionIndex === gradientDirectionList.length - 1 ? 0 : gradientStyle.directionIndex + 1;
             newObject.directionIndex = newIndex;
@@ -108,11 +91,9 @@ function LayoutForm(props) {
         }
         let currentColorList = [...colorList];
         currentColorList[currentColorItem.index].type = type;
-        const newGradientStyle = { ...gradientStyle, ...newObject };
-        setGradientStyle(newGradientStyle);
-        props.setBackground({ ...props.background, type: 'gradient', background: getGradient(newGradientStyle) });
+        setGradientStyle(newObject);
+        setBackground({ ...background, type: 'gradient', background: getGradient(newObject) });
     }
-
     function getGradient(gradientItem = gradientStyle) {
         return `${gradientItem.type}-gradient(${gradientItem.type == "linear" ? `to ${gradientItem.direction},` : ''} ${getRgba(gradientItem.from)}, ${getRgba(gradientItem.to)})`
     }
@@ -123,20 +104,18 @@ function LayoutForm(props) {
 
     function handleBackground(index, url) {
         setCurrentColorItem(null);
-        props.setBackground({ ...props.background, type: "image", background: url, index: `image${index}` });
+        setBackground({ ...background, type: "image", background: url, index: `image${index}` });
     }
 
-    const currentIsColorItem = () => { return currentColorItem.index < gradientItemStartIndex };
+    const currentIsColorItem = currentColorItem.index < gradientItemStartIndex;
 
     function setFileInput(url, name) {
         setUploadedImages([...uploadedImages, { url, name }])
     }
-
     return (
         <Form icon={RiPaintFill({ color: "white" })} label="Background" className="section-form-background">
             <div className="tab-button-wrap">
                 <label className={currentTab === 0 ? 'clicked' : ''} onClick={() => handleTab(0)}>Color</label>
-                {/* <label className={currentTab === 1 ? 'clicked' : ''} onClick={() => { handleTab(1); setInitColorPicker(); }}>Gradient</label> */}
                 <label className={currentTab === 1 ? 'clicked' : ''} onClick={() => setCurrentTab(1)}>Image</label>
             </div>
             <div className="tab-content">
@@ -149,10 +128,10 @@ function LayoutForm(props) {
                             <ul className="color-list">
                                 {colorList.map((color, index) => {
                                     return (<li key={index} style={{ background: index < gradientItemStartIndex ? getRgba(color) : getGradient(color) }}
-                                        onClick={() => { setCurrentColorItem({ ...currentColorItem, index, isFrom: true }) }}></li>);
+                                        onClick={() => { setCurrentColorItem({ index, isFrom: true }) }}></li>);
                                 })}
                             </ul>
-                            <div className="tab-gradient">
+                            <div className={"tab-gradient" + (currentIsColorItem ? '' : ' open')}>
                                 <div className="gradient-preview"
                                     style={{
                                         background: getGradient()
@@ -160,18 +139,18 @@ function LayoutForm(props) {
                                 </div>
                                 <div className="gradient-right">
                                     <div className="gradient-selector">
-                                        <p onClick={() => handleGradientOneColor(0)} className={currentColorItem.isFrom && !currentIsColorItem() === "gradient" ? 'clicked' : ''}
-                                            style={{ backgroundColor: gradientStyle.from }}>
+                                        <p onClick={handleGradientOneColor} name="from" className={currentColorItem.isFrom ? 'clicked' : ''}
+                                            style={{ backgroundColor: getRgba(gradientStyle.from) }}>
                                         </p>
                                         <span></span>
-                                        <p onClick={() => handleGradientOneColor(1)} className={!currentColorItem.isFrom && !currentIsColorItem() === "gradient" ? 'clicked' : ''}
-                                            style={{ backgroundColor: gradientStyle.to }}>
+                                        <p onClick={handleGradientOneColor} name="to" className={!currentColorItem.isFrom ? 'clicked' : ''}
+                                            style={{ backgroundColor: getRgba(gradientStyle.to) }}>
                                         </p>
                                     </div>
                                     <div className="option-wrap">
                                         <div className="gradient-type">
-                                            <button className={gradientStyle.type === "linear" ? 'clicked' : ''} onClick={() => { handleGradient("linear") }}>{gradientDirectionList[gradientStyle.directionIndex].icon}Linear</button>
-                                            <button className={gradientStyle.type === "radial" ? 'clicked' : ''} onClick={() => { handleGradient("radial") }}><RiRecordCircleLine />Radial</button>
+                                            <button className={gradientStyle.type === "linear" ? 'clicked' : ''} name="linear" onClick={handleGradient}>{gradientDirectionList[gradientStyle.directionIndex].icon}Linear</button>
+                                            <button className={gradientStyle.type === "radial" ? 'clicked' : ''} name="radial" onClick={handleGradient}><RiRecordCircleLine />Radial</button>
                                         </div>
                                     </div>
                                     <div></div>

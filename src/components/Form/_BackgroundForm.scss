@@ -64,12 +64,18 @@
 .tab-gradient{
     @include flexBox(flex, row, space-between, center, wrap);
     @include flex(1);
+    opacity: 0.4;
+    pointer-events: none;
+    &.open{
+        opacity: 1;
+        pointer-events: auto;
+    }
     .gradient-preview{
-        background-color: red;
         width: 100%;
         height: 4rem;
         min-width: 4rem;
         margin: 4px auto;
+        border:var(--borderGray)
     }
 
     .gradient-right{
