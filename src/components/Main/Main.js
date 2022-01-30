@@ -43,7 +43,7 @@ function Main() {
     const [canvasSize, setCanvasSize] = useState({ width: 400, height: 300 });
     const [ratio, setRatio] = useState(ratioList[2]);
     const [background, setBackground] = useState({ type: null, background: null, index: null });
-    const [assetStyle, setAssetStyle] = useState({ fontSize: '14px', height: 0, width: 0 });
+    const [assetStyle, setAssetStyle] = useState({ fontSize: '14px', height: 'auto', width: 'auto' });
     const canvasBox = useRef(null);
     const [canvasAssets, setCanvasAssets] = useState([]);
     const [currentAsset, setCurrentAsset] = useState({ index: null, type: null, style: {}, position: {} });
@@ -64,7 +64,12 @@ function Main() {
             setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
     }, [ratio])
 
+    const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
     function handleResizeCanvas(e) {
+        if (!filterNumber.test(e.target.value)) {
+            e.preventDefault();
+            return;
+        };
         const { name, value } = e.target;
         setRatio(null);
         uncheckedRatioBox();
@@ -97,8 +102,8 @@ function Main() {
             <div className="center-box">
                 <section className="section-canvas">
                     <div className="input-canvas-size-wrap">
-                        <input type="number" min={0} name="width" value={canvasSize.width} onChange={handleResizeCanvas} />X
-                        <input type="number" min={0} name="height" value={canvasSize.height} onChange={handleResizeCanvas} />
+                        <input type="text" name="width" value={canvasSize.width} onChange={handleResizeCanvas} />X
+                        <input type="text" name="height" value={canvasSize.height} onChange={handleResizeCanvas} />
                     </div>
                     <div className="canvas-box" ref={canvasBox}>
                         <div id="canvas" className="canvas" style={Object.assign({

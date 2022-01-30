@@ -11,19 +11,20 @@ function Asset(props) {
     let isDragging = useRef(false);
     let isClicked = useRef(false);
     const isCurrentAsset = currentAsset.id === id;
+    const [editing, setEditing] = useState({ pointerEvents: 'none', cursor: 'inherit' })
+
     useEffect(() => {
         const assetElement = assetComponent.current;
         let size = assetElement.getBoundingClientRect();
         assetElement.style.top = `calc(${assetElement.style.top} - ${size.height}px / 2)`;
         assetElement.style.left = `calc(${assetElement.style.left} - ${size.width}px / 2)`;
         setCurrentStyle({ ...currentStyle, visibility: 'visible' });
-    }, [])
 
-    useEffect(() => {
         function handleClickOutside(e) {
             if (assetComponent.current && (!assetComponent.current.contains(e.target) && !sectionForm.contains(e.target))) {
                 isDragging.current = false;
-                setCurrentStyle({ ...currentStyle, pointerEvents: 'none', cursor: 'inherit', visibility: 'visible' })
+                setEditing({ pointerEvents: 'none', cursor: 'inherit' })
+                setCurrentStyle({ ...currentStyle, visibility: 'visible' })
                 setCurrentAsset({ ...currentAsset, id: null })
             }
         }
@@ -36,7 +37,9 @@ function Asset(props) {
 
     useEffect(() => {
         if (isCurrentAsset) {
-            setAssetStyle({ ...currentStyle, ...currentAsset.style });
+            // setAssetStyle({ ...currentStyle, ...currentAsset.style });
+            let size = assetBox.current.getBoundingClientRect();
+            setAssetStyle({ ...currentStyle, ...currentAsset.style, width: size.width, height: size.height });
         }
     }, [currentAsset])
 
@@ -70,16 +73,10 @@ function Asset(props) {
                 type: newAsset.type,
                 style: currentStyle
             });
-            setCurrentStyle({ ...currentStyle, cursor: 'default', pointerEvents: 'inherit' })
+            setEditing({ cursor: 'default', pointerEvents: 'inherit' });
+            setAssetStyle(assetStyle)
         }
     }
-    // function handleAssetBlur(e) {
-    //     if (!sectionForm.contains(e.target)) {
-    //         isDragging.current = false;
-    //         setCurrentStyle({ ...currentStyle, pointerEvents: 'none', cursor: 'move' })
-    //         setCurrentAsset({ ...currentAsset, id: null })
-    //     }
-    // }
     return (
         <Draggable
             onStart={handleAssetClick}
@@ -87,14 +84,13 @@ function Asset(props) {
             nodeRef={assetComponent}
         >
             <div id={id} ref={assetComponent}
-                className={`asset${isCurrentAsset ? ' current' : ''}`}
+                className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}
                 style={{ top: newAsset.style.top, left: newAsset.style.left, transform: 'none' }}
             >
                 {
                     newAsset.type == 'text' ?
                         <div ref={assetBox} row="1"
-                            // onBlur={handleAssetBlur}
-                            style={currentStyle} contentEditable="true"
+                            style={{ ...currentStyle, ...editing }} contentEditable="true"
                             suppressContentEditableWarning="true"
                         ><div>{newAsset.name}</div></div>
                         :

@@ -4,10 +4,17 @@
     position: absolute;
     cursor: move;
     color: white;
-    width: 90%;
     height: fit-content;
     margin: auto;
     user-select: none;
+    &.asset-text{
+        width: 90%;
+    }
+
+    &.asset-image.current{
+        // outline: var(--borderGray);
+        outline: 1px solid red;
+    }
 
     > *{
         display: block;
@@ -33,9 +40,10 @@
     }
 
     img{
-        pointer-events: none;
+        cursor: inherit !important;
+        pointer-events: none!important;
         width: auto;
-        height: 6vmin
+        height: 6vmin;
     }
 
     &.current > *{

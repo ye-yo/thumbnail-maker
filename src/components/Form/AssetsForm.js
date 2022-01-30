@@ -8,9 +8,9 @@ import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "
 import handleFileOnChange from '../commonFunction.js';
 let count = 0;
 const textLayoutList = [
-    { name: 'Title', style: { fontSize: '24px', fontWeight: '500', left: '50%', top: '20%' } },
-    { name: 'Sub title', style: { fontSize: '18px', left: '50%', top: '40%' } },
-    { name: 'Text', style: { fontSize: '14px', left: '50%', top: '60%' } },
+    { name: 'Title', style: { fontSize: '54px', fontWeight: 'bold', left: '50%', top: '50%' } },
+    { name: 'Sub title', style: { fontSize: '38px', fontWeight: '500', left: '50%', top: '50%' } },
+    { name: 'Text', style: { fontSize: '24px', left: '50%', top: '50%' } },
 ];
 
 function AssetsForm(props) {
@@ -27,7 +27,6 @@ function AssetsForm(props) {
 
     useEffect(() => {
         if (selectValue) {
-            alert("select")
             props.setAssetStyle({ ...props.assetStyle, fontFamily: selectValue })
         }
     }, [selectValue])
@@ -45,13 +44,18 @@ function AssetsForm(props) {
     function handleImageAssetClick(item) {
         item.type = 'image';
         item.id = 'asset' + count++;
+        item.style = {};
         props.setCanvasAssets([...props.assets, item])
     }
 
+    const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
     function handleAssetSize(e) {
-        alert("handleassetsieze")
-        const { name, value } = e.target;
-        setAssetStyle({ ...assetStyle, [name]: Number(value) });
+        if (!filterNumber.test(e.target.value)) {
+            e.preventDefault();
+            return;
+        };
+        let { name, value } = e.target;
+        setAssetStyle({ ...assetStyle, [name]: value });
     }
 
     return (
@@ -72,14 +76,14 @@ function AssetsForm(props) {
                     </section>
                     :
                     <section className="section-image">
-                        <div className={`image-option-wrap disabled-content${props.currentAsset.index === null || props.currentAsset.type !== 'image' ? ' disabled' : ''}`}>
+                        <div className={`image-option-wrap disabled-content${props.currentAsset.id === null || props.currentAsset.type !== 'image' ? ' disabled' : ''}`}>
                             <div>
                                 <label>W</label>
-                                <input onChange={handleAssetSize} name="width" type="number" min="0" defaultValue={assetStyle.width} value={assetStyle.width}></input>
+                                <input onChange={handleAssetSize} name="width" type="text" defaultValue={assetStyle.width} value={assetStyle.width === 'auto' ? '' : assetStyle.width}></input>
                             </div>
                             <div>
                                 <label>H</label>
-                                <input onChange={handleAssetSize} name="height" type="number" min="0" defaultValue={assetStyle.height} value={assetStyle.height}></input>
+                                <input onChange={handleAssetSize} name="height" type="text" defaultValue={assetStyle.height} value={assetStyle.height === 'auto' ? '' : assetStyle.height}></input>
                             </div>
                         </div>
                         <div className="image-list">
@@ -90,7 +94,7 @@ function AssetsForm(props) {
                             <label htmlFor="input_asset_image" className="btn-plus"><IoIosAdd /></label>
                             <ul>
                                 {imageAssets.map((item, index) =>
-                                    <li onClick={() => handleImageAssetClick(item)} key={index}>
+                                    <li onClick={() => handleImageAssetClick(item)} key={'image' + index}>
                                         <img src={item.url}></img>
                                     </li>
                                 )}

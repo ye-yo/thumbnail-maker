@@ -94,11 +94,12 @@ function TextOptions(props) {
         e.target.checked = false;
         setColorTarget(null);
     }
+
     return (
         <div className={`text-option-wrap disabled-content${props.currentAsset.id === null || props.currentAsset.type !== 'text' ? ' disabled' : ''}`} >
             <div className="text-input-wrap">
                 <SelectBox setSelectValue={setSelectValue} assetStyle={props.assetStyle} options={fontList} defaultValue='0' value={assetStyle.fontFamily} className="select-font"></SelectBox>
-                <input type="number" min="0" name="fontSize" onChange={(e) => handleAssetStyle(e, null)} value={Number(assetStyle.fontSize.replace('px', ''))}></input>
+                <input type="number" min="0" name="fontSize" onChange={(e) => handleAssetStyle(e, null)} value={assetStyle.fontSize === undefined ? 14 : Number(assetStyle.fontSize.replace('px', ''))}></input>
             </div>
             <div className="text-style-wrap">
                 <CheckBox id="check_bold" name="fontWeight" checkedEvent={handleTextBold} checked={assetStyle.fontWeight}><RiBold /></CheckBox>

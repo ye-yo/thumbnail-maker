@@ -79,11 +79,11 @@
         label{
             cursor: pointer;
             background-color: transparent;
-            border: 1px dashed var(--colorLightgray);
+            border: 1px dashed var(--colorDark);
             svg{
                 width: 100%;
                 height: 100%;
-                color: var(--colorLightgray);
+                color: var(--colorDark);
             }
         }
 
