@@ -26,7 +26,7 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'Sub Title',
-                style: { fontSize: '38px', fontWeight: '500', top: 'calc(40% + 74px)', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
+                style: { fontSize: '38px', top: '60%', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
         ],
     },
@@ -41,7 +41,7 @@ const layoutList = [
             {
                 type: 'text',
                 name: 'small text',
-                style: { fontSize: '24px', fontWeight: '300', top: 'calc(46% + 54px)', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
+                style: { fontSize: '24px', top: '62%', left: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' }
             },
         ],
     },

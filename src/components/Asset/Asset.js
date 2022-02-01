@@ -1,67 +1,57 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Draggable from 'react-draggable';
+import { Rnd } from 'react-rnd';
 import './_Asset.scss';
 
 function Asset(props) {
-    const sectionForm = document.querySelector(".section-form");
     const { newAsset, id, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle } = props;
+    const sectionForm = document.querySelector(".section-form");
     const assetBox = useRef(null);
-    const [currentStyle, setCurrentStyle] = useState({ ...newAsset.style, visibility: 'hidden' });
+    // const [currentStyle, setCurrentStyle] = useState({});
+    const [currentStyle, setCurrentStyle] = useState({ ...newAsset.style, visibility: 'hidden', top: 0, left: 0 });
     const assetComponent = useRef(null);
     let isDragging = useRef(false);
     let isClicked = useRef(false);
     const isCurrentAsset = currentAsset.id === id;
     const [editing, setEditing] = useState({ pointerEvents: 'none', cursor: 'inherit' })
+    const canvasElement = document.querySelector('#canvas').getBoundingClientRect();
 
     useEffect(() => {
         const assetElement = assetComponent.current;
-        let size = assetElement.getBoundingClientRect();
-        assetElement.style.top = `calc(${assetElement.style.top} - ${size.height}px / 2)`;
-        assetElement.style.left = `calc(${assetElement.style.left} - ${size.width}px / 2)`;
-        setCurrentStyle({ ...currentStyle, visibility: 'visible' });
+        let assetSize = assetElement.getBoundingClientRect();
+        let topPercent = 0.5,
+            leftPercent = 0.5;
+        if (newAsset.type === 'text') {
+            if (newAsset.style.top) {
+                topPercent = Number(newAsset.style.top.replace("%", '')) * 0.01;
+                leftPercent = Number(newAsset.style.left.replace("%", '')) * 0.01;
+            }
+        }
+        let width = canvasElement.width * (newAsset.type === 'text' ? 0.9 : 0.4),
+            height = newAsset.type === 'image' ? width * assetSize.height / assetSize.width : assetSize.height,
+            left = canvasElement.width * leftPercent - width / 2,
+            top = canvasElement.height * topPercent - height / 2;
+        setCurrentStyle({
+            ...currentStyle, visibility: 'visible', left, top, width, height
+        })
+    }, [])
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        };
 
         function handleClickOutside(e) {
             if (assetComponent.current && (!assetComponent.current.contains(e.target) && !sectionForm.contains(e.target))) {
                 isDragging.current = false;
                 setEditing({ pointerEvents: 'none', cursor: 'inherit' })
-                setCurrentStyle({ ...currentStyle, visibility: 'visible' })
+                let obj = { ...currentStyle };
+                obj.visibility = 'visible';
+                setCurrentStyle(obj)
                 setCurrentAsset({ ...currentAsset, id: null })
             }
         }
-
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        };
-    }, [])
-
-    useEffect(() => {
-        if (isCurrentAsset) {
-            // setAssetStyle({ ...currentStyle, ...currentAsset.style });
-            let size = assetBox.current.getBoundingClientRect();
-            setAssetStyle({ ...currentStyle, ...currentAsset.style, width: size.width, height: size.height });
-        }
-    }, [currentAsset])
-
-    useEffect(() => {
-        if (isCurrentAsset) {
-            assetBox.current.style.fontSize = assetStyle.fontSize;
-            setCurrentStyle({ ...currentStyle, ...assetStyle });
-        }
-    }, [assetStyle])
-
-    function handleDrag(e, data) {
-        if (!isDragging.current) {
-            isDragging.current = true;
-            if (!isClicked.current) {
-                assetBox.current.focus()
-                handleAssetClick(e);
-            }
-            else {
-                isClicked.current = false;
-            }
-        }
-    };
+    }, [currentStyle]);
 
     function handleAssetClick(e) {
         e.stopPropagation();
@@ -74,31 +64,67 @@ function Asset(props) {
                 style: currentStyle
             });
             setEditing({ cursor: 'default', pointerEvents: 'inherit' });
-            setAssetStyle(assetStyle)
         }
     }
+
+    useEffect(() => {
+        if (isCurrentAsset) {
+            let size = assetBox.current.getBoundingClientRect();
+            let style = { ...currentStyle };
+            if (style.height === 'auto')
+                style.height = size.height;
+            setAssetStyle(style);
+        }
+        else if (currentAsset.id === null) {
+            setAssetStyle({ fontSize: '14px', height: 'auto', width: 'auto' })
+        }
+    }, [currentAsset])
+
+    useEffect(() => {
+        if (isCurrentAsset) {
+            assetBox.current.style.fontSize = assetStyle.fontSize;
+            setCurrentStyle({ ...currentStyle, ...assetStyle });
+        }
+    }, [assetStyle])
+
+    function handleResizeAsset(ref, position) {
+        setAssetStyle({ ...currentStyle, width: Number(ref.style.width.replace('px', '')), height: Number(ref.style.height.replace('px', '')), ...position })
+    }
+
+    useEffect(() => {
+    }, [currentStyle])
     return (
-        <Draggable
-            onStart={handleAssetClick}
-            onDrag={(e, data) => handleDrag(e, data)}
-            nodeRef={assetComponent}
+        <Rnd
+            size={{
+                width: currentStyle.width,
+                height: currentStyle.height
+            }}
+            position={{
+                x: currentStyle.left,
+                y: currentStyle.top,
+            }}
+            noderef={assetComponent}
+            lockAspectRatio="true"
+            onResizeStart={handleAssetClick}
+            onDragStart={handleAssetClick}
+            onResize={(e, direction, ref, delta, position) => { handleResizeAsset(ref, position); }}
+            onDragStop={(e, d) => { console.log(d); setAssetStyle({ ...assetStyle, left: d.x, top: d.y }) }}
+            onResizeStop={(e, direction, ref, delta, position) => { console.log(currentStyle.width); handleResizeAsset(ref, position); }}
         >
             <div id={id} ref={assetComponent}
-                className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}
-                style={{ top: newAsset.style.top, left: newAsset.style.left, transform: 'none' }}
-            >
+                className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}>
                 {
                     newAsset.type == 'text' ?
-                        <div ref={assetBox} row="1"
-                            style={{ ...currentStyle, ...editing }} contentEditable="true"
-                            suppressContentEditableWarning="true"
+                        <div ref={assetBox} style={{ ...currentStyle, width: '100%', height: '100%', ...editing }}
+                            contentEditable="true" suppressContentEditableWarning="true"
                         ><div>{newAsset.name}</div></div>
                         :
-                        <img style={currentStyle} ref={assetBox} src={newAsset.url} alt={newAsset.name}></img>
+                        <img ref={assetBox} src={newAsset.url} alt={newAsset.name}></img>
                 }
             </div>
-        </Draggable >
+
+        </Rnd >
     );
 }
 
-export default Asset;
+export default Asset

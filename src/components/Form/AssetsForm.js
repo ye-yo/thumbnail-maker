@@ -6,15 +6,15 @@ import { RiDragMove2Fill, RiAlignJustify } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
 import handleFileOnChange from '../commonFunction.js';
-let count = 0;
 const textLayoutList = [
-    { name: 'Title', style: { fontSize: '54px', fontWeight: 'bold', left: '50%', top: '50%' } },
-    { name: 'Sub title', style: { fontSize: '38px', fontWeight: '500', left: '50%', top: '50%' } },
-    { name: 'Text', style: { fontSize: '24px', left: '50%', top: '50%' } },
+    { name: 'Title', style: { fontSize: '54px', fontWeight: 'bold', left: '50%', top: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Sub title', style: { fontSize: '38px', fontWeight: '500', left: '50%', top: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Text', style: { fontSize: '24px', left: '50%', top: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
 ];
 
+let count = 0;
 function AssetsForm(props) {
-    const { currentAsset, assetStyle, setAssetStyle } = props;
+    const { currentAsset, assetStyle, setAssetStyle, assets, setCanvasAssets } = props;
     const alignList = {
         'center': <AiOutlineAlignCenter />,
         'left': <AiOutlineAlignLeft />,
@@ -32,9 +32,10 @@ function AssetsForm(props) {
     }, [selectValue])
 
     function handleTextCreate(item) {
-        item.type = 'text';
-        item.id = 'asset' + count++;
-        props.setCanvasAssets([...props.assets, item])
+        let newItem = { ...item };
+        newItem.type = 'text';
+        newItem.id = 'asset' + count++;
+        setCanvasAssets([...assets, newItem])
     }
 
     function setFileInput(item) {
@@ -42,11 +43,13 @@ function AssetsForm(props) {
     }
 
     function handleImageAssetClick(item) {
-        item.type = 'image';
-        item.id = 'asset' + count++;
-        item.style = {};
-        props.setCanvasAssets([...props.assets, item])
+        let newItem = { ...item };
+        newItem.type = 'image';
+        newItem.id = 'asset' + count++;
+        newItem.style = {};
+        setCanvasAssets([...assets, newItem])
     }
+    console.log(count)
 
     const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
     function handleAssetSize(e) {
@@ -55,9 +58,8 @@ function AssetsForm(props) {
             return;
         };
         let { name, value } = e.target;
-        setAssetStyle({ ...assetStyle, [name]: value });
+        setAssetStyle({ ...assetStyle, [name]: Number(value) });
     }
-
     return (
         <Form icon={RiDragMove2Fill({ color: "white" })} label="Assets" className="section-form-assets">
             <div className="tab-button-wrap">
@@ -76,14 +78,14 @@ function AssetsForm(props) {
                     </section>
                     :
                     <section className="section-image">
-                        <div className={`image-option-wrap disabled-content${props.currentAsset.id === null || props.currentAsset.type !== 'image' ? ' disabled' : ''}`}>
+                        <div className={`image-option-wrap disabled-content${currentAsset.id === null || currentAsset.type !== 'image' ? ' disabled' : ''}`}>
                             <div>
                                 <label>W</label>
-                                <input onChange={handleAssetSize} name="width" type="text" defaultValue={assetStyle.width} value={assetStyle.width === 'auto' ? '' : assetStyle.width}></input>
+                                <input onChange={handleAssetSize} name="width" type="text" value={assetStyle.width === 'auto' ? '' : assetStyle.width || ''}></input>
                             </div>
                             <div>
                                 <label>H</label>
-                                <input onChange={handleAssetSize} name="height" type="text" defaultValue={assetStyle.height} value={assetStyle.height === 'auto' ? '' : assetStyle.height}></input>
+                                <input onChange={handleAssetSize} name="height" type="text" value={assetStyle.height === 'auto' ? '' : assetStyle.height || ''}></input>
                             </div>
                         </div>
                         <div className="image-list">
