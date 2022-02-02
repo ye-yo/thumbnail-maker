@@ -114,6 +114,12 @@ function Main() {
         link.click();
         document.body.removeChild(link);
     }
+
+    function removeAsset(targetId) {
+        let filteredAssets = canvasAssets.filter(({ id }) => id !== targetId)
+        setCanvasAssets(filteredAssets);
+    }
+
     return (
         < main >
             <div className="center-box">
@@ -131,7 +137,7 @@ function Main() {
                             { background: background.background })}>
                             {canvasAssets.map((element, index) => {
                                 return <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={element.id}
-                                    id={element.id} newAsset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} ></Asset>
+                                    id={element.id} newAsset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} removeAsset={removeAsset} ></Asset>
                             }
                             )}
                         </div>

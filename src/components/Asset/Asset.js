@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Rnd } from 'react-rnd';
 import './_Asset.scss';
+import { RiCloseCircleFill } from "react-icons/ri";
 
 function Asset(props) {
-    const { newAsset, id, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle } = props;
+    const { newAsset, id, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle, removeAsset } = props;
     const sectionForm = document.querySelector(".section-form");
     const assetBox = useRef(null);
     // const [currentStyle, setCurrentStyle] = useState({});
@@ -87,12 +88,14 @@ function Asset(props) {
         }
     }, [assetStyle])
 
-    function handleResizeAsset(ref, position) {
+    function handleAssetResize(ref, position) {
         setAssetStyle({ ...currentStyle, width: Number(ref.style.width.replace('px', '')), height: Number(ref.style.height.replace('px', '')), ...position })
     }
 
-    useEffect(() => {
-    }, [currentStyle])
+    function handleAssetRemove() {
+        removeAsset(id);
+    }
+
     return (
         <Rnd
             size={{
@@ -107,12 +110,13 @@ function Asset(props) {
             lockAspectRatio="true"
             onResizeStart={handleAssetClick}
             onDragStart={handleAssetClick}
-            onResize={(e, direction, ref, delta, position) => { handleResizeAsset(ref, position); }}
+            onResize={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
             onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, left: d.x, top: d.y }); e.preventDefault(); }}
-            onResizeStop={(e, direction, ref, delta, position) => { handleResizeAsset(ref, position); }}
+            onResizeStop={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
         >
             <div id={id} ref={assetComponent}
                 className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}>
+                <button className="btn-remove" onClick={handleAssetRemove}><RiCloseCircleFill /></button>
                 {
                     newAsset.type == 'text' ?
                         <div ref={assetBox} style={{ ...currentStyle, width: '100%', height: '100%', ...editing }}

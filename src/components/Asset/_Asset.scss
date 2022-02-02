@@ -41,7 +41,7 @@
     //     }
     // }
 
-    > *{
+    > *:not(button){
         display: block;
         width: 100%;
         padding: 0;
@@ -71,7 +71,28 @@
         // height: 6vmin;
     }
 
-    &.current > *{
+    .btn-remove{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        z-index: 100;
+        svg{
+            width: 100%;
+            height: 100%;
+        }
+        transform: translate(+50%, -50%);
+        display: none;
+    }
+  
+    &.current > *:not(button){
         outline: 1px solid rgba(255,255,255,0.5);
+    }
+
+    &.current .btn-remove{
+        display: block;
     }
 }
