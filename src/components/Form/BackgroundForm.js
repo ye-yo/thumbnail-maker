@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Form from './Form.js';
 import { SketchPicker } from 'react-color';
 import './_BackgroundForm.scss';
-import { RiPaintFill, RiRecordCircleLine } from "react-icons/ri";
+import { RiPaintFill, RiRecordCircleLine, RiUploadLine } from "react-icons/ri";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import handleFileOnChange, { getRgba } from '../commonFunction.js';
 
@@ -169,7 +169,7 @@ function LayoutForm(props) {
                             onChange={(e) => {
                                 handleFileOnChange(e, setFileInput);
                             }}></input>
-                        <label className="btn-upload-image btn btn-main" htmlFor="input_file">Upload</label>
+                        <label className="btn-upload-image btn btn-main" htmlFor="input_file">Upload<RiUploadLine /></label>
                     </div>
                 }
             </div>

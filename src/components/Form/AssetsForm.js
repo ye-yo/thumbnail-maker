@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import Form from './Form.js';
 import TextOptions from './TextOptions.js';
 import './_AssetsForm.scss';
-import { RiDragMove2Fill, RiAlignJustify } from "react-icons/ri";
+import { RiDragMove2Fill, RiAlignJustify, RiUploadLine } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
 import handleFileOnChange from '../commonFunction.js';
@@ -24,6 +24,7 @@ function AssetsForm(props) {
     const [currentTab, setCurrentTab] = useState(0);
     const [imageAssets, setImageAssets] = useState([]);
     const [selectValue, setSelectValue] = useState(0);
+    const inputImageUrl = useRef('');
 
     useEffect(() => {
         if (selectValue) {
@@ -87,12 +88,14 @@ function AssetsForm(props) {
                                 <input onChange={handleAssetSize} name="height" type="text" value={assetStyle.height === 'auto' ? '' : assetStyle.height || ''}></input>
                             </div>
                         </div>
-                        <div className="image-list">
+                        <div className="btn-add-image-wrap">
                             <input id="input_asset_image" type="file" accept='image/jpg,image/png,image/jpeg,image/gif'
                                 onChange={(e) => {
                                     handleFileOnChange(e, setFileInput);
                                 }}></input>
-                            <label htmlFor="input_asset_image" className="btn-plus"><IoIosAdd /></label>
+                            <label htmlFor="input_asset_image" className="btn-upload-image">Upload<RiUploadLine /></label>
+                        </div>
+                        <div className="image-list">
                             <ul>
                                 {imageAssets.map((item, index) =>
                                     <li onClick={() => handleImageAssetClick(item)} key={'image' + index}>

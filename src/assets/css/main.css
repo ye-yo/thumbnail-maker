@@ -39,7 +39,7 @@ button, .btn {
   background-color: var(--color_main);
   color: white;
   padding: 8px 10px;
-  border-radius: 2px;
+  border-radius: 4px;
   font-weight: bold; 
 }
 
