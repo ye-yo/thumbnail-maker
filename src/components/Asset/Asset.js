@@ -108,8 +108,8 @@ function Asset(props) {
             onResizeStart={handleAssetClick}
             onDragStart={handleAssetClick}
             onResize={(e, direction, ref, delta, position) => { handleResizeAsset(ref, position); }}
-            onDragStop={(e, d) => { console.log(d); setAssetStyle({ ...assetStyle, left: d.x, top: d.y }) }}
-            onResizeStop={(e, direction, ref, delta, position) => { console.log(currentStyle.width); handleResizeAsset(ref, position); }}
+            onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, left: d.x, top: d.y }); e.preventDefault(); }}
+            onResizeStop={(e, direction, ref, delta, position) => { handleResizeAsset(ref, position); }}
         >
             <div id={id} ref={assetComponent}
                 className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}>
@@ -119,7 +119,7 @@ function Asset(props) {
                             contentEditable="true" suppressContentEditableWarning="true"
                         ><div>{newAsset.name}</div></div>
                         :
-                        <img ref={assetBox} src={newAsset.url} alt={newAsset.name}></img>
+                        <img ref={assetBox} crossOrigin='Anonymous' src={newAsset.url} alt={newAsset.name}></img>
                 }
             </div>
 

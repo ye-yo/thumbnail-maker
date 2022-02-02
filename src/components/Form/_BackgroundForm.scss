@@ -91,7 +91,16 @@
                 position: relative;
                 &.clicked{
                     border: 1px solid white;
-                    outline: 1px dotted gray;
+                    &::before{
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: 1px dotted gray;
+                        border-radius: 50%;
+                    }
                 }
             }
             span{

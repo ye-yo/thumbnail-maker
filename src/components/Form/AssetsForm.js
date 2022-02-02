@@ -49,7 +49,6 @@ function AssetsForm(props) {
         newItem.style = {};
         setCanvasAssets([...assets, newItem])
     }
-    console.log(count)
 
     const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
     function handleAssetSize(e) {

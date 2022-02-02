@@ -6,7 +6,7 @@ import AssetsForm from '../Form/AssetsForm.js';
 import RatioForm from '../Form/RatioForm.js';
 import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
-import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -83,10 +83,27 @@ function Main() {
     }
 
     function handleDownload() {
-        let canvasElement = document.querySelector("#canvas");
-        html2canvas(canvasElement).then(canvas =>
-            handleCaptureCanvas(canvas.toDataURL('image/png'), 'thumbnail.png')
-        );
+        const element = document.getElementById('canvas');
+        const scale = 2;
+        const style = {
+            transform: `scale(${scale})`,
+            transformOrigin: 'top left',
+            width: element.offsetWidth + 'px',
+            height: element.offsetHeight + 'px'
+        };
+        domtoimage
+            .toPng(element, {
+                width: element.offsetWidth * scale,
+                height: element.offsetHeight * scale,
+                style: style
+            })
+            .then(dataUrl => {
+                handleCaptureCanvas(dataUrl, 'thumbnail.png')
+
+            })
+            .catch(error => {
+                console.error("oops, something went wrong!", error);
+            });
     }
 
     function handleCaptureCanvas(uri, fileName) {
