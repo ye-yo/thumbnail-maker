@@ -32,12 +32,6 @@ const defaultColorList = [
 const randomColorIndex = defaultColorList.length - 2;
 const randomGradientIndex = defaultColorList.length - 1;
 
-function getRgbaObject(rgbaStyle) {
-    let rgba = rgbaStyle.replace(/(rgb\(|\))/g, '');
-    rgba = rgba.split(",");
-    return { r: Number(rgba[0]), g: Number(rgba[1]), b: Number(rgba[2]), a: 1 };
-}
-
 function LayoutForm(props) {
     const { setBackground, background } = props;
     const gradientItemStartIndex = 8;
@@ -52,7 +46,7 @@ function LayoutForm(props) {
         if (currentColorItem.index !== null) {
             const current = colorList[currentColorItem.index];
             const newColor = current.type === 'color' ? current.rgb : currentColorItem.isFrom ? current.from : current.to;
-            setColor({ ...color, newColor });
+            setColor({ ...color, ...newColor });
             if (current.type === 'gradient') {
                 setGradientStyle(current);
             }
@@ -73,9 +67,9 @@ function LayoutForm(props) {
         setCurrentColorItem({ ...currentColorItem, isFrom: name === 'from', type: 'gradient' });
     }
 
-    const handleChange = color => {
+    const handleChange = selectedColor => {
         let currentColorList = [...colorList];
-        const newColor = color.rgb;
+        const newColor = selectedColor.rgb;
         if (currentColorItem.type === 'color') {
             currentColorList[currentColorItem.index].rgb = newColor;
         }
@@ -83,7 +77,7 @@ function LayoutForm(props) {
             const keyword = currentColorItem.isFrom ? 'from' : 'to';
             currentColorList[currentColorItem.index][keyword] = newColor;
         }
-        setColor({ ...color, newColor });
+        setColor({ ...color, ...newColor });
         setColorList(currentColorList);
     };
 
