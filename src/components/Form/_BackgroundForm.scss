@@ -10,7 +10,7 @@
 };
 
 .tab-color{
-    @include flexBox(flex, row, space-between, stretch);
+    @include flexBox(flex, row, space-between, stretch, wrap);
     .color-picker-wrap{
         width: 50%;
         height: auto;
@@ -25,7 +25,22 @@
             padding: 0 !important;
             box-shadow: none !important;
         }
-
+        .flexbox-fix:nth-child(3){
+            flex-wrap: wrap;
+            & > div{
+                padding-left: 2px !important;
+            }
+            
+            & > div:first-child{
+                flex: unset !important;
+                width: 100% !important;
+                input{
+                    width: 50% !important;
+                }
+            }
+            
+        }
+        
         .flexbox-fix:last-child{
             display: none!important;
         }
@@ -42,24 +57,28 @@
         width: 100%;
         padding: 4px;
         overflow-x: auto;
-        li{
-            @extend %colorItem;
-            width: 28px;
-            height: 28px;
-            margin: 0 4px 4px;
-            transition: transform .2s ;
-            transition-timing-function:cubic-bezier(0.645, 0.045, 0.355, 1);
-
-            &:hover{
-                transform: scale(1.2);
-            }
-        }
+        
 
         .circle-picker{
             
         }
     }
+
+    .color{
+        @extend %colorItem;
+        width: 28px;
+        height: 28px;
+        margin: 0 4px 4px;
+        transition: transform .2s ;
+        transition-timing-function:cubic-bezier(0.645, 0.045, 0.355, 1);
+
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
 }
+
+
 
 .tab-gradient{
     @include flexBox(flex, row, space-between, center, wrap);
@@ -148,6 +167,28 @@
                     }
                 }
             }
+        }
+    }
+}
+
+.btn-random-color-wrap{
+    @include flexBox();
+    width: 100%;
+    margin-top: 1rem;
+
+    >p.color{
+        margin-right: 10px;
+        &:last-of-type{
+            margin-left: 10px;
+        }
+    }
+    >button{
+        // width: calc(50% - 1rem);
+        @include flex(1);
+        // margin: 0 10px;
+        display: inline-block;
+        &:first-child{
+            margin-right: 1rem;
         }
     }
 }

@@ -11,3 +11,7 @@ export default function handleFileOnChange(e, callback) {
 export function getRgba({ r, g, b, a }) {
     return `rgba(${r},${g},${b},${a})`;
 }
+
+export function getGradient({ form, direction, from, to }) {
+    return `${form}-gradient(${form == "linear" ? `to ${direction},` : ''} ${getRgba(from)}, ${getRgba(to)})`
+}

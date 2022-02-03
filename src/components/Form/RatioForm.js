@@ -5,7 +5,6 @@ import CheckBox from '../../elements/CheckBox.js';
 import { RiAspectRatioLine } from "react-icons/ri";
 
 function RatioForm(props) {
-
     function handleRatio(e, checked) {
         props.setRatio(checked ? props.ratioList[Number(e.target.id.substr(-1))] : null);
     }

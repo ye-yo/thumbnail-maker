@@ -91,10 +91,15 @@ main{
     width: 900px;
      background-color: rgb(59, 58, 67);
      overflow-y: auto;
-     > section{
+     > section, .section-wrap-left > section{
          margin-bottom: .4rem;
          width: calc(50% - 1rem);
          min-width: 400px;
          display: inline-block;
+     }
+
+     .section-wrap-left{
+        width: calc(50% - 1rem);
+        max-width: 400px;
      }
 }

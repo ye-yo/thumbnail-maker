@@ -41,6 +41,7 @@ button, .btn {
   padding: 8px 10px;
   border-radius: 4px;
   font-weight: bold; 
+  cursor: pointer;
 }
 
 textarea {
