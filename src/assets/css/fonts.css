@@ -1,3 +1,119 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap'); */
+@font-face {
+    font-family: '강원교육모두체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/강원교육모두+Light.woff) format('woff'),
+    url(../fonts/강원교육모두+Light.otf) format('truetype');
+}
 
+@font-face {
+    font-family: '강원교육모두체';
+    font-style: normal;
+    font-weight: bold;
+    src: url(../fonts/강원교육모두+Bold.woff) format('woff'),
+    url(../fonts/강원교육모두+Bold.otf) format('truetype');
+}
 
+@font-face {
+    font-family: '빙그레체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/Binggrae.woff) format('woff'),
+    url(../fonts/Binggrae.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '빙그레체';
+    font-style: normal;
+    font-weight: bold;
+    src: url(../fonts/Binggrae-Bold.woff) format('woff'),
+    url(../fonts/Binggrae-Bold.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '빙그레 따옴체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/BinggraeTaom.woff) format('woff'),
+    url(../fonts/BinggraeTaom.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '빙그레 따옴체';
+    font-style: normal;
+    font-weight: bold;
+    src: url(../fonts/BinggraeTaom-Bold.woff) format('woff'),
+    url(../fonts/BinggraeTaom-Bold.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'KoPub돋움체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/KoPubWorld-Dotum-Medium.woff) format('woff'),
+    url(../fonts/KoPubWorld-Dotum_Pro-Medium.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'KoPub돋움체';
+    font-style: normal;
+    font-weight: bold;
+    src: url(../fonts/KoPubWorld-Dotum-Bold.woff) format('woff'),
+    url(../fonts/KoPubWorld-Dotum_Pro-Bold.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '상주곶감체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/SANGJU_Gotgam.woff) format('woff'),
+    url(../fonts/SANGJU_Gotgam.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '조선일보명조체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/ChosunNm.woff) format('woff'),
+    url(../fonts/ChosunNm.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '조선굴림체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/ChosunGu.woff) format('woff'),
+    url(../fonts/ChosunGu.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '여기어때 잘난체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/Jalnan.woff) format('woff'),
+    url(../fonts/JalnanOTF.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/NotoSansKR-Regular.woff) format('woff'),
+    url(../fonts/NotoSansKR-Regular.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '나눔바른고딕체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/NanumBarunGothic.woff) format('woff'),
+    url(../fonts/NanumBarunGothic.otf) format('truetype');
+}
+
+@font-face {
+    font-family: '고운바탕체';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/GowunBatang-Regular.woff) format('woff'),
+    url(../fonts/GowunBatang-Regular.otf) format('truetype');
+}
