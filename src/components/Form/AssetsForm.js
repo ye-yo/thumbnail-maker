@@ -1,36 +1,21 @@
-import React, { useState, useEffect, useRef, useReducer } from 'react';
+import React, { useState, } from 'react';
 import Form from './Form.js';
 import TextOptions from './TextOptions.js';
 import './_AssetsForm.scss';
-import { RiDragMove2Fill, RiAlignJustify, RiUploadLine } from "react-icons/ri";
+import { RiDragMove2Fill, RiUploadLine } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
-import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
 import handleFileOnChange from '../commonFunction.js';
 const textLayoutList = [
-    { name: 'Title', style: { fontSize: '54px', fontWeight: 'bold', left: '50%', top: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
-    { name: 'Sub title', style: { fontSize: '38px', fontWeight: '500', left: '50%', top: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
-    { name: 'Text', style: { fontSize: '24px', left: '50%', top: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Title', style: { fontSize: '48px', fontWeight: 'bold', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Sub title', style: { fontSize: '34px', fontWeight: '500', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Text', style: { fontSize: '20px', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
 ];
 
 let count = 0;
 function AssetsForm(props) {
     const { currentAsset, assetStyle, setAssetStyle, assets, setCanvasAssets } = props;
-    const alignList = {
-        'center': <AiOutlineAlignCenter />,
-        'left': <AiOutlineAlignLeft />,
-        'right': <AiOutlineAlignRight />,
-        'justify': <RiAlignJustify />
-    };
     const [currentTab, setCurrentTab] = useState(0);
     const [imageAssets, setImageAssets] = useState([]);
-    const [selectValue, setSelectValue] = useState(0);
-    const inputImageUrl = useRef('');
-
-    useEffect(() => {
-        if (selectValue) {
-            props.setAssetStyle({ ...props.assetStyle, fontFamily: selectValue })
-        }
-    }, [selectValue])
 
     function handleTextCreate(item) {
         let newItem = { ...item };

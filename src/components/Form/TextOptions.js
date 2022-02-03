@@ -9,7 +9,6 @@ import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "
 import { SketchPicker } from 'react-color';
 import { getRgba } from '../commonFunction.js';
 
-
 const fontList = [
     '나눔바른고딕체',
     '고운바탕체',
@@ -45,12 +44,6 @@ function TextOptions(props) {
     function openColorPicker(colorTarget) {
         setColorTarget(colorTarget);
     }
-    function handleUnderline(e) {
-        setAssetStyle({ ...assetStyle, textDecoration: e.target.checked && 'underline' });
-    }
-    function handleTextBold(e) {
-        setAssetStyle({ ...assetStyle, fontWeight: e.target.checked && 'bold' });
-    }
 
     function handleChange(color) {
         setColor(color);
@@ -63,7 +56,6 @@ function TextOptions(props) {
         const { name, value } = e.target;
         let objectValue = null;
         let moreObject = {};
-        console.log(name, value)
         if (name) {
             switch (name) {
                 case 'fontSize': {
@@ -71,7 +63,8 @@ function TextOptions(props) {
                     prevTextSize = Number(prevTextSize.replace('px', ''));
                     objectValue = value + 'px';
                     const newFontSize = Number(value);
-                    moreObject = { height: assetStyle.height * newFontSize / prevTextSize, width: assetStyle.width * newFontSize / prevTextSize };
+                    // moreObject = { height: assetStyle.height * newFontSize / prevTextSize, width: assetStyle.width * newFontSize / prevTextSize };
+                    moreObject = { height: assetStyle.height * newFontSize / prevTextSize };
                 } break;
                 case 'fontWeight': objectValue = checked && 'bold'; break;
                 case 'textDecoration': objectValue = checked && 'underline'; break;

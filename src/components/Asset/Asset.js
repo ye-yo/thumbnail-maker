@@ -7,8 +7,7 @@ function Asset(props) {
     const { newAsset, id, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle, removeAsset } = props;
     const sectionForm = document.querySelector(".section-form");
     const assetBox = useRef(null);
-    // const [currentStyle, setCurrentStyle] = useState({});
-    const [currentStyle, setCurrentStyle] = useState({ ...newAsset.style, visibility: 'hidden', top: 0, left: 0 });
+    const [currentStyle, setCurrentStyle] = useState({ ...newAsset.style, visibility: 'hidden', y: 0, x: 0 });
     const assetComponent = useRef(null);
     let isDragging = useRef(false);
     let isClicked = useRef(false);
@@ -22,17 +21,17 @@ function Asset(props) {
         let topPercent = 0.5,
             leftPercent = 0.5;
         if (newAsset.type === 'text') {
-            if (newAsset.style.top) {
-                topPercent = Number(newAsset.style.top.replace("%", '')) * 0.01;
-                leftPercent = Number(newAsset.style.left.replace("%", '')) * 0.01;
+            if (newAsset.style.y) {
+                topPercent = Number(newAsset.style.y.replace("%", '')) * 0.01;
+                leftPercent = Number(newAsset.style.x.replace("%", '')) * 0.01;
             }
         }
         let width = canvasElement.width * (newAsset.type === 'text' ? 0.9 : 0.4),
             height = newAsset.type === 'image' ? width * assetSize.height / assetSize.width : assetSize.height,
-            left = canvasElement.width * leftPercent - width / 2,
-            top = canvasElement.height * topPercent - height / 2;
+            x = canvasElement.width * leftPercent - width / 2,
+            y = canvasElement.height * topPercent - height / 2;
         setCurrentStyle({
-            ...currentStyle, visibility: 'visible', left, top, width, height
+            ...currentStyle, visibility: 'visible', x, y, width, height
         })
     }, [])
 
@@ -91,7 +90,6 @@ function Asset(props) {
     function handleAssetResize(ref, position) {
         setAssetStyle({ ...currentStyle, width: Number(ref.style.width.replace('px', '')), height: Number(ref.style.height.replace('px', '')), ...position })
     }
-
     function handleAssetRemove() {
         removeAsset(id);
     }
@@ -103,16 +101,19 @@ function Asset(props) {
                 height: currentStyle.height
             }}
             position={{
-                x: currentStyle.left,
-                y: currentStyle.top,
+                x: currentStyle.x,
+                y: currentStyle.y,
             }}
             noderef={assetComponent}
             lockAspectRatio="true"
             onResizeStart={handleAssetClick}
             onDragStart={handleAssetClick}
-            onResize={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
-            onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, left: d.x, top: d.y }); e.preventDefault(); }}
-            onResizeStop={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
+            onResize={(e, direction, ref, delta, position) => { console.log("resize"); handleAssetResize(ref, position); }}
+            onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, x: d.x, y: d.y }); e.preventDefault(); }}
+            onResizeStop={(e, direction, ref, delta, position) => {
+                console.log(direction, delta, ref, position);
+                handleAssetResize(ref, position);
+            }}
         >
             <div id={id} ref={assetComponent}
                 className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}>
