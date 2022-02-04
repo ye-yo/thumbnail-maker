@@ -25,21 +25,21 @@ const ratioList = [
     },
 ];
 
-function useWindowSize() {
-    const [size, setSize] = useState([0, 0]);
-    useLayoutEffect(() => {
-        function updateSize() {
-            setSize([window.innerWidth, window.innerHeight]);
-        }
-        window.addEventListener('resize', updateSize);
-        updateSize();
-        return () => window.removeEventListener('resize', updateSize);
-    }, []);
-    return size;
-}
+// function useWindowSize() {
+//     const [size, setSize] = useState([0, 0]);
+//     useLayoutEffect(() => {
+//         function updateSize() {
+//             setSize([window.innerWidth, window.innerHeight]);
+//         }
+//         window.addEventListener('resize', updateSize);
+//         updateSize();
+//         return () => window.removeEventListener('resize', updateSize);
+//     }, []);
+//     return size;
+// }
 
 function Main() {
-    const [windowWidth, windowHeight] = useWindowSize();
+    // const [windowWidth, windowHeight] = useWindowSize();
     const [canvasSize, setCanvasSize] = useState({ width: 400, height: 300 });
     const [ratio, setRatio] = useState(ratioList[2]);
     const [background, setBackground] = useState({ type: null, background: null, index: null });
@@ -50,9 +50,9 @@ function Main() {
     const [loading, setLoading] = useState(false);
     const Spinner = () => { return <img src={require('../../assets/images/loading.gif')} style={{ width: 16, height: 16 }}></img> }
 
-    useEffect(() => {
-        setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
-    }, [windowHeight])
+    // useEffect(() => {
+    //     setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
+    // }, [windowHeight])
 
     useEffect(() => {
         if (currentAsset.index != null) {
@@ -139,7 +139,7 @@ function Main() {
                             { background: background.background })}>
                             {canvasAssets.map((element, index) =>
                                 <Asset setCurrentAsset={setCurrentAsset} currentAsset={currentAsset} key={element.id}
-                                    id={element.id} newAsset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} removeAsset={removeAsset} ></Asset>
+                                    id={element.id} canvasSize={canvasSize} newAsset={element} assetStyle={assetStyle} setAssetStyle={setAssetStyle} removeAsset={removeAsset} ></Asset>
                             )}
                         </div>
                     </div>

@@ -4,7 +4,7 @@ import './_Asset.scss';
 import { RiCloseCircleFill } from "react-icons/ri";
 
 function Asset(props) {
-    const { newAsset, id, currentAsset, setCurrentAsset, onClick, assetStyle, setAssetStyle, removeAsset } = props;
+    const { newAsset, id, currentAsset, setCurrentAsset, canvasSize, assetStyle, setAssetStyle, removeAsset } = props;
     const sectionForm = document.querySelector(".section-form");
     const assetBox = useRef(null);
     const [currentStyle, setCurrentStyle] = useState({ ...newAsset.style, visibility: 'hidden', y: 0, x: 0 });
@@ -14,8 +14,11 @@ function Asset(props) {
     const isCurrentAsset = currentAsset.id === id;
     const [editing, setEditing] = useState({ pointerEvents: 'none', cursor: 'inherit' })
     const canvasElement = document.querySelector('#canvas').getBoundingClientRect();
+    const [prevCanvasSize, setPrevCanvasSize] = useState({ width: null, height: null });
 
     useEffect(() => {
+        console.log(canvasElement.width)
+        setPrevCanvasSize({ ...prevCanvasSize, width: canvasElement.width, height: canvasElement.height });
         const assetElement = assetComponent.current;
         let assetSize = assetElement.getBoundingClientRect();
         let topPercent = 0.5,
@@ -30,10 +33,10 @@ function Asset(props) {
             height = newAsset.type === 'image' ? width * assetSize.height / assetSize.width : assetSize.height,
             x = canvasElement.width * leftPercent - width / 2,
             y = canvasElement.height * topPercent - height / 2;
-        setCurrentStyle({
-            ...currentStyle, visibility: 'visible', x, y, width, height
-        })
+        setCurrentStyle({ ...currentStyle, visibility: 'visible', x, y, width, height })
     }, [])
+
+    console.log(prevCanvasSize)
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
@@ -52,20 +55,6 @@ function Asset(props) {
             }
         }
     }, [currentStyle]);
-
-    function handleAssetClick(e) {
-        e.stopPropagation();
-        isClicked.current = true;
-        if (!isCurrentAsset) {
-            setCurrentAsset({
-                ...currentAsset,
-                id: id,
-                type: newAsset.type,
-                style: currentStyle
-            });
-            setEditing({ cursor: 'default', pointerEvents: 'inherit' });
-        }
-    }
 
     useEffect(() => {
         if (isCurrentAsset) {
@@ -86,6 +75,31 @@ function Asset(props) {
             setCurrentStyle({ ...currentStyle, ...assetStyle });
         }
     }, [assetStyle])
+
+    useEffect(() => {
+        if (prevCanvasSize.width) {
+            const newX = (currentStyle.x + currentStyle.width / 2) * canvasSize.width / prevCanvasSize.width;
+            const newY = (currentStyle.y + currentStyle.height / 2) * canvasSize.height / prevCanvasSize.height;
+            setCurrentStyle({ ...currentStyle, x: newX - currentStyle.width / 2, y: newY - currentStyle.height / 2 });
+            setPrevCanvasSize({ ...prevCanvasSize, ...canvasSize })
+        }
+    }, [canvasSize])
+
+    console.log(currentStyle.x)
+
+    function handleAssetClick(e) {
+        e.stopPropagation();
+        isClicked.current = true;
+        if (!isCurrentAsset) {
+            setCurrentAsset({
+                ...currentAsset,
+                id: id,
+                type: newAsset.type,
+                style: currentStyle
+            });
+            setEditing({ cursor: 'default', pointerEvents: 'inherit' });
+        }
+    }
 
     function handleAssetResize(ref, position) {
         setAssetStyle({ ...currentStyle, width: Number(ref.style.width.replace('px', '')), height: Number(ref.style.height.replace('px', '')), ...position })
