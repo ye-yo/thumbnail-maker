@@ -10,17 +10,14 @@ import { SketchPicker } from 'react-color';
 import { getRgba } from '../commonFunction.js';
 
 const fontList = [
-    '나눔바른고딕체',
+    '기본서체',
     '고운바탕체',
     '상주곶감체',
     'KoPub돋움체',
     '빙그레 따옴체',
     '빙그레체',
     '강원교육모두체',
-    '조선일보명조체',
     '조선굴림체',
-    '여기어때 잘난체',
-    'Noto Sans',
 ]
 
 function TextOptions(props) {
