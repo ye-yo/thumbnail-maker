@@ -7,7 +7,7 @@ import { IoMdColorPalette, } from "react-icons/io";
 import { RiUnderline, RiBold, RiAlignJustify } from "react-icons/ri";
 import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
 import { SketchPicker } from 'react-color';
-import { getRgba } from '../commonFunction.js';
+import { getRgba } from '../utils.js';
 
 const fontList = [
     '기본서체',

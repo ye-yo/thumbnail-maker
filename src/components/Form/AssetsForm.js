@@ -4,7 +4,7 @@ import TextOptions from './TextOptions.js';
 import './_AssetsForm.scss';
 import { RiDragMove2Fill, RiUploadLine } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
-import handleFileOnChange from '../commonFunction.js';
+import { handleFileOnChange } from '../utils.js';
 const textLayoutList = [
     { name: 'Title', style: { fontSize: '48px', fontWeight: 'bold', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
     { name: 'Sub title', style: { fontSize: '34px', fontWeight: '500', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },

@@ -4,7 +4,7 @@ import { SketchPicker } from 'react-color';
 import './_BackgroundForm.scss';
 import { RiPaintFill, RiRecordCircleLine, RiUploadLine } from "react-icons/ri";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
-import handleFileOnChange, { getRgba, getGradient } from '../commonFunction.js';
+import { handleFileOnChange, getRgba, getGradient } from '../utils.js';
 
 const gradientDirectionList = [
     { direction: 'top', icon: <HiOutlineArrowSmUp /> },

@@ -21,6 +21,7 @@ function useWindowSize() {
     return size;
 }
 
+
 const ratioList = [
     { aspectRatio: { width: 1, height: 1 }, text: '1:1', id: 'ratio_0', outputWidth: 400, outputHeight: 400, },
     { aspectRatio: { width: 3, height: 4 }, text: '4:3', id: 'ratio_1', outputWidth: 533.3333, outputHeight: 400, },
@@ -38,6 +39,7 @@ const ratioList = [
     },
 ];
 
+
 function Main() {
     const [windowWidth, windowHeight] = useWindowSize();
     const [canvasSize, setCanvasSize] = useState({ width: 400, height: 300 });
@@ -47,6 +49,8 @@ function Main() {
     const canvasBox = useRef(null);
     const [canvasAssets, setCanvasAssets] = useState([]);
     const [currentAsset, setCurrentAsset] = useState({ index: null, type: null, style: {}, position: {} });
+    const [loading, setLoading] = useState(false);
+    const Spinner = () => { return <img src={require('../../assets/images/loading.gif')} style={{ width: 16, height: 16 }}></img> }
 
     useEffect(() => {
         setCanvasSize({ width: ratio.outputWidth, height: ratio.outputHeight })
@@ -54,7 +58,6 @@ function Main() {
 
     useEffect(() => {
         if (currentAsset.index != null) {
-            alert("current asset")
             setAssetStyle({ ...currentAsset.style })
         }
     }, [currentAsset])
@@ -91,6 +94,7 @@ function Main() {
             width: element.offsetWidth + 'px',
             height: element.offsetHeight + 'px'
         };
+        setLoading(true);
         domtoimage
             .toPng(element, {
                 width: element.offsetWidth * scale,
@@ -98,10 +102,11 @@ function Main() {
                 style: style
             })
             .then(dataUrl => {
+                setLoading(false);
                 handleCaptureCanvas(dataUrl, 'thumbnail.png')
-
             })
             .catch(error => {
+                setLoading(false);
                 console.error("oops, something went wrong!", error);
             });
     }
@@ -140,7 +145,7 @@ function Main() {
                             )}
                         </div>
                     </div>
-                    <button onClick={handleDownload} className="btn-download btn-main"><BsDownload />Download</button>
+                    <button onClick={handleDownload} className="btn-download btn-main">{loading ? <Spinner></Spinner> : <span><BsDownload />Download</span>}</button>
                 </section>
                 <section className="section-form">
                     <div className="section-wrap-left">
