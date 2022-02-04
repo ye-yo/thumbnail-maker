@@ -7,15 +7,9 @@
 .template-list{
     @include flexBox(flex,row,start);
     overflow-x: scroll;
-    // & ::after{
-    //     content: "";
-    //     flex: auto;
-    //     margin: 10px;
-    // }
 
     > li{
         position: relative;
-        border: var(--borderGray);
         cursor: pointer;
         flex: none;
         width: 100px;

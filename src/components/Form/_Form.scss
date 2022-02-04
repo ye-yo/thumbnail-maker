@@ -31,13 +31,17 @@
     background-color: transparent;
     margin-bottom: .4rem;
     width: 100%;
+    color:var(--colorDarkBlack);
+    transition: all .3s;
     &:hover{
         opacity: .8;
         background-color: initial;
+        svg{
+            color: white;
+        }
     }
 
     &:after{
-        // content: "-";
         margin-left: 4px;
     }
     &.hide{
@@ -56,6 +60,7 @@
         width: 1.4rem;
         height: 1.4rem;
         margin-right: 4px;
+        color: var(--colorDarkBlack)
     }
 }
 
@@ -85,7 +90,6 @@
             border-color: white;
         }
     }
-    // label.
 }
 
 .tab-content{

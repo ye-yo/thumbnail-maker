@@ -54,7 +54,7 @@ function AssetsForm(props) {
         setAssetStyle({ ...assetStyle, [name]: Number(value) });
     }
     return (
-        <Form icon={RiDragMove2Fill({ color: "white" })} label="Assets" className="section-form-assets">
+        <Form icon={RiDragMove2Fill()} label="Assets" className="section-form-assets">
             <div className="tab-button-wrap">
                 <label className={!currentTab ? 'clicked' : {}} onClick={() => setCurrentTab(0)}>Text</label>
                 <label className={currentTab ? 'clicked' : ''} onClick={() => setCurrentTab(1)}>Image</label>
@@ -86,7 +86,7 @@ function AssetsForm(props) {
                                 onChange={(e) => {
                                     handleFileOnChange(e, setFileInput);
                                 }}></input>
-                            <label htmlFor="input_asset_image" className="btn-upload-image">Upload<RiUploadLine /></label>
+                            <label htmlFor="input_asset_image" className="btn-upload-image btn">Upload<RiUploadLine /></label>
                         </div>
                         <div className="image-list">
                             <ul>

@@ -17,7 +17,6 @@ function Asset(props) {
     const [prevCanvasSize, setPrevCanvasSize] = useState({ width: null, height: null });
 
     useEffect(() => {
-        console.log(canvasElement.width)
         setPrevCanvasSize({ ...prevCanvasSize, width: canvasElement.width, height: canvasElement.height });
         const assetElement = assetComponent.current;
         let assetSize = assetElement.getBoundingClientRect();
@@ -35,8 +34,6 @@ function Asset(props) {
             y = canvasElement.height * topPercent - height / 2;
         setCurrentStyle({ ...currentStyle, visibility: 'visible', x, y, width, height })
     }, [])
-
-    console.log(prevCanvasSize)
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
@@ -84,8 +81,6 @@ function Asset(props) {
             setPrevCanvasSize({ ...prevCanvasSize, ...canvasSize })
         }
     }, [canvasSize])
-
-    console.log(currentStyle.x)
 
     function handleAssetClick(e) {
         e.stopPropagation();

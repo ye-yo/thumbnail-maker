@@ -32,7 +32,7 @@
                 transform: translate(0%, -50%);
             }
             &:hover{
-                background-color: var(--colorMain);
+                background-color: var(--colorPoint);
                 color: white;
             }
             &:last-child{
@@ -70,13 +70,8 @@
 
         .btn-upload-image{
             width: 100%;
-            display: block;
-            background-color: var(--colorMain);
-            color: white;
-            border-radius: 4px;
             padding: 10px 10px;
             cursor: pointer;
-            margin-bottom: 6px;
             svg{
                 vertical-align: text-bottom;
                 width: auto;

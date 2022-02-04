@@ -1,6 +1,4 @@
 @import url(./reset.css);
-/* @import url(./fonts.css); */
-@import url(./input.css);
 
 html, body {
   width: 100%;
@@ -28,21 +26,8 @@ button {
   background-color: transparent;
   border: none; }
 
-:root {
-  --color_main: #3366FF; }
 
-button, .btn {
-  display: block;
-  width: fit-content;
-  box-shadow: none;
-  border: none;
-  background-color: var(--color_main);
-  color: white;
-  padding: 8px 10px;
-  border-radius: 4px;
-  font-weight: bold; 
-  cursor: pointer;
-}
+
 
 textarea {
   resize: none;
@@ -60,6 +45,8 @@ input {
 :root {
   --color_beach_blue: linear-gradient(to right, rgb(76, 161, 175), rgb(196, 224, 229)); 
   --colorMain : #222222;
+  --colorPoint: #8D91BE;
+  --colorDarkBlack: #333333;
   --colorLightgray : #dcdcdc;
   --colorDark : gray;
   --borderGray :1px solid var(--colorLightgray);
@@ -67,9 +54,23 @@ input {
 
 }
 
-.btn-dark:hover, button:hover{
-    opacity: 1;
-    background-color: var(--colorDark);
+button, .btn {
+  display: block;
+  width: fit-content;
+  box-shadow: none;
+  border: none;
+  background-color: var(--colorMain);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 4px;
+  /* font-weight: bold;  */
+  cursor: pointer;
+  transition: all .4s;
+}
+
+.btn-dark:hover, button:hover, .btn:hover{
+    /* opacity: 1; */
+    background-color: var(--colorPoint);
     color: white;
 }
 
@@ -77,13 +78,6 @@ input {
   opacity: 1;
   background-color: var(--colorDark);
   color: white;
-}
-
-.btn-main{
-    background-color: var(--colorMain);
-}
-.btn-main:hover{
-  opacity: .8;
 }
 
 

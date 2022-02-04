@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Form from './Form.js';
 import './_LayoutForm.scss';
 import { RiLayoutBottom2Line } from "react-icons/ri";
@@ -7,6 +7,10 @@ let count = 0;
 
 function LayoutForm(props) {
     const { canvasAssets, setCanvasAssets } = props;
+
+    useEffect(() => {
+        handleTemplateChange(0);
+    }, [])
 
     function handleTemplateChange(index) {
         const layout = (layoutList[index].layout).map(layout => { layout.id = 'layout' + count++; return layout; });

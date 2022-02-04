@@ -5,38 +5,29 @@ main{
     width: 100vw;
     height: 100vh;
     overflow: auto;
+    padding: 40px 0 ;
+    background-color: #cad2d3;
+    // background: linear-gradient(to bottom, rgb(114, 198, 205), rgb(185, 186, 228));
+    background: linear-gradient(to bottom, rgb(149, 200, 204), rgb(141, 142, 190));
+
 }
+
 .center-box{
     margin-top: 10vh;
-    // @include flexBox(flex, row, stretch);
     @include flexBox(flex, column, stretch);
-    // margin: 10%;
-    position: absolute;
-    // top: 50%;
-    left: 50%;
-    // transform: translate(-50%, -50%);
-    transform: translate(-50%, 0);
     width: 90%;
-    // height: 80vh;
-    background-color: #eeeeee;
+    margin: 0 auto;
     max-width: 1080px;
-    // height: 90vh;
-    border: 1px solid gray;
     min-width: fit-content;
     min-height: fit-content;
-
-    > section{
-        // width: 100%;
-    }
 }
 
 .section-canvas{
     height: 100%;
     @include flexBox(flex,column,space-between);
-    margin: 0 auto;
-    // background-color: white;
+    margin: 0 auto 20px;
     .input-canvas-size-wrap{
-        margin-top: 1rem;
+        margin-top: 2rem;
 
         input{
             width: 100px;
@@ -51,20 +42,16 @@ main{
         min-width: 768px;
         min-height: 402.094px;
         margin: 1rem 0;
-        // overflow: hidden;
 
         .canvas{
             font-size: 1vmin;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: green;
             overflow: hidden;
             position: relative;
             height: 100%;
             font-family: '나눔바른고딕체';
-            // width: 768px;
-            // height: 402.094px;
         }
     }
 
@@ -74,6 +61,12 @@ main{
         margin-bottom: 1rem;
         padding: 10px;
         font-size: 18px;
+        position: fixed;
+        border-radius: 50%;
+        padding: 0;
+        width: 100px;
+        height: 100px;
+        right: 4%;
         svg{
             vertical-align: text-top;
             margin-right: 10px;
@@ -87,10 +80,12 @@ main{
     @include flexBox(flex, row, space-between, start, wrap);
      min-height: 200px;
      height: 100%;
-    //  padding: 1rem;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 1.4rem;
     width: 900px;
-     background-color: rgb(59, 58, 67);
+    background-color: white;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    background-color: #ebecef73;
      overflow-y: auto;
      > section, .section-wrap-left > section{
          margin-bottom: .4rem;

@@ -22,7 +22,7 @@ function LayoutForm(props) {
     const gradientItemStartIndex = 8;
     const [currentTab, setCurrentTab] = useState(0);
     const [colorList, setColorList] = useState(defaultColorList);
-    const [currentColorItem, setCurrentColorItem] = useState({ index: 0, isFrom: false, type: 'color', isRand: false });
+    const [currentColorItem, setCurrentColorItem] = useState({ index: gradientItemStartIndex, isFrom: true, type: 'gradient', isRand: false });
     const [gradientStyle, setGradientStyle] = useState(defaultColorList[gradientItemStartIndex]);
     const [color, setColor] = useState(defaultColorList[0].rgb);
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -130,7 +130,7 @@ function LayoutForm(props) {
     }
 
     return (
-        <Form icon={RiPaintFill({ color: "white" })} label="Background" className="section-form-background">
+        <Form icon={RiPaintFill()} label="Background" className="section-form-background">
             <div className="tab-button-wrap">
                 <label className={currentTab === 0 ? 'clicked' : ''} onClick={() => handleTab(0)}>Color</label>
                 <label className={currentTab === 1 ? 'clicked' : ''} onClick={() => setCurrentTab(1)}>Image</label>

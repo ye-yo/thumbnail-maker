@@ -9,18 +9,18 @@
     overflow-x: scroll;
     .check-style{
         @include flexBox(flex,column);
-        border: var(--borderGray);
+        border: 1px solid white;
         cursor: pointer;
         flex: none;
         width: 100px;
         height: 100px;
         margin: 0 4px;
-        background-color: transparent;
+        background-color: rgba(0,0,0,.1);
         color: white;
-        // background-color: rgba(255,255,255,.7);
         cursor: pointer;
+        transition: all .4s;
         &:hover{
-            opacity: .8;
+            opacity: .5;
         }
        .icon{
             background: no-repeat center / contain;
@@ -40,7 +40,7 @@
             word-wrap: break-word;
             text-align: center;
             span{
-                color: #aaaaaa;
+                color: white;
                 font-size: 12px;
             }
         }
