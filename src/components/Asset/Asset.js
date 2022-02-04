@@ -20,13 +20,13 @@ function Asset(props) {
         let assetSize = assetElement.getBoundingClientRect();
         let topPercent = 0.5,
             leftPercent = 0.5;
-        if (newAsset.type === 'text') {
+        if (newAsset.type !== 'image') {
             if (newAsset.style.y) {
                 topPercent = Number(newAsset.style.y.replace("%", '')) * 0.01;
                 leftPercent = Number(newAsset.style.x.replace("%", '')) * 0.01;
             }
         }
-        let width = canvasElement.width * (newAsset.type === 'text' ? 0.9 : 0.4),
+        let width = newAsset.style.width || canvasElement.width * 0.9,
             height = newAsset.type === 'image' ? width * assetSize.height / assetSize.width : assetSize.height,
             x = canvasElement.width * leftPercent - width / 2,
             y = canvasElement.height * topPercent - height / 2;
@@ -105,13 +105,12 @@ function Asset(props) {
                 y: currentStyle.y,
             }}
             noderef={assetComponent}
-            lockAspectRatio="true"
+            lockAspectRatio={newAsset.shape === 'circle'}
             onResizeStart={handleAssetClick}
             onDragStart={handleAssetClick}
-            onResize={(e, direction, ref, delta, position) => { console.log("resize"); handleAssetResize(ref, position); }}
+            onResize={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
             onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, x: d.x, y: d.y }); e.preventDefault(); }}
             onResizeStop={(e, direction, ref, delta, position) => {
-                console.log(direction, delta, ref, position);
                 handleAssetResize(ref, position);
             }}
         >
@@ -119,12 +118,15 @@ function Asset(props) {
                 className={`asset${isCurrentAsset ? ' current' : ''} asset-${newAsset.type}`}>
                 <button className="btn-remove" onClick={handleAssetRemove}><RiCloseCircleFill /></button>
                 {
-                    newAsset.type == 'text' ?
+                    newAsset.type === 'text' ?
                         <div ref={assetBox} style={{ ...currentStyle, width: '100%', height: '100%', ...editing }}
                             contentEditable="true" suppressContentEditableWarning="true"
                         ><div>{newAsset.name}</div></div>
-                        :
-                        <img ref={assetBox} crossOrigin='Anonymous' src={newAsset.url} alt={newAsset.name}></img>
+                        : newAsset.type === 'figure' ?
+                            <div ref={assetBox} style={{ ...currentStyle, background: newAsset.shape === 'line' ? 'none' : currentStyle.background }}>
+                                {newAsset.shape === 'line' ? <p className="line" style={{ background: currentStyle.background }}></p> : ''}
+                            </div>
+                            : <img ref={assetBox} crossOrigin='Anonymous' src={newAsset.url} alt={newAsset.name}></img>
                 }
             </div>
 

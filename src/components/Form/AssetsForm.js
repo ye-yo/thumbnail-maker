@@ -32,7 +32,10 @@ function AssetsForm(props) {
         let newItem = { ...item };
         newItem.type = 'image';
         newItem.id = 'asset' + count++;
-        newItem.style = {};
+        const canvasElement = document.querySelector('#canvas').getBoundingClientRect();
+        newItem.style = {
+            width: canvasElement.width * 0.4
+        };
         setCanvasAssets([...assets, newItem])
     }
 

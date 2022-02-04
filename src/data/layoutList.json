@@ -1,0 +1,352 @@
+[
+    {
+        "name": "layout1",
+        "layout": [
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "48px",
+                    "fontWeight": "bold",
+                    "y": "50%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout2",
+        "layout": [
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "48px",
+                    "fontWeight": "bold",
+                    "y": "44%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
+                }
+            },
+            {
+                "type": "text",
+                "name": "부제목을 입력하세요",
+                "style": {
+                    "fontSize": "28px",
+                    "y": "64%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout3",
+        "layout": [
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "48px",
+                    "fontWeight": "bold",
+                    "y": "46%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "16px",
+                    "y": "62%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout4",
+        "layout": [
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "48px",
+                    "fontWeight": "bold",
+                    "y": "50%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "16px",
+                    "y": "38%",
+                    "x": "50%",
+                    "textShadow": "2px 2px 2px rgba(0,0,0,.4)"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout5",
+        "layout": [
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "48px",
+                    "fontWeight": "bold",
+                    "y": "46%",
+                    "x": "50%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "부제목을 입력하세요",
+                "style": {
+                    "fontSize": "28px",
+                    "y": "62%",
+                    "x": "50%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "12px",
+                    "y": "90%",
+                    "x": "50%"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout6",
+        "layout": [
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "48px",
+                    "fontWeight": "bold",
+                    "x": "50%",
+                    "y": "48%"
+                }
+            },
+            {
+                "type": "figure",
+                "shape": "line",
+                "style": {
+                    "width": 320,
+                    "height": 20,
+                    "background": "white",
+                    "x": "50%",
+                    "y": "58%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "16px",
+                    "x": "50%",
+                    "y": "66%"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout7",
+        "layout": [
+            {
+                "type": "figure",
+                "shape": "line",
+                "style": {
+                    "width": 320,
+                    "height": 20,
+                    "background": "white",
+                    "x": "50%",
+                    "y": "30%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "42px",
+                    "x": "50%",
+                    "y": "46%"
+                }
+            },
+            {
+                "type": "figure",
+                "shape": "line",
+                "style": {
+                    "width": 320,
+                    "height": 20,
+                    "background": "white",
+                    "x": "50%",
+                    "y": "61%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "16px",
+                    "y": "70%",
+                    "x": "50%"
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout8",
+        "layout": [
+            {
+                "type": "figure",
+                "style": {
+                    "border": "1px solid white",
+                    "zIndex": 0,
+                    "width": 360,
+                    "height": 200,
+                    "background": "rgba(255,255,255,0.1)",
+                    "y": "50%",
+                    "x": "50%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "제목을 입력하세요",
+                "style": {
+                    "fontSize": "40px",
+                    "y": "46%",
+                    "x": "50%",
+                    "zIndex": 1
+                }
+            },
+            {
+                "type": "figure",
+                "shape": "line",
+                "style": {
+                    "width": 300,
+                    "height": 20,
+                    "background": "white",
+                    "y": "54",
+                    "x": "50%"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "16px",
+                    "y": "62%",
+                    "x": "50%",
+                    "zIndex": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout9",
+        "layout": [
+            {
+                "type": "figure",
+                "shape": "circle",
+                "style": {
+                    "border": "1px solid white",
+                    "borderRadius": "50%",
+                    "zIndex": 0,
+                    "width": 300,
+                    "height": 300,
+                    "background": "rgba(255,255,255,0.1)",
+                    "top": "50%",
+                    "left": "50%",
+                    "transform": "translate(-50%, -50%)"
+                }
+            },
+            {
+                "type": "text",
+                "name": "제목을\n입력하세요",
+                "style": {
+                    "fontSize": "40px",
+                    "y": "46%",
+                    "x": "50%",
+                    "zIndex": 1
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "14px",
+                    "y": "64%",
+                    "x": "50%",
+                    "zIndex": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "layout10",
+        "layout": [
+            {
+                "type": "figure",
+                "shape": "circle",
+                "style": {
+                    "borderRadius": "50%",
+                    "zIndex": 0,
+                    "width": 300,
+                    "height": 300,
+                    "background": "rgba(255,255,255,.9)",
+                    "top": "50%",
+                    "left": "50%",
+                    "transform": "translate(-50%, -50%)"
+                }
+            },
+            {
+                "type": "figure",
+                "shape": "circle",
+                "style": {
+                    "border": "1px dashed rgba(255,255,255,.5)",
+                    "borderRadius": "50%",
+                    "zIndex": 0,
+                    "width": 320,
+                    "height": 320,
+                    "top": "50%",
+                    "left": "50%",
+                    "transform": "translate(-50%, -50%)"
+                }
+            },
+            {
+                "type": "text",
+                "name": "제목을\n입력하세요",
+                "style": {
+                    "fontSize": "40px",
+                    "y": "46%",
+                    "x": "50%",
+                    "zIndex": 1,
+                    "color": "rgba(32,32,32,.8)"
+                }
+            },
+            {
+                "type": "text",
+                "name": "소제목을 입력하세요",
+                "style": {
+                    "fontSize": "14px",
+                    "y": "64%",
+                    "x": "50%",
+                    "zIndex": 1,
+                    "color": "rgba(98,98,98,.8)"
+                }
+            }
+        ]
+    }
+]
