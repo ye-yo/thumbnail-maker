@@ -5,28 +5,13 @@ import './_BackgroundForm.scss';
 import { RiPaintFill, RiRecordCircleLine, RiUploadLine } from "react-icons/ri";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import { handleFileOnChange, getRgba, getGradient } from '../utils.js';
+import defaultColorList from '../../data/defaultColorList.json'
 
 const gradientDirectionList = [
     { direction: 'top', icon: <HiOutlineArrowSmUp /> },
     { direction: 'right', icon: <HiOutlineArrowSmRight /> },
     { direction: 'bottom', icon: <HiOutlineArrowSmDown /> },
     { direction: 'left', icon: <HiOutlineArrowSmLeft /> }
-];
-const defaultColorList = [
-    { type: 'color', rgb: { "r": 205, "g": 106, "b": 131, "a": 1 } },
-    { type: 'color', rgb: { "r": 45, "g": 134, "b": 123, "a": 1 } },
-    { type: 'color', rgb: { "r": 46, "g": 191, "b": 145, "a": 1 } },
-    { type: 'color', rgb: { "r": 255, "g": 221, "b": 108, "a": 1 } },
-    { type: 'color', rgb: { "r": 123, "g": 121, "b": 210, "a": 1 } },
-    { type: 'color', rgb: { "r": 198, "g": 210, "b": 236, "a": 1 } },
-    { type: 'color', rgb: { "r": 154, "g": 189, "b": 210, "a": 1 } },
-    { type: 'color', rgb: { "r": 51, "g": 93, "b": 153, "a": 1 } },
-    { type: 'gradient', from: { "r": 101, "g": 78, "b": 163, "a": 1 }, to: { "r": 234, "g": 175, "b": 200, "a": 1 }, form: 'linear', direction: 'right', directionIndex: 1 },
-    { type: 'gradient', from: { "r": 218, "g": 68, "b": 83, "a": 1 }, to: { "r": 137, "g": 33, "b": 107, "a": 1 }, form: 'linear', direction: 'left', directionIndex: 3 },
-    { type: 'gradient', from: { "r": 0, "g": 90, "b": 167, "a": 1 }, to: { "r": 255, "g": 253, "b": 228, "a": 1 }, form: 'linear', direction: 'top', directionIndex: 0 },
-    { type: 'gradient', from: { "r": 168, "g": 192, "b": 255, "a": 1 }, to: { "r": 63, "g": 43, "b": 150, "a": 1 }, form: 'radial', direction: 'bottom', directionIndex: 2 },
-    { type: 'color', isRand: true, rgb: { "r": 205, "g": 106, "b": 131, "a": 1 } },
-    { type: 'gradient', isRand: true, from: { "r": 101, "g": 78, "b": 163, "a": 1 }, to: { "r": 234, "g": 175, "b": 200, "a": 1 }, form: 'linear', direction: 'right', directionIndex: 1 },
 ];
 
 const randomColorIndex = defaultColorList.length - 2;
@@ -153,6 +138,12 @@ function LayoutForm(props) {
             <div className="tab-content">
                 {currentTab === 0 ?
                     <div className="tab-color">
+                        <div className="btn-random-color-wrap">
+                            <p onClick={() => setCurrentColorItem({ index: randomColorIndex, isRand: true, type: 'color' })} className='color' style={{ background: getRgba(colorList[randomColorIndex].rgb) }}></p>
+                            <button onClick={getRandomColor} className="btn-random-color">Random Color</button>
+                            <p onClick={() => setCurrentColorItem({ index: randomGradientIndex, isFrom: true, isRand: true, type: 'gradient' })} name="to" className='color' style={{ background: getGradient(colorList[randomGradientIndex]) }}></p>
+                            <button onClick={getRandomGradient} className="btn-random-gradient">Random Gradient</button>
+                        </div>
                         <div className="color-picker-wrap">
                             <SketchPicker color={color} onChangeComplete={handleChange} />
                         </div>
@@ -189,12 +180,6 @@ function LayoutForm(props) {
                                     <div></div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="btn-random-color-wrap">
-                            <p onClick={() => setCurrentColorItem({ index: randomColorIndex, isRand: true, type: 'color' })} className='color' style={{ background: getRgba(colorList[randomColorIndex].rgb) }}></p>
-                            <button onClick={getRandomColor} className="btn-random-color">Random Color</button>
-                            <p onClick={() => setCurrentColorItem({ index: randomGradientIndex, isFrom: true, isRand: true, type: 'gradient' })} name="to" className='color' style={{ background: getGradient(colorList[randomGradientIndex]) }}></p>
-                            <button onClick={getRandomGradient} className="btn-random-gradient">Random Gradient</button>
                         </div>
                     </div>
                     :

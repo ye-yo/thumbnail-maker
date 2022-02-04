@@ -8,20 +8,6 @@ import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
 import domtoimage from 'dom-to-image';
 
-function useWindowSize() {
-    const [size, setSize] = useState([0, 0]);
-    useLayoutEffect(() => {
-        function updateSize() {
-            setSize([window.innerWidth, window.innerHeight]);
-        }
-        window.addEventListener('resize', updateSize);
-        updateSize();
-        return () => window.removeEventListener('resize', updateSize);
-    }, []);
-    return size;
-}
-
-
 const ratioList = [
     { aspectRatio: { width: 1, height: 1 }, text: '1:1', id: 'ratio_0', outputWidth: 400, outputHeight: 400, },
     { aspectRatio: { width: 3, height: 4 }, text: '4:3', id: 'ratio_1', outputWidth: 533.3333, outputHeight: 400, },
@@ -39,6 +25,18 @@ const ratioList = [
     },
 ];
 
+function useWindowSize() {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+        function updateSize() {
+            setSize([window.innerWidth, window.innerHeight]);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    return size;
+}
 
 function Main() {
     const [windowWidth, windowHeight] = useWindowSize();
