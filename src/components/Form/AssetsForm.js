@@ -41,11 +41,16 @@ function AssetsForm(props) {
 
     const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
     function handleAssetSize(e) {
-        if (!filterNumber.test(e.target.value)) {
-            e.preventDefault();
-            return;
-        };
         let { name, value } = e.target;
+        if (!filterNumber.test(value)) {
+            if (value === "") {
+                value = 0;
+            }
+            else {
+                e.preventDefault();
+                return;
+            }
+        };
         setAssetStyle({ ...assetStyle, [name]: Number(value) });
     }
     return (
@@ -69,11 +74,11 @@ function AssetsForm(props) {
                         <div className={`image-option-wrap disabled-content${currentAsset.id === null || currentAsset.type !== 'image' ? ' disabled' : ''}`}>
                             <div>
                                 <label>W</label>
-                                <input onChange={handleAssetSize} name="width" type="text" value={assetStyle.width === 'auto' ? '' : assetStyle.width || ''}></input>
+                                <input onChange={handleAssetSize} name="width" type="text" value={assetStyle.width === 'auto' ? '' : assetStyle.width ?? ''}></input>
                             </div>
                             <div>
                                 <label>H</label>
-                                <input onChange={handleAssetSize} name="height" type="text" value={assetStyle.height === 'auto' ? '' : assetStyle.height || ''}></input>
+                                <input onChange={handleAssetSize} name="height" type="text" value={assetStyle.height === 'auto' ? '' : assetStyle.height ?? ''}></input>
                             </div>
                         </div>
                         <div className="btn-add-image-wrap">

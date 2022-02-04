@@ -67,11 +67,16 @@ function Main() {
 
     const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
     function handleResizeCanvas(e) {
-        if (!filterNumber.test(e.target.value)) {
-            e.preventDefault();
-            return;
+        let { name, value } = e.target;
+        if (!filterNumber.test(value)) {
+            if (value === "") {
+                value = 0;
+            }
+            else {
+                e.preventDefault();
+                return;
+            }
         };
-        const { name, value } = e.target;
         setRatio(null);
         uncheckedRatioBox();
         setCanvasSize({ ...canvasSize, [name]: Number(value) });
