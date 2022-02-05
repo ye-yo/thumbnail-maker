@@ -114,7 +114,7 @@ function Asset(props) {
                 y: currentStyle.y,
             }}
             noderef={assetComponent}
-            lockAspectRatio={newAsset.shape === 'circle'}
+            lockAspectRatio={newAsset.shape === 'circle' || newAsset.type === 'image'}
             onResizeStart={handleAssetClick}
             onDragStart={handleAssetClick}
             onResize={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
