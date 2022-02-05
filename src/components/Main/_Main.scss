@@ -1,37 +1,30 @@
-@import "../../assets/css/components.scss";
-
-$변수사용가능 : 100px; 
+@import "../../assets/css/_crossBrowsing.scss";
 
 main{
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 40px 0 ;
 }
+
 .center-box{
-    @include flexBox(flex, row, stretch);
-    // margin: 10%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 10vh;
+    @include flexBox(flex, column, stretch);
     width: 90%;
-    height: 80vh;
-    background-color: #eeeeee;
+    margin: 0 auto;
     max-width: 1080px;
-    // height: 90vh;
-    > section{
-        border: 1px solid gray;
-        width: 50%;
-    }
+    min-width: fit-content;
+    min-height: fit-content;
+    overflow: auto;
 }
 
 .section-canvas{
     height: 100%;
     @include flexBox(flex,column,space-between);
-    margin: 0 auto;
-    background-color: white;
+    margin: 0 auto 20px;
     .input-canvas-size-wrap{
-        margin-top: 1rem;
+        margin-top: 2rem;
 
         input{
             width: 100px;
@@ -41,12 +34,21 @@ main{
     }
     .canvas-box{
         @include flexBox();
-        width: 80%;
+        width: 90%;
         height: 90%;
-        // overflow: hidden;
+        min-width: 768px;
+        min-height: 402.094px;
+        margin: 1rem 0;
 
         .canvas{
-            background-color: green;
+            font-size: 1vmin;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            font-family: '나눔바른고딕체';
         }
     }
 
@@ -56,22 +58,52 @@ main{
         margin-bottom: 1rem;
         padding: 10px;
         font-size: 18px;
+        position: fixed;
+        border-radius: 50%;
+        padding: 0;
+        width: 100px;
+        height: 100px;
+        right: 4%;
         svg{
             vertical-align: text-top;
-            margin-right: 10px;
+            display: block;
+            margin: 0 auto 2px;
         }
     }
 
 
 }
 
-
 .section-form{
+    @include flexBox(flex, row, space-between, start, wrap);
+    position: relative;
      min-height: 200px;
      height: 100%;
-     padding: 1rem;
-     background-color: rgb(59, 58, 67);
-     > section{
+    padding: 1rem 2rem 1.4rem;
+    width: 900px;
+    background-color: white;
+    border-radius: 20px;
+    background-color: #ffffff59;
+     overflow-y: auto;
+     > section, .section-wrap-left > section{
          margin-bottom: .4rem;
+         width: calc(50% - 1rem);
+         min-width: 400px;
+         display: inline-block;
+     }
+
+     .section-wrap-left{
+        width: calc(50% - 1rem);
+        max-width: 400px;
+     }
+
+     &::after{
+         position: absolute;
+         bottom: 1rem;
+         right: 1.6rem;
+         content: "Thumbnail Maker\Aⓒ2022 ye-yo All rights reserved.";
+         color: white;
+         white-space: pre;
+         text-align: right;
      }
 }

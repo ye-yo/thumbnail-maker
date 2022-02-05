@@ -1,4 +1,4 @@
-@import "../../assets/css/components.scss";
+@import "../../assets/css/_crossBrowsing.scss";
 
 .form{
     background-color: white;
@@ -26,49 +26,68 @@
 }
 
 .btn-accordion{
-    @include flexBox;
+    @include flexBox(flex, row, start);
     margin-right: 100%;
     background-color: transparent;
     margin-bottom: .4rem;
+    width: 100%;
+    color:var(--colorDarkBlack);
+    transition: all .3s;
     &:hover{
         opacity: .8;
+        background-color: initial;
+        svg{
+            color: white;
+        }
     }
 
     &:after{
-        // content: "-";
         margin-left: 4px;
     }
-    &.clicked:after{
-        content:"+"
+    &.hide{
+        border-bottom: var(--borderGray);
+        border-bottom-style:dashed;
+        border-color: rgba(255,255,255,0.4);
+        &:after{
+            content:"+";
+        }
+        + .form{
+            display: none;
+        }
     }
 
     svg {
         width: 1.4rem;
         height: 1.4rem;
         margin-right: 4px;
+        color: var(--colorDarkBlack)
     }
 }
 
 .tab-button-wrap{
+    @include flexBox;
     width: 100%;
     label{
-        width: 50%;
+        @include flex(1);
         display: inline-block;
         padding:10px;
         cursor: pointer;
         line-height: initial;
-        &:hover{
+        border: 1px solid rgb(209, 209, 209);
+        border-top:0;
+        border-bottom: 0;
+        background-color: #d9dbe0;
+        &:last-child, &:from-child{
+            border: none;
         }
-        background-color: #dddddd;
         &:hover{
-            background-color: rgb(179, 174, 174);
+            background-color: #c4cada;
         }
         &.clicked{
             background-color: white;
             border-color: white;
         }
     }
-    // label.
 }
 
 .tab-content{
@@ -79,7 +98,7 @@
 }
 
 input{
-    border: $borderGray;
+    border: var(--borderGray);
     padding: 4px 10px;
     border-radius: 4px;
 }

@@ -1,0 +1,80 @@
+@import "../../assets/css/_crossBrowsing.scss";
+
+.asset{
+    cursor: move;
+    color: white;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    user-select: none;
+    &.asset-text{
+        width: 100%;
+    }
+
+    &.asset-image.current{
+        outline: var(--borderGray);
+    }
+
+    > *:not(button){
+        display: block;
+        position: relative;
+        width: 100%;
+        padding: 0;
+        border-radius: 0;
+        color: inherit;
+        background-color: transparent;
+        border: 0;
+        outline:0;
+        cursor: inherit;
+        white-space: pre-wrap;
+        text-align: center;
+        font-family: inherit;
+        overflow: auto;
+        &:focus{
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+
+    img{
+        cursor: inherit !important;
+        pointer-events: none!important;
+    }
+
+    .btn-remove{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        z-index: 100;
+        svg{
+            width: 100%;
+            height: 100%;
+        }
+        transform: translate(+50%, -50%);
+        display: none;
+    }
+  
+    &.current {
+        outline: 1px solid rgba(255,255,255,0.5);
+    }
+
+    &.current .btn-remove{
+        display: block;
+    }
+
+    .line{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 1px;
+        transform: translate(-50%, -50%);
+    }
+}

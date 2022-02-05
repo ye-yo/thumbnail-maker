@@ -1,0 +1,86 @@
+@import "../../assets/css/_crossBrowsing.scss";
+
+.text-option-wrap{
+    @include flexBox(inline-flex, row, start, center, wrap);
+    width: 50%;
+    margin-right: 1rem;
+    position: relative;
+    > div{
+        @include flexBox(inline-flex,row,start,stretch, wrap);
+    }
+
+    
+    .text-input-wrap{
+        width: 100%;
+        .select-font{
+            width: calc(70% - 4px);
+            margin-bottom: 4px;
+            margin-right: 4px;
+        }
+
+        input{
+            width: 30%;
+            min-width: 48px;
+            margin-bottom: 4px;
+        }
+    } 
+    
+    .text-style-wrap{
+        width: 100%;
+        margin :10px 0;
+        button, .check-style{
+            margin: 0 4px 4px;
+            background-color: #eeeeee;
+            border: var(--borderGray);
+            width: 32px;
+            height: 32px;
+            padding: 6px;
+            position: relative;
+            color: black;
+        }
+
+        .color-preview{
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: var(--borderGray);
+            background-color: var(--fontColor);
+        }
+
+        .btn-back-color{
+            %absoluteCenter{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            svg{
+                @extend %absoluteCenter;
+                width: calc(100% - 12px);
+                height: calc(100% - 12px);
+                z-index: 1;
+            }
+            span{
+                @extend %absoluteCenter;
+                width: 80%;
+                height: 80%;
+                background-color: white;
+            }
+        }
+
+        .shadow{
+            -webkit-filter: drop-shadow( 2px 1px 1px rgba(0, 0, 0, .5));
+            filter: drop-shadow( 2px 1px 1px rgba(0, 0, 0, .5));
+        }
+    }
+    .color-picker-wrap{
+        position: absolute;
+        left: 100%;
+        .sketch-picker{
+            z-index: 2;
+        }
+    }
+}

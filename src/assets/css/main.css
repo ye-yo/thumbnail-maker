@@ -1,5 +1,4 @@
 @import url(./reset.css);
-@import url(./input.css);
 
 html, body {
   width: 100%;
@@ -27,18 +26,7 @@ button {
   background-color: transparent;
   border: none; }
 
-:root {
-  --color_main: #3366FF; }
 
-button {
-  width: fit-content;
-  box-shadow: none;
-  border: none;
-  background-color: var(--color_main);
-  color: white;
-  padding: 8px 10px;
-  border-radius: 2px;
-  font-weight: bold; }
 
 textarea {
   resize: none;
@@ -54,7 +42,43 @@ input {
   -webkit-border-radius: 0; }
 
 :root {
-  --color_beach_blue: linear-gradient(to right, rgb(76, 161, 175), rgb(196, 224, 229)); }
+  --color_beach_blue: linear-gradient(to right, rgb(76, 161, 175), rgb(196, 224, 229)); 
+  --colorMain : #222222;
+  --colorPoint: #8D91BE;
+  --colorDarkBlack: #333333;
+  --colorLightgray : #dcdcdc;
+  --colorDark : gray;
+  --borderGray :1px solid var(--colorLightgray);
+  --fontColor:#222222;
+
+}
+
+button, .btn {
+  display: block;
+  width: fit-content;
+  box-shadow: none;
+  border: none;
+  background-color: var(--colorMain);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 4px;
+  /* font-weight: bold;  */
+  cursor: pointer;
+  transition: all .4s;
+}
+
+.btn-dark:hover, button:hover, .btn:hover{
+    /* opacity: 1; */
+    background-color: var(--colorPoint);
+    color: white;
+}
+
+.btn-dark.clicked, button.clicked{
+  opacity: 1;
+  background-color: var(--colorDark);
+  color: white;
+}
+
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -65,4 +89,8 @@ body {
 
 button *{
   cursor: pointer;
+}
+
+svg{
+  pointer-events: none;
 }

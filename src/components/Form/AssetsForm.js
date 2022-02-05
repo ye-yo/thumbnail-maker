@@ -1,74 +1,100 @@
-import React, { useReducer, useState, useRef } from 'react';
+import React, { useState, } from 'react';
 import Form from './Form.js';
-import SelectBox from '../../elements/SelectBox.js';
+import TextOptions from './TextOptions.js';
 import './_AssetsForm.scss';
-import { RiDragMove2Fill, RiText, RiUnderline, RiPaintFill, RiBold, RiAlignJustify } from "react-icons/ri";
-import { ImImage } from "react-icons/im";
-import { BiFont } from "react-icons/bi";
-import { IoMdColorPalette, IoIosAdd } from "react-icons/io";
-import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
+import { RiDragMove2Fill, RiUploadLine } from "react-icons/ri";
+import { IoIosAdd } from "react-icons/io";
+import { handleFileOnChange } from '../utils.js';
+const textLayoutList = [
+    { name: 'Title', style: { fontSize: '48px', fontWeight: 'bold', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Sub title', style: { fontSize: '34px', fontWeight: '500', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Text', style: { fontSize: '20px', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+];
 
-
-
-function AssetsForm() {
-    const optionList = [
-        { value: '0', name: 'font0' },
-        { value: '1', name: 'font1' },
-        { value: '2', name: 'font2' },
-        { value: '3', name: 'font3' },
-    ]
-    const alignList = [<AiOutlineAlignCenter />, <AiOutlineAlignLeft />, <AiOutlineAlignRight />, <RiAlignJustify />];
-    const [currentAlignIndex, setCurrentAlignIndex] = useState(0)
+let count = 0;
+function AssetsForm(props) {
+    const { currentAsset, assetStyle, setAssetStyle, assets, setCanvasAssets } = props;
     const [currentTab, setCurrentTab] = useState(0);
-    const fontSize = useRef(0);
-    const [currentAssetSize, setCurrentAssetSize] = useState({ width: 0, height: 0 });
-    function handleCurrentAlignIndex() {
-        setCurrentAlignIndex(currentAlignIndex => currentAlignIndex === 3 ? 0 : currentAlignIndex + 1)
+    const [imageAssets, setImageAssets] = useState([]);
+
+    function handleTextCreate(item) {
+        let newItem = { ...item };
+        newItem.type = 'text';
+        newItem.id = 'asset' + count++;
+        setCanvasAssets([...assets, newItem])
+    }
+
+    function setFileInput(item) {
+        setImageAssets([...imageAssets, item])
+    }
+
+    function handleImageAssetClick(item) {
+        let newItem = { ...item };
+        newItem.type = 'image';
+        newItem.id = 'asset' + count++;
+        const canvasElement = document.querySelector('#canvas').getBoundingClientRect();
+        newItem.style = {
+            width: canvasElement.width * 0.4
+        };
+        setCanvasAssets([...assets, newItem])
+    }
+
+    const filterNumber = /^[+]?\d+(?:[.]\d+)?$/g;
+    function handleAssetSize(e) {
+        let { name, value } = e.target;
+        if (!filterNumber.test(value)) {
+            if (value === "") {
+                value = 0;
+            }
+            else {
+                e.preventDefault();
+                return;
+            }
+        };
+        setAssetStyle({ ...assetStyle, [name]: Number(value) });
     }
     return (
-        <Form icon={RiDragMove2Fill({ color: "white" })} label="Assets" className="section-form-assets">
+        <Form icon={RiDragMove2Fill()} label="Assets" className="section-form-assets">
             <div className="tab-button-wrap">
-                <label className={!currentTab && 'clicked'} onClick={() => setCurrentTab(0)}>Text</label>
-                <label className={currentTab && 'clicked'} onClick={() => setCurrentTab(1)}>Image</label>
+                <label className={!currentTab ? 'clicked' : {}} onClick={() => setCurrentTab(0)}>Text</label>
+                <label className={currentTab ? 'clicked' : ''} onClick={() => setCurrentTab(1)}>Image</label>
             </div>
             <div className="tab-content">
                 {!currentTab ?
                     <section className="section-text">
-                        <div className="text-option-wrap">
-                            <div className="text-input-wrap">
-                                <SelectBox options={optionList} defaultValue='0' className="select-font"></SelectBox>
-                                <input type="number" min="0" value={fontSize.current}></input>
-                            </div>
-                            <div className="text-style-wrap">
-                                <button><RiBold /></button>
-                                <button><RiUnderline /></button>
-                                <button><IoMdColorPalette /><span className="color-preview" style={{ backgroundColor: "red" }}></span></button>
-                                <button className="btn-back-color"><BiFont className="ic-top" /><span style={{ backgroundColor: "red" }}></span></button>
-                                <button onClick={handleCurrentAlignIndex}>{alignList[currentAlignIndex]}</button>
-                            </div>
-                        </div>
+                        <TextOptions currentAsset={currentAsset} assetStyle={assetStyle} setAssetStyle={setAssetStyle}></TextOptions>
                         <div className="text-button-wrap">
-                            <button><IoIosAdd />Title</button>
-                            <button><IoIosAdd />Sub title</button>
-                            <button><IoIosAdd />Text</button>
+                            {textLayoutList.map((item, index) =>
+                                <button onClick={() => handleTextCreate(item)} key={index}><IoIosAdd />{item.name}</button>
+                            )}
                         </div>
                     </section>
                     :
                     <section className="section-image">
-                        <div className="image-option-wrap">
+                        <div className={`image-option-wrap disabled-content${currentAsset.id === null || currentAsset.type !== 'image' ? ' disabled' : ''}`}>
                             <div>
                                 <label>W</label>
-                                <input type="number" min="0" value={currentAssetSize.width}></input>
+                                <input onChange={handleAssetSize} name="width" type="text" value={assetStyle.width === 'auto' ? '' : assetStyle.width ?? ''}></input>
                             </div>
                             <div>
                                 <label>H</label>
-                                <input type="number" min="0" value={currentAssetSize.height}></input>
+                                <input onChange={handleAssetSize} name="height" type="text" value={assetStyle.height === 'auto' ? '' : assetStyle.height ?? ''}></input>
                             </div>
                         </div>
+                        <div className="btn-add-image-wrap">
+                            <input id="input_asset_image" type="file" accept='image/jpg,image/png,image/jpeg,image/gif'
+                                onChange={(e) => {
+                                    handleFileOnChange(e, setFileInput);
+                                }}></input>
+                            <label htmlFor="input_asset_image" className="btn-upload-image btn">Upload<RiUploadLine /></label>
+                        </div>
                         <div className="image-list">
-                            <button className="btn-plus"><IoIosAdd /></button>
                             <ul>
-                                {/* <li></li> */}
+                                {imageAssets.map((item, index) =>
+                                    <li onClick={() => handleImageAssetClick(item)} key={'image' + index}>
+                                        <img src={item.url}></img>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     </section>
