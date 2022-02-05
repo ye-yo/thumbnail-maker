@@ -8,6 +8,7 @@
                 "style": {
                     "fontSize": "48px",
                     "fontWeight": "bold",
+                    "color": "rgba(255,255,255,1)",
                     "y": "50%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
@@ -24,6 +25,7 @@
                 "style": {
                     "fontSize": "48px",
                     "fontWeight": "bold",
+                    "color": "rgba(255,255,255,1)",
                     "y": "44%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
@@ -34,6 +36,7 @@
                 "name": "부제목을 입력하세요",
                 "style": {
                     "fontSize": "28px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "64%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
@@ -50,6 +53,7 @@
                 "style": {
                     "fontSize": "48px",
                     "fontWeight": "bold",
+                    "color": "rgba(255,255,255,1)",
                     "y": "46%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
@@ -60,6 +64,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "16px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "62%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
@@ -76,6 +81,7 @@
                 "style": {
                     "fontSize": "48px",
                     "fontWeight": "bold",
+                    "color": "rgba(255,255,255,1)",
                     "y": "50%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.5)"
@@ -86,6 +92,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "16px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "38%",
                     "x": "50%",
                     "textShadow": "2px 2px 2px rgba(0,0,0,.4)"
@@ -102,6 +109,7 @@
                 "style": {
                     "fontSize": "48px",
                     "fontWeight": "bold",
+                    "color": "rgba(255,255,255,1)",
                     "y": "46%",
                     "x": "50%"
                 }
@@ -111,6 +119,7 @@
                 "name": "부제목을 입력하세요",
                 "style": {
                     "fontSize": "28px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "62%",
                     "x": "50%"
                 }
@@ -120,6 +129,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "12px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "90%",
                     "x": "50%"
                 }
@@ -135,6 +145,7 @@
                 "style": {
                     "fontSize": "48px",
                     "fontWeight": "bold",
+                    "color": "rgba(255,255,255,1)",
                     "x": "50%",
                     "y": "48%"
                 }
@@ -145,7 +156,7 @@
                 "style": {
                     "width": 320,
                     "height": 20,
-                    "background": "white",
+                    "background": "rgba(255,255,255,1)",
                     "x": "50%",
                     "y": "58%"
                 }
@@ -155,6 +166,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "16px",
+                    "color": "rgba(255,255,255,1)",
                     "x": "50%",
                     "y": "66%"
                 }
@@ -170,7 +182,7 @@
                 "style": {
                     "width": 320,
                     "height": 20,
-                    "background": "white",
+                    "background": "rgba(255,255,255,1)",
                     "x": "50%",
                     "y": "30%"
                 }
@@ -180,6 +192,7 @@
                 "name": "제목을 입력하세요",
                 "style": {
                     "fontSize": "42px",
+                    "color": "rgba(255,255,255,1)",
                     "x": "50%",
                     "y": "46%"
                 }
@@ -190,7 +203,7 @@
                 "style": {
                     "width": 320,
                     "height": 20,
-                    "background": "white",
+                    "background": "rgba(255,255,255,1)",
                     "x": "50%",
                     "y": "61%"
                 }
@@ -200,6 +213,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "16px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "70%",
                     "x": "50%"
                 }
@@ -227,6 +241,7 @@
                 "name": "제목을 입력하세요",
                 "style": {
                     "fontSize": "40px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "46%",
                     "x": "50%",
                     "zIndex": 1
@@ -238,7 +253,7 @@
                 "style": {
                     "width": 300,
                     "height": 20,
-                    "background": "white",
+                    "background": "rgba(255,255,255,1)",
                     "y": "54",
                     "x": "50%"
                 }
@@ -248,6 +263,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "16px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "62%",
                     "x": "50%",
                     "zIndex": 1
@@ -279,6 +295,7 @@
                 "name": "제목을\n입력하세요",
                 "style": {
                     "fontSize": "40px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "46%",
                     "x": "50%",
                     "zIndex": 1
@@ -289,6 +306,7 @@
                 "name": "소제목을 입력하세요",
                 "style": {
                     "fontSize": "14px",
+                    "color": "rgba(255,255,255,1)",
                     "y": "64%",
                     "x": "50%",
                     "zIndex": 1

@@ -28,9 +28,7 @@ function TextOptions(props) {
         'justify': <RiAlignJustify />
     };
     const [selectValue, setSelectValue] = useState(0);
-    const [color, setColor] = useState();
     const [colorTarget, setColorTarget] = useState(null);
-
     useEffect(() => {
         if (selectValue) {
             setAssetStyle({ ...assetStyle, fontFamily: selectValue })
@@ -42,7 +40,6 @@ function TextOptions(props) {
     }
 
     function handleChange(color) {
-        setColor(color);
         let currentAssetStyle = assetStyle;
         currentAssetStyle[colorTarget] = getRgba(color.rgb);
         setAssetStyle({ ...assetStyle, currentAssetStyle });
@@ -64,7 +61,7 @@ function TextOptions(props) {
                 case 'fontWeight': objectValue = checked && 'bold'; break;
                 case 'textDecoration': objectValue = checked && 'underline'; break;
                 case 'color': checked ? openColorPicker(currentAsset.type === 'figure' ? 'borderColor' : name) : setColorTarget(null); break;
-                case 'backgroundColor': checked ? openColorPicker(name) : setColorTarget(null); break;
+                case 'background': checked ? openColorPicker(name) : setColorTarget(null); break;
                 case 'textAlign': {
                     objectValue = (checked === 'center' || !checked) ? 'left' : checked === 'left' ? 'right' : checked === 'right' ? 'justify' : 'center';
                 } break;
@@ -88,15 +85,15 @@ function TextOptions(props) {
             <div className="text-style-wrap">
                 <CheckBox id="check_bold" name="fontWeight" checkedEvent={handleAssetStyle} checked={assetStyle.fontWeight} className="text-option"><RiBold /></CheckBox>
                 <CheckBox id="check_underline" name="textDecoration" checkedEvent={handleAssetStyle} checked={assetStyle.textDecoration} className="text-option"><RiUnderline /></CheckBox>
-                <CheckBox id="check_color" name="color" checkedEvent={handleAssetStyle} checked={colorTarget === 'color' || colorTarget === 'borderColor'}><IoMdColorPalette /><span className="color-preview" style={{ backgroundColor: currentAsset.type === 'text' ? (assetStyle.color || 'initial') : (assetStyle.borderColor || 'initial') }}></span></CheckBox>
-                <CheckBox id="check_backcolor" name="backgroundColor" checkedEvent={handleAssetStyle} checked={colorTarget === 'backgroundColor'} className="btn-back-color"><RiPaintFill className="ic-top" style={{ color: assetStyle.backgroundColor || 'initial' }} /></CheckBox>
+                <CheckBox id="check_color" name="color" checkedEvent={handleAssetStyle} checked={colorTarget === 'color' || colorTarget === 'borderColor'}><IoMdColorPalette /><span className="color-preview" style={{ background: currentAsset.type === 'text' ? (assetStyle.color || 'initial') : (assetStyle.borderColor || 'initial') }}></span></CheckBox>
+                <CheckBox id="check_backcolor" name="background" checkedEvent={handleAssetStyle} checked={colorTarget === 'background'} className="btn-back-color"><RiPaintFill className="ic-top" style={{ color: assetStyle.background || 'initial' }} /></CheckBox>
                 <button name="textAlign" onClick={(e) => { handleAssetStyle(e, assetStyle.textAlign) }} className="text-option">{alignList[assetStyle.textAlign || 'center']}</button>
                 <CheckBox id="check_shadow" name="textShadow" checkedEvent={handleAssetStyle} checked={assetStyle.textShadow} className="text-option"><BiFont className="shadow" /></CheckBox>
             </div>
             {
                 colorTarget != null &&
                 <div className="color-picker-wrap" tabIndex="0">
-                    <SketchPicker color={color} onChangeComplete={handleChange} />
+                    <SketchPicker color={assetStyle[colorTarget] || 'rgba(0,0,0,0)'} onChangeComplete={handleChange} />
                 </div>
             }
         </div >

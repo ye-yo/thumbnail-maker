@@ -6,9 +6,9 @@ import { RiDragMove2Fill, RiUploadLine } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { handleFileOnChange } from '../utils.js';
 const textLayoutList = [
-    { name: 'Title', style: { fontSize: '48px', fontWeight: 'bold', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
-    { name: 'Sub title', style: { fontSize: '34px', fontWeight: '500', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
-    { name: 'Text', style: { fontSize: '20px', x: '50%', y: '50%', textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Title', style: { fontSize: '48px', fontWeight: 'bold', x: '50%', y: '50%', color: "rgba(255,255,255,1)", textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Sub title', style: { fontSize: '34px', fontWeight: '500', x: '50%', y: '50%', color: "rgba(255,255,255,1)", textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
+    { name: 'Text', style: { fontSize: '20px', x: '50%', y: '50%', color: "rgba(255,255,255,1)", textShadow: '2px 2px 2px rgba(0,0,0,.5)' } },
 ];
 
 let count = 0;
@@ -92,7 +92,7 @@ function AssetsForm(props) {
                             <ul>
                                 {imageAssets.map((item, index) =>
                                     <li onClick={() => handleImageAssetClick(item)} key={'image' + index}>
-                                        <img src={item.url}></img>
+                                        <img alt={'imageAsset' + index} src={item.url}></img>
                                     </li>
                                 )}
                             </ul>
