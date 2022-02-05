@@ -3,16 +3,9 @@ import Form from './Form.js';
 import { SketchPicker } from 'react-color';
 import './_BackgroundForm.scss';
 import { RiPaintFill, RiRecordCircleLine, RiUploadLine } from "react-icons/ri";
-import { HiOutlineArrowSmDown, HiOutlineArrowSmUp, HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
+import { HiOutlineArrowSmUp } from "react-icons/hi";
 import { handleFileOnChange, getRgba, getGradient } from '../utils.js';
 import defaultColorList from '../../data/defaultColorList.json'
-
-const gradientDirectionList = [
-    { direction: 'top', icon: <HiOutlineArrowSmUp /> },
-    { direction: 'right', icon: <HiOutlineArrowSmRight /> },
-    { direction: 'bottom', icon: <HiOutlineArrowSmDown /> },
-    { direction: 'left', icon: <HiOutlineArrowSmLeft /> }
-];
 
 const randomColorIndex = defaultColorList.length - 2;
 const randomGradientIndex = defaultColorList.length - 1;
@@ -26,7 +19,6 @@ function LayoutForm(props) {
     const [gradientStyle, setGradientStyle] = useState(defaultColorList[gradientItemStartIndex]);
     const [color, setColor] = useState(defaultColorList[0].rgb);
     const [uploadedImages, setUploadedImages] = useState([]);
-
     useEffect(() => {
         if (currentColorItem.index !== null) {
             const current = colorList[currentColorItem.index];
@@ -70,9 +62,7 @@ function LayoutForm(props) {
         const form = e.target.name;
         let newObject = { ...gradientStyle, form };
         if (form === "linear" && gradientStyle.form === form) {
-            const newIndex = gradientStyle.directionIndex === gradientDirectionList.length - 1 ? 0 : gradientStyle.directionIndex + 1;
-            newObject.directionIndex = newIndex;
-            newObject.direction = gradientDirectionList[newIndex].direction;
+            newObject.direction = gradientStyle.direction === 315 ? 0 : gradientStyle.direction + 45;
         }
         if (currentColorItem.index) {
             let currentColorList = [...colorList];
@@ -173,7 +163,7 @@ function LayoutForm(props) {
                                     </div>
                                     <div className="option-wrap">
                                         <div className="gradient-type">
-                                            <button className={gradientStyle.form === "linear" ? 'clicked' : ''} name="linear" onClick={handleGradient}>{gradientDirectionList[gradientStyle.directionIndex].icon}Linear</button>
+                                            <button className={gradientStyle.form === "linear" ? 'clicked' : ''} name="linear" onClick={handleGradient}><HiOutlineArrowSmUp style={{ transform: `rotate(${gradientStyle.direction}deg)` }} />Linear</button>
                                             <button className={gradientStyle.form === "radial" ? 'clicked' : ''} name="radial" onClick={handleGradient}><RiRecordCircleLine />Radial</button>
                                         </div>
                                     </div>
