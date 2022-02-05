@@ -74,6 +74,23 @@
     {
         "type": "gradient",
         "from": {
+            "r": 255,
+            "g": 206,
+            "b": 217,
+            "a": 1
+        },
+        "to": {
+            "r": 160,
+            "g": 193,
+            "b": 238,
+            "a": 1
+        },
+        "form": "linear",
+        "direction": 45
+    },
+    {
+        "type": "gradient",
+        "from": {
             "r": 101,
             "g": 78,
             "b": 163,
@@ -86,8 +103,7 @@
             "a": 1
         },
         "form": "linear",
-        "direction": "right",
-        "directionIndex": 1
+        "direction": 90
     },
     {
         "type": "gradient",
@@ -104,26 +120,7 @@
             "a": 1
         },
         "form": "linear",
-        "direction": "left",
-        "directionIndex": 3
-    },
-    {
-        "type": "gradient",
-        "from": {
-            "r": 0,
-            "g": 90,
-            "b": 167,
-            "a": 1
-        },
-        "to": {
-            "r": 255,
-            "g": 253,
-            "b": 228,
-            "a": 1
-        },
-        "form": "linear",
-        "direction": "top",
-        "directionIndex": 0
+        "direction": 180
     },
     {
         "type": "gradient",
@@ -140,8 +137,7 @@
             "a": 1
         },
         "form": "radial",
-        "direction": "bottom",
-        "directionIndex": 2
+        "direction": 45
     },
     {
         "type": "color",
@@ -169,7 +165,6 @@
             "a": 1
         },
         "form": "linear",
-        "direction": "right",
-        "directionIndex": 1
+        "direction": 45
     }
 ]

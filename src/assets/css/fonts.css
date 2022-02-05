@@ -23,13 +23,6 @@
 }
 
 @font-face {
-    font-family: 'KoPub돋움체';
-    font-style: normal;
-    font-weight: normal;
-    src: url(../fonts/KoPubWorld-Dotum-Medium.woff) format('woff');
-    font-display: swap;
-}
-@font-face {
     font-family: '상주곶감체';
     font-style: normal;
     font-weight: normal;

@@ -76,14 +76,12 @@
         border: 1px solid rgb(209, 209, 209);
         border-top:0;
         border-bottom: 0;
+        background-color: #d9dbe0;
         &:last-child, &:from-child{
             border: none;
         }
         &:hover{
-        }
-        background-color: #dddddd;
-        &:hover{
-            background-color: rgb(179, 174, 174);
+            background-color: #c4cada;
         }
         &.clicked{
             background-color: white;

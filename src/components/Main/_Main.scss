@@ -2,14 +2,10 @@
 
 main{
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     overflow: auto;
     padding: 40px 0 ;
-    background-color: #cad2d3;
-    // background: linear-gradient(to bottom, rgb(114, 198, 205), rgb(185, 186, 228));
-    background: linear-gradient(to bottom, rgb(149, 200, 204), rgb(141, 142, 190));
-
 }
 
 .center-box{
@@ -20,6 +16,7 @@ main{
     max-width: 1080px;
     min-width: fit-content;
     min-height: fit-content;
+    overflow: auto;
 }
 
 .section-canvas{
@@ -69,7 +66,8 @@ main{
         right: 4%;
         svg{
             vertical-align: text-top;
-            margin-right: 10px;
+            display: block;
+            margin: 0 auto 2px;
         }
     }
 
@@ -78,14 +76,14 @@ main{
 
 .section-form{
     @include flexBox(flex, row, space-between, start, wrap);
+    position: relative;
      min-height: 200px;
      height: 100%;
     padding: 1rem 2rem 1.4rem;
     width: 900px;
     background-color: white;
     border-radius: 20px;
-    margin-bottom: 40px;
-    background-color: #ebecef73;
+    background-color: #ffffff59;
      overflow-y: auto;
      > section, .section-wrap-left > section{
          margin-bottom: .4rem;
@@ -97,5 +95,15 @@ main{
      .section-wrap-left{
         width: calc(50% - 1rem);
         max-width: 400px;
+     }
+
+     &::after{
+         position: absolute;
+         bottom: 1rem;
+         right: 1.6rem;
+         content: "Thumbnail Maker\Aⓒ2022 ye-yo All rights reserved.";
+         color: white;
+         white-space: pre;
+         text-align: right;
      }
 }

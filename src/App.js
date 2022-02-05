@@ -6,9 +6,11 @@ import './assets/css/fonts.css';
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <div>
+        <Header />
+        <Main />
+        <Footer />
+      </div>
     </div>
   );
 }

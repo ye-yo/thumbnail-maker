@@ -13,7 +13,6 @@ const fontList = [
     '기본서체',
     '고운바탕체',
     '상주곶감체',
-    'KoPub돋움체',
     '빙그레 따옴체',
     '빙그레체',
     '강원교육모두체',
@@ -60,7 +59,6 @@ function TextOptions(props) {
                     prevTextSize = Number(prevTextSize.replace('px', ''));
                     objectValue = value + 'px';
                     const newFontSize = Number(value);
-                    // moreObject = { height: assetStyle.height * newFontSize / prevTextSize, width: assetStyle.width * newFontSize / prevTextSize };
                     moreObject = { height: assetStyle.height * newFontSize / prevTextSize };
                 } break;
                 case 'fontWeight': objectValue = checked && 'bold'; break;
