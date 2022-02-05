@@ -42,11 +42,9 @@ function TextOptions(props) {
     }
 
     function handleChange(color) {
-        console.log(color.rgb, colorTarget)
         setColor(color);
         let currentAssetStyle = assetStyle;
         currentAssetStyle[colorTarget] = getRgba(color.rgb);
-        console.log(currentAssetStyle.borderColor)
         setAssetStyle({ ...assetStyle, currentAssetStyle });
     }
 
