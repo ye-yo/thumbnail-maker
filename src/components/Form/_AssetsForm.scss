@@ -129,3 +129,10 @@
         position: absolute;
     }
 }
+
+.disabled-text-option{
+    .text-option{
+        pointer-events: none;
+        opacity: .6;
+    }
+}

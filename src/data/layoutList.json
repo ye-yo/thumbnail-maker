@@ -213,6 +213,7 @@
                 "type": "figure",
                 "style": {
                     "border": "1px solid white",
+                    "borderColor": "rgba(255,255,255,1)",
                     "zIndex": 0,
                     "width": 360,
                     "height": 200,
@@ -262,6 +263,7 @@
                 "shape": "circle",
                 "style": {
                     "border": "1px solid white",
+                    "borderColor": "rgba(255,255,255,1)",
                     "borderRadius": "50%",
                     "zIndex": 0,
                     "width": 300,

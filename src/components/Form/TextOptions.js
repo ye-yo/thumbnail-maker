@@ -4,7 +4,7 @@ import CheckBox from '../../elements/CheckBox.js';
 import './_TextOptions.scss';
 import { BiFont } from "react-icons/bi";
 import { IoMdColorPalette, } from "react-icons/io";
-import { RiUnderline, RiBold, RiAlignJustify } from "react-icons/ri";
+import { RiUnderline, RiBold, RiAlignJustify, RiPaintFill } from "react-icons/ri";
 import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter, } from "react-icons/ai";
 import { SketchPicker } from 'react-color';
 import { getRgba } from '../utils.js';
@@ -33,7 +33,7 @@ function TextOptions(props) {
 
     useEffect(() => {
         if (selectValue) {
-            props.setAssetStyle({ ...assetStyle, fontFamily: selectValue })
+            setAssetStyle({ ...assetStyle, fontFamily: selectValue })
         }
     }, [selectValue])
 
@@ -43,9 +43,9 @@ function TextOptions(props) {
 
     function handleChange(color) {
         setColor(color);
-        let currentassetStyle = assetStyle;
-        currentassetStyle[colorTarget] = getRgba(color.rgb);
-        setAssetStyle({ ...assetStyle, currentassetStyle });
+        let currentAssetStyle = assetStyle;
+        currentAssetStyle[colorTarget] = getRgba(color.rgb);
+        setAssetStyle({ ...assetStyle, currentAssetStyle });
     }
 
     function handleAssetStyle(e, checked) {
@@ -63,7 +63,7 @@ function TextOptions(props) {
                 } break;
                 case 'fontWeight': objectValue = checked && 'bold'; break;
                 case 'textDecoration': objectValue = checked && 'underline'; break;
-                case 'color': checked ? openColorPicker(name) : focusout(e); break;
+                case 'color': checked ? openColorPicker(currentAsset.type === 'figure' ? 'borderColor' : name) : setColorTarget(null); break;
                 case 'backgroundColor': checked ? openColorPicker(name) : setColorTarget(null); break;
                 case 'textAlign': {
                     objectValue = (checked === 'center' || !checked) ? 'left' : checked === 'left' ? 'right' : checked === 'right' ? 'justify' : 'center';
@@ -79,24 +79,19 @@ function TextOptions(props) {
         }
     }
 
-    function focusout(e) {
-        e.target.checked = false;
-        setColorTarget(null);
-    }
-
     return (
-        <div className={`text-option-wrap disabled-content${props.currentAsset.id === null || props.currentAsset.type !== 'text' ? ' disabled' : ''}`} >
+        <div className={`text-option-wrap disabled-content${(currentAsset.id === null || currentAsset.type === 'image') ? ' disabled' : currentAsset.type === 'figure' ? ' disabled-text-option' : ''}`} >
             <div className="text-input-wrap">
-                <SelectBox setSelectValue={setSelectValue} assetStyle={props.assetStyle} options={fontList} defaultValue='0' value={assetStyle.fontFamily} className="select-font"></SelectBox>
-                <input type="number" min="0" name="fontSize" onChange={(e) => handleAssetStyle(e, null)} value={assetStyle.fontSize === undefined ? 14 : Number(assetStyle.fontSize.replace('px', ''))}></input>
+                <SelectBox setSelectValue={setSelectValue} assetStyle={assetStyle} options={fontList} defaultValue='0' value={assetStyle.fontFamily} className="select-font text-option"></SelectBox>
+                <input type="number" min="0" name="fontSize" onChange={(e) => handleAssetStyle(e, null)} value={assetStyle.fontSize === undefined ? 14 : Number(assetStyle.fontSize.replace('px', ''))} className="text-option"></input>
             </div>
             <div className="text-style-wrap">
-                <CheckBox id="check_bold" name="fontWeight" checkedEvent={handleAssetStyle} checked={assetStyle.fontWeight}><RiBold /></CheckBox>
-                <CheckBox id="check_underline" name="textDecoration" checkedEvent={handleAssetStyle} checked={assetStyle.textDecoration}><RiUnderline /></CheckBox>
-                <CheckBox id="check_color" name="color" checkedEvent={handleAssetStyle} checked={colorTarget === 'color'}><IoMdColorPalette /><span className="color-preview" style={{ backgroundColor: assetStyle.color || 'initial' }}></span></CheckBox>
-                <CheckBox id="check_backcolor" name="backgroundColor" checkedEvent={handleAssetStyle} checked={colorTarget === 'backgroundColor'} className="btn-back-color"><BiFont className="ic-top" /><span style={{ backgroundColor: assetStyle.backgroundColor || 'initial' }}></span></CheckBox>
-                <button name="textAlign" onClick={(e) => { handleAssetStyle(e, assetStyle.textAlign) }}>{alignList[assetStyle.textAlign || 'center']}</button>
-                <CheckBox id="check_shadow" name="textShadow" checkedEvent={handleAssetStyle} checked={assetStyle.textShadow}><BiFont className="shadow" /></CheckBox>
+                <CheckBox id="check_bold" name="fontWeight" checkedEvent={handleAssetStyle} checked={assetStyle.fontWeight} className="text-option"><RiBold /></CheckBox>
+                <CheckBox id="check_underline" name="textDecoration" checkedEvent={handleAssetStyle} checked={assetStyle.textDecoration} className="text-option"><RiUnderline /></CheckBox>
+                <CheckBox id="check_color" name="color" checkedEvent={handleAssetStyle} checked={colorTarget === 'color' || colorTarget === 'borderColor'}><IoMdColorPalette /><span className="color-preview" style={{ backgroundColor: currentAsset.type === 'text' ? (assetStyle.color || 'initial') : (assetStyle.borderColor || 'initial') }}></span></CheckBox>
+                <CheckBox id="check_backcolor" name="backgroundColor" checkedEvent={handleAssetStyle} checked={colorTarget === 'backgroundColor'} className="btn-back-color"><RiPaintFill className="ic-top" style={{ color: assetStyle.backgroundColor || 'initial' }} /></CheckBox>
+                <button name="textAlign" onClick={(e) => { handleAssetStyle(e, assetStyle.textAlign) }} className="text-option">{alignList[assetStyle.textAlign || 'center']}</button>
+                <CheckBox id="check_shadow" name="textShadow" checkedEvent={handleAssetStyle} checked={assetStyle.textShadow} className="text-option"><BiFont className="shadow" /></CheckBox>
             </div>
             {
                 colorTarget != null &&
