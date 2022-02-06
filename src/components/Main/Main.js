@@ -6,7 +6,9 @@ import AssetsForm from '../Form/AssetsForm.js';
 import RatioForm from '../Form/RatioForm.js';
 import Asset from '../Asset/Asset.js';
 import { BsDownload } from "react-icons/bs";
-import domtoimage from 'dom-to-image';
+// import domtoimage from 'dom-to-image';
+import html2canvas from 'html2canvas';
+
 
 const ratioList = [
     { text: '1:1', id: 'ratio_0', outputWidth: 400, outputHeight: 400, },
@@ -78,20 +80,11 @@ function Main() {
             height: element.offsetHeight + 'px'
         };
         setLoading(true);
-        domtoimage
-            .toPng(element, {
-                width: element.offsetWidth * scale,
-                height: element.offsetHeight * scale,
-                style: style
-            })
-            .then(dataUrl => {
-                setLoading(false);
-                handleCaptureCanvas(dataUrl, 'thumbnail.png')
-            })
-            .catch(error => {
-                setLoading(false);
-                console.error("oops, something went wrong!", error);
-            });
+        html2canvas(document.getElementById('canvas')).then(canvas => {
+            setLoading(false);
+            handleCaptureCanvas(canvas.toDataURL('image/png'), 'thumbnail.png')
+        });
+
     }
 
     function handleCaptureCanvas(uri, fileName) {
