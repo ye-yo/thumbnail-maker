@@ -44,9 +44,10 @@ function Asset(props) {
         function handleClickOutside(e) {
             if (assetComponent.current && (!assetComponent.current.contains(e.target) && !sectionForm.contains(e.target))) {
                 isDragging.current = false;
-                setEditing({ pointerEvents: 'none', cursor: 'inherit' })
                 let obj = { ...currentStyle };
+                obj.height = assetComponent.current.getBoundingClientRect().height;
                 obj.visibility = 'visible';
+                setEditing({ pointerEvents: 'none', cursor: 'inherit' })
                 setCurrentStyle(obj)
                 setCurrentAsset({ ...currentAsset, id: null })
             }
@@ -82,10 +83,14 @@ function Asset(props) {
         }
     }, [canvasSize])
 
-    function handleAssetClick(e) {
+    function handleAssetClick(e, type) {
         e.stopPropagation();
         isClicked.current = true;
-        if (!isCurrentAsset) {
+        if (isCurrentAsset) {
+            setEditing({ cursor: 'default', pointerEvents: 'inherit' })
+            setCurrentStyle({ ...currentStyle, height: assetComponent.current.getBoundingClientRect().height })
+        }
+        else {
             setCurrentAsset({
                 ...currentAsset,
                 id: id,
@@ -103,11 +108,17 @@ function Asset(props) {
         removeAsset(id);
     }
 
+    function handleTextChange() {
+        if (editing.height !== 'auto') {
+            setEditing({ ...editing, height: 'auto' });
+        }
+    }
+
     return (
         <Rnd
             size={{
                 width: currentStyle.width,
-                height: currentStyle.height
+                height: editing.height || currentStyle.height
             }}
             position={{
                 x: currentStyle.x,
@@ -118,7 +129,7 @@ function Asset(props) {
             onResizeStart={handleAssetClick}
             onDragStart={handleAssetClick}
             onResize={(e, direction, ref, delta, position) => { handleAssetResize(ref, position); }}
-            onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, x: d.x, y: d.y }); e.preventDefault(); }}
+            onDragStop={(e, d) => { setAssetStyle({ ...assetStyle, x: d.x, y: d.y, height: d.node.clientHeight }); e.preventDefault(); }}
             onResizeStop={(e, direction, ref, delta, position) => {
                 handleAssetResize(ref, position);
             }}
@@ -129,7 +140,7 @@ function Asset(props) {
                 {
                     newAsset.type === 'text' ?
                         <div ref={assetBox} style={{ ...currentStyle, width: '100%', height: '100%', ...editing }}
-                            contentEditable="true" suppressContentEditableWarning="true" spellCheck="false"
+                            contentEditable="true" suppressContentEditableWarning="true" spellCheck="false" onInput={handleTextChange}
                         ><div>{newAsset.name}</div></div>
                         : newAsset.type === 'figure' ?
                             <div ref={assetBox} style={{ ...currentStyle, background: newAsset.shape === 'line' ? 'none' : currentStyle.background }}>
