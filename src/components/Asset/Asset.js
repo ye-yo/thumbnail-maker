@@ -129,7 +129,7 @@ function Asset(props) {
                 {
                     newAsset.type === 'text' ?
                         <div ref={assetBox} style={{ ...currentStyle, width: '100%', height: '100%', ...editing }}
-                            contentEditable="true" suppressContentEditableWarning="true"
+                            contentEditable="true" suppressContentEditableWarning="true" spellCheck="false"
                         ><div>{newAsset.name}</div></div>
                         : newAsset.type === 'figure' ?
                             <div ref={assetBox} style={{ ...currentStyle, background: newAsset.shape === 'line' ? 'none' : currentStyle.background }}>
