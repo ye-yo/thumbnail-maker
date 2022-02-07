@@ -80,7 +80,7 @@ function Main() {
             height: element.offsetHeight + 'px'
         };
         setLoading(true);
-        html2canvas(document.getElementById('canvas')).then(canvas => {
+        html2canvas(document.getElementById('canvas'), { dpi: 144 }).then(canvas => {
             setLoading(false);
             handleCaptureCanvas(canvas.toDataURL('image/png'), 'thumbnail.png')
         });
