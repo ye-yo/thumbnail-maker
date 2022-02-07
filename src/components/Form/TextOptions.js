@@ -35,6 +35,10 @@ function TextOptions(props) {
         }
     }, [selectValue])
 
+    useEffect(() => {
+        setColorTarget(null);
+    }, [currentAsset])
+
     function openColorPicker(colorTarget) {
         setColorTarget(colorTarget);
     }
@@ -75,7 +79,6 @@ function TextOptions(props) {
             }
         }
     }
-
     return (
         <div className={`text-option-wrap disabled-content${(currentAsset.id === null || currentAsset.type === 'image') ? ' disabled' : currentAsset.type === 'figure' ? ' disabled-text-option' : ''}`} >
             <div className="text-input-wrap">
@@ -91,9 +94,9 @@ function TextOptions(props) {
                 <CheckBox id="check_shadow" name="textShadow" checkedEvent={handleAssetStyle} checked={assetStyle.textShadow} className="text-option"><BiFont className="shadow" /></CheckBox>
             </div>
             {
-                colorTarget != null &&
+                (colorTarget != null && currentAsset.id && currentAsset.type !== 'image') &&
                 <div className="color-picker-wrap" tabIndex="0">
-                    <SketchPicker color={assetStyle[colorTarget] || 'rgba(0,0,0,0)'} onChangeComplete={handleChange} />
+                    <SketchPicker color={assetStyle[colorTarget]} onChangeComplete={handleChange} />
                 </div>
             }
         </div >
