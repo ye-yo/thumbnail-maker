@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useRef, } from 'react';
 import './_Main.scss';
 import LayoutForm from '../Form/LayoutForm.js';
 import BackgroundForm from '../Form/BackgroundForm.js';
@@ -16,7 +16,7 @@ const ratioList = [
     {
         id: 'ratio_2',
         outputWidth: 768, outputHeight: 402.094, text: 'Velog', subText: '(768x402.094)',
-        icon: <img src='https://media.vlpt.us/images/velog/profile/9aa07f66-5fcd-41f4-84f2-91d73afcec28/green%20favicon.png?w=240)' />
+        icon: <img alt="velog_icon" src='https://media.vlpt.us/images/velog/profile/9aa07f66-5fcd-41f4-84f2-91d73afcec28/green%20favicon.png?w=240)' />
     },
     {
         id: 'ratio_3',
@@ -34,7 +34,7 @@ function Main() {
     const [canvasAssets, setCanvasAssets] = useState([]);
     const [currentAsset, setCurrentAsset] = useState({ index: null, type: null, style: {}, position: {} });
     const [loading, setLoading] = useState(false);
-    const Spinner = () => { return <img src={require('../../assets/images/loading.gif')} style={{ width: 16, height: 16 }}></img> }
+    const Spinner = () => { return <img alt="loading" src={require('../../assets/images/loading.gif')} style={{ width: 16, height: 16 }}></img> }
 
     useEffect(() => {
         if (currentAsset.index != null) {
@@ -71,16 +71,11 @@ function Main() {
     }
 
     function handleDownload() {
-        const element = document.getElementById('canvas');
-        const scale = 2;
-        const style = {
-            transform: `scale(${scale})`,
-            transformOrigin: 'top left',
-            width: element.offsetWidth + 'px',
-            height: element.offsetHeight + 'px'
-        };
         setLoading(true);
-        html2canvas(document.getElementById('canvas'), { dpi: 144 }).then(canvas => {
+
+        html2canvas(document.getElementById('canvas'), {
+            height: document.getElementById('canvas').clientHeight,
+        }).then(canvas => {
             setLoading(false);
             handleCaptureCanvas(canvas.toDataURL('image/png'), 'thumbnail.png')
         });

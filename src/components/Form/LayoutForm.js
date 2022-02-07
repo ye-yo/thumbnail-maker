@@ -6,7 +6,7 @@ import layoutList from '../../data/layoutList';
 let count = 0;
 
 function LayoutForm(props) {
-    const { canvasAssets, setCanvasAssets } = props;
+    const { setCanvasAssets } = props;
 
     useEffect(() => {
         handleTemplateChange(0);

@@ -66,9 +66,8 @@ function TextOptions(props) {
                 case 'textDecoration': objectValue = checked && 'underline'; break;
                 case 'color': checked ? openColorPicker(currentAsset.type === 'figure' ? 'borderColor' : name) : setColorTarget(null); break;
                 case 'background': checked ? openColorPicker(name) : setColorTarget(null); break;
-                case 'textAlign': {
-                    objectValue = (checked === 'center' || !checked) ? 'left' : checked === 'left' ? 'right' : checked === 'right' ? 'justify' : 'center';
-                } break;
+                case 'textAlign': objectValue = (checked === 'center' || !checked) ? 'left' : checked === 'left' ? 'right' : checked === 'right' ? 'justify' : 'center';
+                    break;
                 case 'textShadow': objectValue = checked && '2px 2px 2px rgba(0, 0, 0, .5)'; break;
                 default: break;
             }

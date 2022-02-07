@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from './Form.js';
 import { SketchPicker } from 'react-color';
 import './_BackgroundForm.scss';
@@ -23,7 +23,7 @@ function LayoutForm(props) {
         if (currentColorItem.index !== null) {
             const current = colorList[currentColorItem.index];
             const newColor = current.type === 'color' ? current.rgb : currentColorItem.isFrom ? current.from : current.to;
-            setColor({ ...color, ...newColor });
+            setColor(color => ({ ...color, ...newColor }));
             if (current.type === 'gradient') {
                 setGradientStyle(current);
             }
@@ -33,7 +33,6 @@ function LayoutForm(props) {
     useEffect(() => {
         setBackground({ type: currentColorItem.type, background: getBackgroundStyle(colorList[currentColorItem.index]) })
     }, [color])
-
 
     function getBackgroundStyle(colorItem) {
         return colorItem.type === 'color' ? getRgba(colorItem.rgb) : getGradient(colorItem);
@@ -143,6 +142,7 @@ function LayoutForm(props) {
                                     if (!color.isRand)
                                         return (<li key={index} className="color" style={{ background: getBackgroundStyle(color) }}
                                             onClick={() => { setCurrentColorItem({ index, isFrom: true, type: color.type }) }}></li>);
+                                    else return '';
                                 })}
                             </ul>
                             <div className={"tab-gradient" + (currentColorItem.type === 'gradient' ? ' open' : '')}>
