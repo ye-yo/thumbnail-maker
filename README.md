@@ -1,12 +1,18 @@
 # Thumbnail Maker
+
+![image](https://user-images.githubusercontent.com/50618754/153700819-d7999a89-e739-4d6c-93ff-35f18522cdc9.png)
+
 블로그, 유튜브 등에서 썸네일이 필요한 경우 간편하게 이미지를 만들 수 있도록 도와주는 도구
+- [Thumbnail Maker 사용해보기](https://github.com/ye-yo/thumbnail_maker_)
+- [Velog 포스트](https://velog.io/@yeyo0x0/Thumbnail-Maker)
+## 주요 기능
 
-## 개발 목표
-
-1. 기본적인 CSS 수정 기능 : font-size, color, font-weight, background 등을 수정
-2. 이미지 첨부 기능 : 배경 이미지는 물론 로고 이미지 등의 다양한 이미지 추가 가능
-3. 다양한 레이아웃 템플릿 제공 및 적용 기능: 여러가지 레이아웃 예시를 제공하고 유저가 선택한 레이아웃의 템플릿이 기본으로 세팅되어 보다 빠르고 간편하게 만들 수 있도록 도움.
-4. 완성본 다운로드 기능 : htmlcanvas2 기능을 활용하여 캔버스 캡쳐 및 다운로드 지원
-5. element 이동 기능 : 배치를 자유롭게 바꿀 수 있도록 지원
-6. 캔버스 사이즈 선택 기능 : 유저가 캔버스 사이즈를 선택할 수 있게 하고, 사이트 별 추천 사이즈가 있을 경우 안내
+1. Ratio : 비율 조정 및 플랫폼 별 권장 비율(규격) 제공
+2. Layout: 다양한 종류의 레이아웃 템플릿을 통해 보다 빠르게 썸네일 제작 가능
+3. Background : 색상/그라데이션/이미지 배경 선택 및 랜덤 색상/그라데이션 적용 가능
+4. Assets : 
+- 텍스트/이미지 추가 및 사이즈/위치 조절 기능
+- font style/size 선택
+- 폰트 굵기, 밑줄, 그림자효과, 정렬, 색상, 배경색상 조절 가능
+5. Export : 완성된 화면을 이미지로 export하여 다운로드 받을 수 있는 기능
 
