@@ -33,6 +33,7 @@ main{
 
     }
     .canvas-box{
+        overflow: hidden;
         @include flexBox();
         width: 90%;
         height: 90%;
