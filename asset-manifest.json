@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "./static/css/main.755fba24.css",
+    "main.js": "./static/js/main.9ce61af7.js",
+    "static/js/787.d8f177ab.chunk.js": "./static/js/787.d8f177ab.chunk.js",
+    "static/media/ChosunGu.woff": "./static/media/ChosunGu.02f5e153a1c0045cff81.woff",
+    "static/media/BinggraeTaom.woff": "./static/media/BinggraeTaom.3e9e46078fbf139630fd.woff",
+    "static/media/Binggrae.woff": "./static/media/Binggrae.b37600ad260d804e41fa.woff",
+    "static/media/GowunBatang-Regular.woff": "./static/media/GowunBatang-Regular.bef096c3deb159cf9d92.woff",
+    "static/media/강원교육모두+Light.woff": "./static/media/강원교육모두+Light.4a76705d339600b0a75b.woff",
+    "static/media/SANGJU_Gotgam.woff": "./static/media/SANGJU_Gotgam.3d15d8ca99fa42467821.woff",
+    "static/media/layout2.png": "./static/media/layout2.8dbf8f496522d51f86b5.png",
+    "static/media/loading.gif": "./static/media/loading.6892adbca75087c9d07a.gif",
+    "static/media/layout3.png": "./static/media/layout3.526b416510363f0f38d4.png",
+    "static/media/layout4.png": "./static/media/layout4.ae03b725aad4a158c1b8.png",
+    "static/media/layout10.png": "./static/media/layout10.6f98e266db5e935b151c.png",
+    "static/media/layout9.png": "./static/media/layout9.e8c6fa45c54f74ee1a2a.png",
+    "static/media/layout1.png": "./static/media/layout1.0927a96f3d0b8036b65a.png",
+    "static/media/layout5.png": "./static/media/layout5.9aec46f93a1c5db30284.png",
+    "static/media/layout6.png": "./static/media/layout6.44bd6221d6320008d187.png",
+    "static/media/layout8.png": "./static/media/layout8.20126b7f0a1c11e5adb9.png",
+    "static/media/layout7.png": "./static/media/layout7.9dd4ed243f0cd8df4250.png",
+    "index.html": "./index.html",
+    "main.755fba24.css.map": "./static/css/main.755fba24.css.map",
+    "main.9ce61af7.js.map": "./static/js/main.9ce61af7.js.map",
+    "787.d8f177ab.chunk.js.map": "./static/js/787.d8f177ab.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.755fba24.css",
+    "static/js/main.9ce61af7.js"
+  ]
+}
