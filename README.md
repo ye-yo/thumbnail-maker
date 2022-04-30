@@ -15,7 +15,7 @@
 > 블로그, 유튜브 등에서 썸네일이 필요한 경우 간편하게 이미지를 만들 수 있도록 도와주는 도구
 >
 > - [Thumbnail Maker 사용해보기](https://ye-yo.github.io/thumbnail-maker/)
-> - [Velog 포스트](https://velog.io/@yeyo0x0/Thumbnail-Maker)
+> - [ 포스트](https://ye-yo.github.io/toy/2022/01/21/thumbnail-maker.html)
 
 ## 주요 기능
 
